@@ -1,7 +1,8 @@
 import mysql.connector
 
-db = mysql.connector.connect(host="user-information.cfe8lazrwbtc.us-east-1.rds.amazonaws.com",
-                             user="admin", password="password", database="user")
+from PY_Files import CONSTANTS
+db = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,
+                             password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
 
 TABLE_NAME = "product_information"
 
