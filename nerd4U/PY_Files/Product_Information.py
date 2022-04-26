@@ -22,18 +22,15 @@ def Get_Product_By_Catagory(category):
 
 def Get_Product_By_Category_If_Valid(array, category):
     cursor = db.cursor()
-    test = "%" + str(array[0][10]) + "%"
     # make a new string with spliced list
-    cursor.execute("SELECT * FROM product_information where catagory like '%" +
-                   category + "%' AND  tags like '" + test + "'")
-    array = cursor.fetchall()
-    return (array)
+    cursor.execute("SELECT * FROM product_information where catagory like '%" + category + "%' AND  tags like '%" + str(array[0][10]) + "%'")
+    new_array = cursor.fetchall()
+    return (new_array)
 
 
 def Get_Product_By_Tag(tag):
     cursor = db.cursor()
-    cursor.execute(
-        "SELECT * FROM product_information where tags like '%" + tag + "%'")
+    cursor.execute("SELECT * FROM product_information where tags like '%" + tag + "%' or catagory like '%" + tag + "%'")
     array = cursor.fetchall()
     return (array)
 
@@ -46,17 +43,15 @@ def Get_Product_By_SubCategory(subcategory, title):
     array = cursor.fetchall()
     return (array)
 
-
-def Insert_New_Product(list_of_tags, title, description, image, price, quantity, catagory, subcategory):
-
+def Insert_New_Product(uid,list_of_tags,title,description, image,price,quantity,catagory,subcategory):
+    
     cursor = db.cursor()
 
-    sql = "INSERT INTO product_information (name, price, picture_id, seller_id, description, quantity, remaining_item, catagory, sub_category, tags) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-
-    # CHANGE PRICE (DOLLAR) TO ACTUAL SUM OF DOLLAR + CENT
-    val = (title, price, image, 1, description, quantity,
-           quantity, catagory, subcategory, str(list_of_tags))
-    cursor.execute(sql, val)
+    sql="INSERT INTO product_information (name, price, picture_id, seller_id, description, quantity, remaining_item, catagory, sub_category, tags) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    
+    #### CHANGE PRICE (DOLLAR) TO ACTUAL SUM OF DOLLAR + CENT
+    val = (title, price, image, uid, description, quantity, quantity, catagory, subcategory, str(list_of_tags))
+    cursor.execute(sql,val)
     db.commit()
 
 

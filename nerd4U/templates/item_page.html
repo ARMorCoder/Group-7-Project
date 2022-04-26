@@ -136,28 +136,32 @@
                         <p class="mb-1">&#36;450.69</p>
                     </div>
                 </div>
-                <div class="text-center"><button type="button" class="btn btn-warning">Add to Cart</button></div>
+                <hr class="mt-0">
+                <h6>About this item</h6>
+                <p>Seller: {{user[1]}}</p>
+                <p>Description: {{result[5]}}</p>
             </div>
-            <!-- hide by default, show when item is already in cart -->
-            <div name="cartRemove">
-                <h6>Shopping Cart:</h6>
-                <div class="row mb-2">
-                    <div class="col-auto">
-                        <p class="fw-bold mb-1">Items</p>
-                        <p class="fw-bold mb-1">Subtotal</p>
-                        <p class="text-danger text-end mb-1">&#45;</p>
-                        <p class="text-end mb-0">&#61;</p>
+            <div class="col-auto">
+<!-- show by default, hide when item already in cart -->
+                <div name="cartAdd">
+                    <h6>Shopping Cart:</h6>
+                    <div class="row mb-2">
+                        <div class="col-auto">
+                            <p class="fw-bold mb-1">Items</p>
+                            <p class="fw-bold mb-1">Subtotal</p>
+                            <p class="text-danger text-end mb-1">&#43;</p>
+                            <p class="text-end mb-0">&#61;</p>
+                        </div>
+                        <div class="col ps-0">
+                            <p class="mb-1">{{itemcount}}</p>
+                            <p class="mb-1">&#36;{{subtotal}}</p>
+                            <p class="text-danger mb-1">&#36;{{result[2]}}</p>
+                            <p class="mb-1">&#36;{{adding_to_cart}}</p>
+                        </div>
                     </div>
-                    <div class="col ps-0">
-
-                        <p class="mb-1">{itemcount}</p>
-                        <p class="mb-1">&#36;{subtotal}</p>
-
-                        <p class="text-danger mb-1">&#36;{{result[2]}}</p>
-                        <p class="mb-1">&#36;30.00</p>
-                    </div>
+                    <div class="text-center"><button type="button" class="btn btn-warning">Add to Cart</button></div>
                 </div>
-                <div class="text-center"><button type="button" class="btn btn-danger">Remove from Cart</button></div>
+
             </div>
         </div>
     </div>
