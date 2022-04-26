@@ -43,3 +43,6 @@ def Delete_From_Cart(UID,PID):
     Cart.remove(PID)
     Push_Cart(Cart,UID)
 
+def Get_Shopping_Products(cart_list):
+     return SQL_Queries.Fill_Cart(cart_list)
+

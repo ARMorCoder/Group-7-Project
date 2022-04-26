@@ -1,5 +1,6 @@
 import mysql.connector
-import CONSTANTS
+import py
+from PY_Files import CONSTANTS
 DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,
                              password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
 
@@ -120,7 +121,7 @@ def Fill_Cart(Cart_List):
     Where = Format_Half_Zip_List("PID",Cart_List," OR ")
     sql = sql.format(Sel_Value, P_TABLE, Where)
     My_Cursor.execute(sql)
-    print(My_Cursor.fetchall())
+    return My_Cursor.fetchall()
     
 def UserIdToUsername(uid):
     My_Cursor = DB.cursor()

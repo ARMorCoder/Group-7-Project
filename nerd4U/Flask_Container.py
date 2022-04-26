@@ -8,8 +8,30 @@ from ast import literal_eval
 
 import mysql.connector
 from flask import Flask, jsonify, request, render_template, send_from_directory, redirect, url_for, session, flash
+from sympy import Q
 
+tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
+                  'art-TV': 'Television', 'art-OTHER': 'Other', 'art-CN': 'Cartoon Network',
+                  'art-DC': 'DC Universe', 'art-DISNEY': 'Disney', 'art-GOT': 'Game of Thrones',
+                  'art-GHOSTBUSTERS': 'Ghostbusters', 'art-HARRY': 'Harry Potter', 'art-LOTR': 'Lord of the Rings',
+                  'art-MARVEL': 'Marvel', 'art-NICKELODEON': 'Nickelodeon', 'art-Nintendo': 'Nintendo',
+                  'art-PIXAR': 'Pixar', 'art-POKEMON': 'Pokemon', 'art-POWER': 'Power Rangers',
+                  'art-SEGA': 'SEGA', 'art-STAR-TREK': 'Star Trek', 'art-STAR-WARS': 'Star Wars',
+                  'acc-ANIME': 'Anime','acc-CARTOONS': 'Cartoons', 'acc-Movies': 'Movies',
+                  'acc-TV': 'Television', 'acc-OTHER': 'Other', 'acc-CN': 'Cartoon Network',
+                  'acc-DC': 'DC Universe', 'acc-DISNEY': 'Disney', 'acc-GOT': 'Game of Thrones',
+                  'acc-GHOSTBUSTERS': 'Ghostbusters', 'acc-HARRY': 'Harry Potter', 'acc-LOTR': 'Lord of the Rings',
+                  'acc-MARVEL': 'Marvel', 'acc-NICKELODEON': 'Nickelodeon', 'acc-Nintendo': 'Nintendo',
+                  'acc-PIXAR': 'Pixar', 'acc-POKEMON': 'Pokemon', 'acc-POWER': 'Power Rangers',
+                  'acc-SEGA': 'SEGA', 'acc-STAR-TREK': 'Star Trek', 'acc-STAR-WARS': 'Star Wars',
+                  'jewelry-BRACELETS': 'Bracelets', 'jewlery-EARRINGS': 'Earrings', 'jewlery-NECKLACES': 'Necklaces', 'jewelry-RINGS': 'Rings',
+                  'comic-SINGLE': 'Single Issue', 'comic-OGN': 'Original Graphic Novel/Volume', 'comic-MAGAZINE': 'Magazine/Anthonlogy',
+                  'comic-PAPERBACK': 'Paper Back Edition', 'comic-HARD-COVER': 'Hard Cover Edition', 'comic-DIGEST': 'Digest', 'comic-ARCHIE': 'Archie Comics',
+                  'comic-BOOM': 'Boom! Studios', 'comic-DARK': 'Dark Horse', 'comic-DC': 'DC', 'comic-DEL-REY': 'Del Rey', 'comic-DYNAMITE': 'Dynamite',
+                  'comic-IDW': 'IDW', 'comic-IMAGE': 'Image', 'comic-KODANSHA': 'Kodansha', 'comic-MARVEL': 'Marvel', 'comic-ONI': 'Oni Press',
+                  'comic-SHOGAKUGAN': 'Shogakugan', 'comic-SHUEISHA': 'Shueisha', 'comic-TOKYOPOP': 'Tokyopop', 'comic-VALIANT': 'Valiant', 'comic-OTHER': 'Other'}
 
+    # Add the rest of the tags from create_listing.html to allow createListing function to properly insert the tags into database
 
 from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart
 
@@ -32,15 +54,14 @@ def homepage():
 
         search_for = request.form['search_bar']
         session["search_for"] = search_for        
-        print(session["search_for"])
+
 
         return redirect(url_for('searchpage'))
 
     ################################################################################################
     # Call function to perform SQL Query on specified categories (returns array containing tuples) #
     #
-    art_products = Product_Information.Get_Product_By_Catagory('Art')   
-    print(art_products)                                               #
+    art_products = Product_Information.Get_Product_By_Catagory('Art')                                                #
     comic_products = Product_Information.Get_Product_By_Catagory('Comics')                                             #
     toy_products = Product_Information.Get_Product_By_Catagory('Toys & Models')                                        #
 
@@ -75,7 +96,7 @@ def homepage():
 def send_image(filename):
 
     # Display images
-    print(filename)
+
     return send_from_directory("../Images", filename)
 
 
@@ -121,7 +142,7 @@ def register():
         Flash_Code = Create_User.Create_User(
             username, email, password, first_name, last_name, street_address, state, phone_number)
         Flash_Statement = Create_User.Login_Code_Statement(Flash_Code)
-        # print(tempflash)
+
         flash(Flash_Statement)
         if Flash_Code == 0:
             return redirect(url_for('homepage'))
@@ -138,9 +159,8 @@ def searchpage():
     if request.method == "POST" and request.form['searchfor']:
         searchfor = request.form['searchfor']
         session["search_for"] = searchfor
-        print("in session search_for filled")
+
         result = Product_Information.Get_Product_By_Tag(searchfor)
-        print(result,flush=True)
         session["result"] = result
         array_art = Product_Information.Get_Product_By_Category_If_Valid(result, '%Art%')
         session["array_art"] = array_art
@@ -198,6 +218,7 @@ def searchpage():
     ## This line was causing problem as I was using session["result"] to get the result that they previously entered specifically when they clicked refreshed button so I can just query through that.
     session["result"] = result
     array_art = Product_Information.Get_Product_By_Category_If_Valid(result, '%Art%')
+    print(result)
     session["array_art"] = array_art
     array_acc = Product_Information.Get_Product_By_Category_If_Valid(result, '%Accessories%')
     session["array_acc"] = array_art
@@ -215,26 +236,34 @@ def searchpage():
                                             , array_toys_and_models = array_toys_and_models)
     
 @app.route('/createListing', methods=['GET', 'POST'])
-def createListing():
-
+def createListing():    
+    tags = ""
     if request.method == 'POST':
 
         catagory = request.form['listingCategory']
         subcatagory = request.form['listingCategory']
-        print(catagory, flush=True)
+        uid = session["UID"] 
         list_of_tags = request.form.getlist('boxes')
         title = request.form['title']
+
+        for x in list_of_tags:
+            for y in tag_dictionary:
+                if x == y:
+                    tags = tags + ", " +tag_dictionary[y]
+           
+            
+
         print(title)
         description = request.form['desc']
         description.replace(",", "|$|")
         image = request.form['image']
+        image = image.split(".")
         dollar = request.form['dollar']
         cent = request.form['cent']
         price = dollar + cent
-        print(price)
+
         quantity = request.form['quantity']
-        Product_Information.Insert_New_Product(list_of_tags, title, description,
-                           image, price, quantity,catagory, subcatagory)
+        Product_Information.Insert_New_Product(uid,tags, title, description,image[0], price, quantity,catagory, subcatagory)
         return redirect(url_for('homepage'))
 
     return render_template('Create_Listing.html')
@@ -246,20 +275,24 @@ def itempage(iteminfo):
     user = session["UID"]
     seller = result[4]
     user = SQL_Queries.UserIdToUsername(int(seller))
-   
     shopcart =  Shopping_Cart.Pull_Cart(session["UID"])
+    shopping_cart_items = Shopping_Cart.Get_Shopping_Products(shopcart)
+
+    
     itemcount = len(shopcart)
-    subtotal = 10
-    return render_template('item_page.html', result=result,user = user, itemcount = itemcount, subtotal=subtotal)
+    subtotal=0
+    if itemcount != 0:
+        subtotal = 0
+        for x in shopping_cart_items:
+            subtotal += int(x[1])
+    adding_to_cart = int(subtotal) + int(result[2])
+
+    return render_template('item_page.html', result=result,user = user, itemcount = itemcount, subtotal=subtotal,adding_to_cart=adding_to_cart)
 
 @app.route('/shoppingCart')
 def ShoppingCart():
     UID = session
-    cart  = Pull_Cart(UID)
-
-
-
-
+    cart  = Shopping_Cart. Pull_Cart(UID)
     return render_template('shopping_cart.html')
 
 app.run(debug=True)
