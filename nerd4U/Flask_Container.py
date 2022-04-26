@@ -259,10 +259,8 @@ def itempage(iteminfo):
 
 @app.route('/shoppingCart')
 def ShoppingCart():
-   
+
     user = session.get("UID")
-    
-   
     Cart = Shopping_Cart.Pull_Cart(user)
     Filled = Shopping_Cart.Get_Shopping_Products(Cart)
     length = len(Filled)
@@ -271,9 +269,8 @@ def ShoppingCart():
     Tax = ("TAX 8.25%", Tax_Value, "TAX")
     Shipping = ("SHIPPING 5.89 per Item", length * 5.89, "SHIPPING")
     T_Total = round(total + Tax_Value + Shipping[1], 2)
-    irreplaceable = [Tax,Shipping]
-    Checkout_Detail=SQL_Queries.Get_User_Checkout(user)
-    
+    irreplaceable = [Tax, Shipping]
+    Checkout_Detail = SQL_Queries.Get_User_Checkout(user)
 
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
@@ -281,8 +278,8 @@ def ShoppingCart():
                            N_Items=length,
                            Sub_Total=total,
                            Taxed_Total=T_Total,
-                           Address = Checkout_Detail[0],
-                           Full_Name = "{} {}".format(Checkout_Detail[1],Checkout_Detail[2]))
+                           Address=Checkout_Detail[0],
+                           Full_Name="{} {}".format(Checkout_Detail[1], Checkout_Detail[2]))
 
 
 app.run(debug=True)

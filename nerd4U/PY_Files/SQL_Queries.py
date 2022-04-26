@@ -41,11 +41,13 @@ def Get_Login(UserInfo):
 def Get_Cart(UID):
     return Select_Any(U_TABLE, "Cart", ["UID"], [UID])
 
+
 def Get_User_Checkout(UID):
-    returner = Select_Any_Dirty(U_TABLE, "Address,First_Name,Last_Name", ["UID"], [UID])
+    returner = Select_Any_Dirty(
+        U_TABLE, "Address,First_Name,Last_Name", ["UID"], [UID])
     if returner != None:
         return returner
-    return ("","","","")
+    return ("", "", "", "")
 
 
 # Get_Any searches U
@@ -60,6 +62,7 @@ def Select_Any(Table, Select_List, Attribute_List, Value_List):
     returner = My_Cursor.fetchone()
     # My_Cursor.close()
     return Clean_Result(returner)
+
 
 def Select_Any_Dirty(Table, Select_List, Attribute_List, Value_List):
     My_Cursor = DB.cursor()

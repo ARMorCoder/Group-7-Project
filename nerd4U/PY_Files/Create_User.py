@@ -11,6 +11,8 @@ def Create_User(Username, Email, Password, First, Last, Street, State, Phone):
     return Code
 
 # Returns a string from a Dupe code
+
+
 def Login_Code_Statement(Dupe_Code):
     if (Dupe_Code == 0):
         Dupe_Statement = "Registration Sucessful"
