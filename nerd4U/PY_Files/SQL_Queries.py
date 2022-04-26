@@ -6,6 +6,7 @@ DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,
 
 U_TABLE = CONSTANTS.USER_TABLE
 P_TABLE = CONSTANTS.PROD_TABLE
+T_TABLE = CONSTANTS.TRANS_TABLE
 K_TABLE = CONSTANTS.KEYS_TABLE
 
 
@@ -17,6 +18,14 @@ def Push_To_User_Table(Username, Email, Password, First, Last, Street, State, ph
                      Password, First, Last, Street, State, phone)
     My_Cursor.execute(sql)
     DB.commit()
+
+def Push_To_Trans_Table(TID,UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Address):
+    My_Cursor = DB.cursor()
+    sql = "insert into {} (UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Address) values  ('{}', '{}', '{}', '{}', '{}', '{}', '{}')"
+    sql = sql.format(T_TABLE, UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Address)
+    My_Cursor.execute(sql)
+    DB.commit()
+    
 
 
 def Get_Email(Email):

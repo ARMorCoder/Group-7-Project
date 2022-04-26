@@ -301,6 +301,14 @@ def ShoppingCart():
     irreplaceable = [Tax, Shipping]
     Checkout_Detail = SQL_Queries.Get_User_Checkout(user)
 
+
+
+
+
+
+
+
+    
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
                            Tuple_Two=irreplaceable,
