@@ -58,6 +58,8 @@ def Delete_From_Cart(UID, PID):
 
 
 def Get_Shopping_Products(Cart_List):
+    if Cart_Is_Empty(Cart_List):
+        return []
     return SQL_Queries.Fill_Cart(Cart_List)
 
 
@@ -66,9 +68,14 @@ def Total_Shopping_Cart(Cart_List):
     if Cart_Is_Empty(Cart_List):
         return 0
     for each in Cart_List:
-        total += each
+        total += int(each[1])
     return total
 
 
 def Cart_Is_Empty(Cart):
     return len(Cart) == 0
+
+def Cart_Length(Filled):
+    if len(Filled) == 0:
+        return 0
+    return len(Filled)

@@ -262,9 +262,12 @@ def ShoppingCart():
 
     user = session.get("UID")
     Cart = Shopping_Cart.Pull_Cart(user)
+    
     Filled = Shopping_Cart.Get_Shopping_Products(Cart)
-    length = len(Filled)
-    total = Shopping_Cart.Total_Shopping_Cart(Cart)
+   
+    length = Shopping_Cart.Cart_Length(Filled)
+    total = Shopping_Cart.Total_Shopping_Cart(Filled)
+    
     Tax_Value = round(total * 0.0825, 2)
     Tax = ("TAX 8.25%", Tax_Value, "TAX")
     Shipping = ("SHIPPING 5.89 per Item", length * 5.89, "SHIPPING")
