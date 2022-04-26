@@ -13,7 +13,7 @@ from flask import Flask, jsonify, request, render_template, send_from_directory,
 from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='./static')
 
 app.secret_key = 'super secret key'
 
@@ -264,14 +264,22 @@ def ShoppingCart():
     Filled = Shopping_Cart.Get_Shopping_Products(Cart)
     length = len(Filled)
     total = Shopping_Cart.Total_Shopping_Cart(Cart)
-    taxv = round(total * 0.0825, 2)
-    tax = ("TAX 8.25%", taxv, "TAX")
+    Tax_Value = round(total * 0.0825, 2)
+    Tax = ("TAX 8.25%", Tax_Value, "TAX")
     Shipping = ("SHIPPING 5.89 per Item", length * 5.89, "SHIPPING")
-    T_Total = round(total + taxv + Shipping[1],2)
-    Filled.append(tax)
+    T_Total = round(total + Tax_Value + Shipping[1], 2)
+    Filled.append(Tax)
     Filled.append(Shipping)
+    Checkout_Detail=SQL_Queries.Get_User_Checkout(user)
+    
 
-    return render_template('shopping_cart.html', Tuple_List=Filled, leng=length, totes=total, taxed=T_Total)
+    return render_template('shopping_cart.html',
+                           Tuple_List=Filled,
+                           N_Items=length,
+                           Sub_Total=total,
+                           Taxed_Total=T_Total,
+                           Address = Checkout_Detail[0],
+                           Full_Name = "{} {}".format(Checkout_Detail[1],Checkout_Detail[2]))
 
 
 app.run(debug=True)
