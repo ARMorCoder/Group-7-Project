@@ -268,13 +268,13 @@ def ShoppingCart():
     Tax = ("TAX 8.25%", Tax_Value, "TAX")
     Shipping = ("SHIPPING 5.89 per Item", length * 5.89, "SHIPPING")
     T_Total = round(total + Tax_Value + Shipping[1], 2)
-    Filled.append(Tax)
-    Filled.append(Shipping)
+    irreplaceable = [Tax,Shipping]
     Checkout_Detail=SQL_Queries.Get_User_Checkout(user)
     
 
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
+                           Tuple_Two=irreplaceable,
                            N_Items=length,
                            Sub_Total=total,
                            Taxed_Total=T_Total,
