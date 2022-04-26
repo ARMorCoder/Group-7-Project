@@ -90,7 +90,42 @@ def homepage():
                            )  # Display's homepage when at root directory of website along with all products ##
 
 ## Helper Function ##
+@app.route('/artPage')
+def artpage():
+    if request.method == 'POST':
 
+
+        search_for = request.form['search_bar']
+        session["search_for"] = search_for        
+
+
+        return redirect(url_for('searchpage'))
+
+    ################################################################################################
+    # Call function to perform SQL Query on specified categories (returns array containing tuples) #
+                                                                                                   #
+    art_products = Product_Information.Get_Product_By_Catagory('Art')                              #
+    art_draw_paint = Product_Information.Get_Product_By_SubCategory('Drawing & Painting')
+    art_mixed_media = Product_Information.Get_Product_By_SubCategory('Mixed Media')
+
+    #####################################################################################
+    # Recurse through each tuple, only returning the third data column (the image id's) #
+    #####################################################################################
+                                                                                        #
+                                                                                        #
+    art_img_ids = (tuple(map(lambda x: x[3], art_products)))                            #
+                                                                                        #
+                                                                                        #
+
+                                                                                        #
+                                                                                        #
+                                                                                        #
+
+                                                                                        #
+   
+    return render_template('homepage.html',
+                           art_img_ids=art_img_ids,
+                           )  # Display's homepage when at root directory of website along with all products ##
 
 @app.route('/upload/<filename>')
 def send_image(filename):
@@ -218,7 +253,6 @@ def searchpage():
     ## This line was causing problem as I was using session["result"] to get the result that they previously entered specifically when they clicked refreshed button so I can just query through that.
     session["result"] = result
     array_art = Product_Information.Get_Product_By_Category_If_Valid(result, '%Art%')
-    print(result)
     session["array_art"] = array_art
     array_acc = Product_Information.Get_Product_By_Category_If_Valid(result, '%Accessories%')
     session["array_acc"] = array_art
