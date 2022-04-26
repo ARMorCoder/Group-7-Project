@@ -74,7 +74,7 @@ def Select_Any_Dirty(Table, Select_List, Attribute_List, Value_List):
 
 def Clean_Result(dirty):
     if(dirty == None):
-        return "none"
+        return dirty
     return dirty[0]
 
 

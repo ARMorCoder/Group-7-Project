@@ -17,6 +17,8 @@ def Push_Cart(Temp_Cart,UID):
 
 # Makes a list from a cart's uid
 def Pull_Cart(UID):
+    if UID == None:
+        return []
     Cart_List = SQL_Queries.Get_Cart(UID)
     Cart_List = Cart_List[1:-1]
     Cart_List = Cart_List.split(',')

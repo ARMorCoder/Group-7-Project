@@ -31,7 +31,7 @@ def homepage():
 
         search_for = request.form['search_bar']
         session["search_for"] = search_for
-        print(session["search_for"])
+        # print(session["search_for"])
 
         return redirect(url_for('searchpage'))
 
@@ -247,11 +247,11 @@ def itempage(iteminfo):
     # Product_Information.strArrayToArray(iteminfo)
     result = Product_Information.strArrayToArray(iteminfo)
     result[5] = result[5].replace('|$|', ",")
-    user = session["UID"]
+    Buyer = session.get("UID")
     seller = result[4]
     user = SQL_Queries.UserIdToUsername(int(seller))
 
-    shopcart = Shopping_Cart.Pull_Cart(session["UID"])
+    shopcart = Shopping_Cart.Pull_Cart(Buyer)
     itemcount = len(shopcart)
     subtotal = 10
     return render_template('item_page.html', result=result, user=user, itemcount=itemcount, subtotal=subtotal)
@@ -259,7 +259,10 @@ def itempage(iteminfo):
 
 @app.route('/shoppingCart')
 def ShoppingCart():
-    user = session["UID"]
+   
+    user = session.get("UID")
+    
+   
     Cart = Shopping_Cart.Pull_Cart(user)
     Filled = Shopping_Cart.Get_Shopping_Products(Cart)
     length = len(Filled)
