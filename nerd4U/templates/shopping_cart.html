@@ -105,7 +105,7 @@
                 {%endfor%}
                 {%for x in Tuple_Two%}
                 <li class="list-group-item d-flex align-items-center">
-                    <div class="form-check"><input class="form-check-input" type="checkbox" name="item1" checked></div>
+                    <!-- <div class="form-check"><input class="form-check-input" type="checkbox" name="item1" checked></div> -->
                     <div class="text-center" style="width: 10rem; height: 10em;">
                         <img src="{{url_for('send_image', filename=x[2]+'.jpg')}}" class="h-100">
                     </div>
