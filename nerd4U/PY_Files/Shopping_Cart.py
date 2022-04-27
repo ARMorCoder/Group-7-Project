@@ -14,7 +14,9 @@ def Add_To_Cart(UID, PID):
     Push_Cart(Cart, UID)
 
 #
-
+def Empty_Cart(UID):
+    SQL_Queries.Update_Field(CONSTANTS.USER_TABLE,
+                             "Cart", "", "UID", UID)
 
 def Push_Cart(Temp_Cart, UID):
     SQL_Queries.Update_Field(CONSTANTS.USER_TABLE,
@@ -24,9 +26,10 @@ def Push_Cart(Temp_Cart, UID):
 
 
 def Pull_Cart(UID):
-    if UID == None:
+    if UID == 00 or UID == None:
         return []
     Cart_List = SQL_Queries.Get_Cart(UID)
+
     Cart_List = Cart_List[1:-1]
     Cart_List = Cart_List.split(',')
     Cart_List = Str_To_Lint(Cart_List)
@@ -45,7 +48,8 @@ def Add_Item(Cart_List, New_PID):
 
 
 def Str_To_Lint(String_List):
-    print(String_List)
+    if String_List[0] == "":
+        return []
     for i in range(0, len(String_List)):
         String_List[i] = int(String_List[i])
     return String_List
@@ -82,4 +86,6 @@ def Cart_Length(Filled):
 
 def CList_to_Str(cart):
     return str(cart)
-    pass
+
+def Get_PID_From_P_Name(Deleter_List):
+    print(SQL_Queries.Fill_Deleter(Deleter_List))

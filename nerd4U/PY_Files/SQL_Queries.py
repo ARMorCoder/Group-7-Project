@@ -46,7 +46,7 @@ def Get_Password(Session_ID):
 
 
 def Get_Login(UserInfo):
-    return Select_Any(U_TABLE, "UID", ["(Username)", "(Pass)"], UserInfo)
+    return Select_Any(U_TABLE, "UID",    ["(Username)", "(Pass)"], UserInfo)
 
 
 def Get_Cart(UID):
@@ -147,6 +147,15 @@ def Fill_Cart(Cart_List):
     sql = "Select {} From {} Where {}"
     Sel_Value = "Name,Price,picture_id"
     Where = Format_Half_Zip_List("PID", Cart_List, " OR ")
+    sql = sql.format(Sel_Value, P_TABLE, Where)
+    My_Cursor.execute(sql)
+    return My_Cursor.fetchall()
+
+def Fill_Deleter(Deleter_List):
+    My_Cursor = DB.cursor()
+    sql = "Select {} From {} Where {}"
+    Sel_Value = "PID"
+    Where = Format_Half_Zip_List("name", Deleter_List, " OR ")
     sql = sql.format(Sel_Value, P_TABLE, Where)
     My_Cursor.execute(sql)
     return My_Cursor.fetchall()

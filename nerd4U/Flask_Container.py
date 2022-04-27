@@ -302,6 +302,14 @@ def ShoppingCart():
     irreplaceable = [Tax, Shipping]
     Checkout_Detail = SQL_Queries.Get_User_Checkout(User)
 
+    if request.method == "POST" and request.form.getlist('Delete_Checks'):
+        print("POSTER!")
+        Deleter_List = request.form.getlist('Delete_Checks')
+        print(Deleter_List)
+        
+        
+        Deleter_List = Shopping_Cart.Get_PID_From_P_Name(Deleter_List)
+
     if request.method == "POST":
         print("Posted!")
         Shipping = Transaction.Make_Address_String(request.form["shipAddr"],
@@ -330,6 +338,8 @@ def ShoppingCart():
                                                          request.form["cardNumber"]),
                                                      S_Address=Shipping,
                                                      B_Address=Billing)
+        Shopping_Cart.Empty_Cart(User)
+
 
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
