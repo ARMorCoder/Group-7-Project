@@ -331,7 +331,7 @@ def ShoppingCart():
                                                      S_Address=Shipping,
                                                      B_Address=Billing
                                                      )
-        print(Trans)
+        Push_To_Trans_Table
 
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
