@@ -49,7 +49,7 @@ DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,password=C
 ## Home Page ##
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
-    session
+
     # Grab what user enters in searchpage and use it to fill searchpage.html #
     if request.method == 'POST':
         search_for = request.form['search_bar']
@@ -59,7 +59,7 @@ def homepage():
     ################################################################################################
     # Call function to perform SQL Query on specified categories (returns array containing tuples) #
                                                                                                    #
-    art_products = Product_Information.Get_Product_By_Catagory('Art')                              #
+    #art_products = Product_Information.Get_Product_By_Tag_Only('Art')                              #
     comic_products = Product_Information.Get_Product_By_Catagory('Comics')                         #
     toy_products = Product_Information.Get_Product_By_Catagory('Toys & Models')                    #
 
@@ -67,16 +67,15 @@ def homepage():
     # Recurse through each tuple, only returning the third data column (the image id's) #
     #####################################################################################
                                                                                         #                                                                #
-    art_img_ids = (tuple(map(lambda x: x[3], art_products)))                            #                                                                   #
+                          #                                                                   #
     comic_img_ids = (tuple(map(lambda x: x[3], comic_products)))                        #
     toy_img_ids = (tuple(map(lambda x: x[3], toy_products)))                            #
                         
     
     return render_template('homepage.html',
-                           art_img_ids=art_img_ids,
+
                            comic_img_ids=comic_img_ids,
                            toy_img_ids=toy_img_ids,
-                           art_products=art_products,
                            comic_products=comic_products,
                            toy_products=toy_products
                            )  # Display's homepage when at root directory of website along with all products ##
@@ -131,18 +130,20 @@ def login():
             passw = request.form['password']
             account = Login_User.Login_User(username,passw)
             print(account)
-            if account == None:
+            if account == 'none':
                 flash('Incorrect User information')
+                print('Returning login 1')
                 return render_template('login.html')
                 
             else:
                 session["UID"] = str(account)
+                print("Session id set to = " + str(session["UID"]))
                 session["username"] = username
                 flash('Login Sucessful. Welcome back ' +  username + '!')
-                # Redirect to home page
                 return redirect(url_for('homepage'))
                 
         # Show the login form with message (if any)
+        print("Returning login")
         return render_template('login.html')
     else:
         return redirect(url_for('accountpage'))
@@ -298,7 +299,7 @@ def itempage(iteminfo):
     shopcart=[]
     shopcart_cart_items = []
     print("User id = " + str(user_id))
-    if user_id:
+    if user_id != 'none':
         shopcart =  Shopping_Cart.Pull_Cart(user_id)
         if shopcart:
             shopping_cart_items = Shopping_Cart.Get_Shopping_Products(shopcart)
@@ -325,32 +326,33 @@ def accountpage():
     user_listings=[]
     product=[]
     listing_user=[]
-    # if session['UID'] == '00':
-    user = SQL_Queries.UserIdToUsername(session['UID'])
-    print(user)
-    products_int = Shopping_Cart.Pull_Cart(user[0])
-    print(products_int)
-    print("My session id = " + str(session['UID']))
-    user_transactions = Transaction.Pull_Transactions_From_UID(str(user[0]))
-    for y in user_transactions:
-        pids = y[2]
-        pids = pids.strip('][').split(', ')
-        for x in range(0,len(pids)):
-            
-            temp = Product_Information.Get_Product_By_Pid(x)
-            if temp != None:
-                product.append(temp)
-            num_items = len(y[2].split(","))
-            
-    user_listings = Product_Information.Get_Product_By_UID(session['UID'])
+    if session['UID'] != None:
+        print("session = " + session['UID'])
+        user = SQL_Queries.UserIdToUsername(session['UID'])
+        print(user)
+        products_int = Shopping_Cart.Pull_Cart(user[0])
+        print(products_int)
+        print("My session id = " + str(session['UID']))
+        user_transactions = Transaction.Pull_Transactions_From_UID(str(user[0]))
+        for y in user_transactions:
+            pids = y[2]
+            pids = pids.strip('][').split(', ')
+            for x in range(0,len(pids)):
+                
+                temp = Product_Information.Get_Product_By_Pid(x)
+                if temp != None:
+                    product.append(temp)
+                num_items = len(y[2].split(","))
+                
+        user_listings = Product_Information.Get_Product_By_UID(session['UID'])
 
-    for listing in user_listings:
-        if listing[7] > 0:
-            listing_user.append(('N/A',str(listing[1]),str(listing[2]),str(listing[6]),'N','N/A'))
-        else:
-            listing_user.append(('N/A',str(listing[1]),str(listing[2]),str(listing[6]),'Y','N/A'))
-    print("Product = " + str(listing_user))
-    return render_template('account_page.html',user=user, order_list = user_transactions,num_items=num_items, product=product, user_listings = listing_user)
+        for listing in user_listings:
+            if listing[7] > 0:
+                listing_user.append(('N/A',str(listing[1]),str(listing[2]),str(listing[6]),'N','N/A'))
+            else:
+                listing_user.append(('N/A',str(listing[1]),str(listing[2]),str(listing[6]),'Y','N/A'))
+        print("Product = " + str(listing_user))
+        return render_template('account_page.html',user=user, order_list = user_transactions,num_items=num_items, product=product, user_listings = listing_user)
 
 @app.route('/logout',methods=['GET','POST'])
 def logout():
