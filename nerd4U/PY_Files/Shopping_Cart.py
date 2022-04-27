@@ -23,6 +23,7 @@ def Pull_Cart(UID):
     Cart_List = Str_To_Lint(Cart_List)
     return Cart_List
 
+
 # adds a pid to a list cart
 def Add_Item(Cart_List, New_PID):
     PID_Set = set(Cart_List)

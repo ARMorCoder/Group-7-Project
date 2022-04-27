@@ -10,11 +10,36 @@
         
         <title>Nerds4U</title>
         <style>
-			footer {
-				position:fixed;
-				bottom:0;
-				width:100%;
-			}
+
+		.alert {
+		padding: 20px;
+		border-color:transparent;
+		margin-bottom: 15px;
+		width:74%;
+		left:13%;
+		}
+
+		/* The close button */
+		.closebtn {
+		margin-left: 15px;
+
+		font-weight: bold;
+		float: right;
+		font-size: 22px;
+		line-height: 20px;
+		cursor: pointer;
+		transition: 0.3s;
+		}
+
+		/* When moving the mouse over the close button */
+		.closebtn:hover {
+		color: black;
+		}
+		footer {
+			position:fixed;
+			bottom:0;
+			width:100%;
+		}
 
             *{
 			padding: 0;
@@ -192,6 +217,22 @@
 				</nav>
 			</header>
         </form>
+
+		<div class="alertMsg">
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+
+					  <div class="alert alert-success alert-dismissible fade show" role="alert">
+						  <strong>{{message}}</strong> 
+						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+						</div>
+
+	  
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		  </div>
         <!-- Art Products Container -->
 
 	<main class ="shadow-lg rounded-3 bg-body container-fluid w-75 mb-5 p-0 h-100" >

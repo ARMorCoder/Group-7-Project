@@ -48,6 +48,9 @@ DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,password=C
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
 
+
+    
+
     # Grab what user enters in searchpage and use it to fill searchpage.html #
     if request.method == 'POST':
         search_for = request.form['search_bar']
@@ -69,7 +72,7 @@ def homepage():
     comic_img_ids = (tuple(map(lambda x: x[3], comic_products)))                        #
     toy_img_ids = (tuple(map(lambda x: x[3], toy_products)))                            #
                         
-   
+    
     return render_template('homepage.html',
                            art_img_ids=art_img_ids,
                            comic_img_ids=comic_img_ids,
@@ -120,26 +123,30 @@ def send_image(filename):
 
 @app.route('/userLogin', methods=['GET', 'POST'])
 def login():
+    print(session["UID"])
 
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        # Create variables for easy access
+    if(session['UID'] == '00'):
+        if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+            # Create variables for easy access
 
-        username = request.form['username']
-        passw = request.form['password']
+            username = request.form['username']
+            passw = request.form['password']
 
-        account = Login_User.Login_User(username,passw)
-        if account == "none":
-            flash('Incorrect User information')
-        else:
-            session["UID"] = account
-            flash('Login Sucessful UID:{}'.format(account))
-            # Redirect to home page
-            return redirect(url_for('homepage'))
-            
-    # Show the login form with message (if any)
+            account = Login_User.Login_User(username,passw)
+            if account == "none":
+                flash('Incorrect User information')
+            else:
+                session["UID"] = str(account)
 
-    return render_template('login.html')
+                flash('Login Sucessful. Welcome back ' +  username + '!')
+                # Redirect to home page
+                return redirect(url_for('homepage'))
+                
+        # Show the login form with message (if any)
 
+        return render_template('login.html')
+    else:
+        return redirect(url_for('accountpage'))
 
 @app.route('/userRegristration', methods=['GET', 'POST'])
 def register():
@@ -265,8 +272,6 @@ def createListing():
                 if x == y:
                     tags = tags + ", " +tag_dictionary[y]
            
-            
-
         print(title)
         description = request.form['desc']
         description.replace(",", "|$|")
@@ -306,5 +311,15 @@ def ShoppingCart():
     UID = session
     cart  = Shopping_Cart. Pull_Cart(UID)
     return render_template('shopping_cart.html')
-
+@app.route('/accountpage', methods=['GET','POST'])
+def accountpage():
+    if request.method == "POST":
+        print("In logout")
+        session['UID'] = '00'
+        print(session['UID'])
+        return redirect(url_for('homepage'))
+    return render_template('account_page.html')
+@app.route('/adminPage',methods=['GET','POST'])
+def adminPage():
+    return render_template('admin_listings.html')
 app.run(debug=True)
