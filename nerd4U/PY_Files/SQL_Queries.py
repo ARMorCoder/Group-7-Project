@@ -1,5 +1,4 @@
 import mysql.connector
-import py
 from PY_Files import CONSTANTS
 DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,
                              password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
@@ -120,6 +119,7 @@ def Fill_Cart(Cart_List):
     Sel_Value = "Name,Price,picture_id"
     Where = Format_Half_Zip_List("PID",Cart_List," OR ")
     sql = sql.format(Sel_Value, P_TABLE, Where)
+    print (sql)
     My_Cursor.execute(sql)
     return My_Cursor.fetchall()
     
