@@ -24,17 +24,13 @@ def Push_Cart(Temp_Cart, UID):
 
 
 def Pull_Cart(UID):
-    if(UID == "00"):
+    if UID == None:
         return []
-    else:
-        Cart_List = SQL_Queries.Get_Cart(UID)
-        print("Cart list = " + str(Cart_List))
-        
-        Cart_List = Cart_List[1:-1]
-        Cart_List = Cart_List.split(',')
-        Cart_List = Str_To_Lint(Cart_List)
-        return Cart_List
-
+    Cart_List = SQL_Queries.Get_Cart(UID)
+    Cart_List = Cart_List[1:-1]
+    Cart_List = Cart_List.split(',')
+    Cart_List = Str_To_Lint(Cart_List)
+    return Cart_List
 
 # adds a pid to a list cart
 
@@ -49,6 +45,7 @@ def Add_Item(Cart_List, New_PID):
 
 
 def Str_To_Lint(String_List):
+    print(String_List)
     for i in range(0, len(String_List)):
         String_List[i] = int(String_List[i])
     return String_List
