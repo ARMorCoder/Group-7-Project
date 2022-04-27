@@ -80,3 +80,7 @@ def CList_to_Str(cart):
 
 def Get_PID_From_P_Name(Deleter_List):
     print(SQL_Queries.Fill_Deleter(Deleter_List))
+
+def Empty_Cart(UID):
+    SQL_Queries.Update_Field(CONSTANTS.USER_TABLE,
+                             "Cart", "", "UID", UID)

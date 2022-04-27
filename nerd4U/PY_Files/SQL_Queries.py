@@ -25,7 +25,6 @@ def Push_To_Trans_Table(UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_
     print(sql)
     My_Cursor.execute(sql)
     DB.commit()
-
 def Get_Email(Email):
     return Select_Any(U_TABLE, "Email", ["Email"], [Email])
 
@@ -129,7 +128,7 @@ def Update_Field(Table,Attribute_List, Value_List, ID_Type,ID):
     set = "set " + Format_Zip_List([Attribute_List], [Value_List],",")
     where = 'Where {} = {}'.format(ID_Type,ID)
     sql  = "{} {} {}".format(update,set,where)
-    print(sql)
+    
     My_Cursor.execute(sql)
     DB.commit()
 
@@ -139,7 +138,7 @@ def Fill_Cart(Cart_List):
     Sel_Value = "Name,Price,picture_id"
     Where = Format_Half_Zip_List("PID",Cart_List," OR ")
     sql = sql.format(Sel_Value, P_TABLE, Where)
-    print (sql)
+    
     My_Cursor.execute(sql)
     return My_Cursor.fetchall()
     

@@ -5,7 +5,6 @@ import sys
 import os
 from ast import literal_eval
 
-# password: passwordtodb123!
 
 import mysql.connector
 from flask import Flask, jsonify, request, render_template, send_from_directory, redirect, url_for, session, flash
@@ -59,8 +58,8 @@ def homepage():
     ################################################################################################
     # Call function to perform SQL Query on specified categories (returns array containing tuples) #
         #
-    art_products = Product_Information.Get_Product_By_Catagory(
-        'Art')                              #
+    # art_products = Product_Information.Get_Product_By_Catagory(
+    #     'Art')                              #
     comic_products = Product_Information.Get_Product_By_Catagory(
         'Comics')                         #
     toy_products = Product_Information.Get_Product_By_Catagory(
@@ -70,17 +69,17 @@ def homepage():
     # Recurse through each tuple, only returning the third data column (the image id's) #
     #####################################################################################
     #                                                                #
-    art_img_ids = (tuple(map(lambda x: x[3], art_products)))
+    # art_img_ids = (tuple(map(lambda x: x[3], art_products)))
     comic_img_ids = (
         tuple(map(lambda x: x[3], comic_products)))                        #
     #
     toy_img_ids = (tuple(map(lambda x: x[3], toy_products)))
 
     return render_template('homepage.html',
-                           art_img_ids=art_img_ids,
+                           
                            comic_img_ids=comic_img_ids,
                            toy_img_ids=toy_img_ids,
-                           art_products=art_products,
+                           
                            comic_products=comic_products,
                            toy_products=toy_products
                            )  # Display's homepage when at root directory of website along with all products ##
@@ -134,9 +133,8 @@ def send_image(filename):
 
 @app.route('/userLogin', methods=['GET', 'POST'])
 def login():
-    print(session["UID"])
-
-    if(session['UID'] == '00'):
+    Sess_UID = session.get('UID')
+    if(Sess_UID == None or Sess_UID == '00' or Sess_UID == 00):
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             # Create variables for easy access
 
@@ -318,9 +316,9 @@ def itempage(iteminfo):
 
     adding_to_cart = int(total) + int(result[2])
     if request.method == "POST":
-        print("Add_Item c{} r{}".format(Cart,result[0]))
+        # print("Add_Item c{} r{}".format(Cart,result[0]))
         Cart = Shopping_Cart.Add_Item(Cart,result[0])
-        print(Cart)
+        # print(Cart)
         Shopping_Cart.Push_Cart(Cart,user)
         return redirect(url_for('ShoppingCart'))
 
@@ -350,20 +348,15 @@ def ShoppingCart():
     Checkout_Detail = SQL_Queries.Get_User_Checkout(User)
 
     if request.method == "POST" and request.form.getlist('Delete_Checks'):
-        print("POSTER!")
         Deleter_List = request.form.getlist('Delete_Checks')
-        # print(Deleter_List)
-
         Deleter_List = Shopping_Cart.Get_PID_From_P_Name(Deleter_List)
 
     if request.method == "POST":
-        print("Posted!")
         Shipping = Transaction.Make_Address_String(request.form["shipAddr"],
                                                    request.form["shipState"],
                                                    request.form["shipCity"],
                                                    request.form["shipZip"],
                                                    request.form["shipApt"])
-        print(Shipping)
         if request.form.get("billzor"):
             Billing = Transaction.Make_Address_String(
                 request.form["billAddr"],
@@ -385,6 +378,8 @@ def ShoppingCart():
                                              S_Address=Shipping,
                                              B_Address=Billing)
         Shopping_Cart.Empty_Cart(User)
+        return redirect(url_for('ShoppingCart'))
+
 
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
@@ -403,7 +398,7 @@ def ShoppingCart():
 @app.route('/accountpage', methods=['GET', 'POST'])
 def accountpage():
     order_list = []
-    if session['UID']:
+    if session.get('UID'):
         user = SQL_Queries.UserIdToUsername(session['UID'])
         print(user[0])
         products_int = Shopping_Cart.Pull_Cart(user[0])
