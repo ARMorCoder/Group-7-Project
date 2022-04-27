@@ -1,3 +1,4 @@
+from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart, Transaction
 import re
 from re import A
 import sys
@@ -10,14 +11,14 @@ import mysql.connector
 from flask import Flask, jsonify, request, render_template, send_from_directory, redirect, url_for, session, flash
 # from sympy import Q
 
-tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
+tag_dictionary = {'art-ANIME': 'Anime', 'art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
                   'art-TV': 'Television', 'art-OTHER': 'Other', 'art-CN': 'Cartoon Network',
                   'art-DC': 'DC Universe', 'art-DISNEY': 'Disney', 'art-GOT': 'Game of Thrones',
                   'art-GHOSTBUSTERS': 'Ghostbusters', 'art-HARRY': 'Harry Potter', 'art-LOTR': 'Lord of the Rings',
                   'art-MARVEL': 'Marvel', 'art-NICKELODEON': 'Nickelodeon', 'art-Nintendo': 'Nintendo',
                   'art-PIXAR': 'Pixar', 'art-POKEMON': 'Pokemon', 'art-POWER': 'Power Rangers',
                   'art-SEGA': 'SEGA', 'art-STAR-TREK': 'Star Trek', 'art-STAR-WARS': 'Star Wars',
-                  'acc-ANIME': 'Anime','acc-CARTOONS': 'Cartoons', 'acc-Movies': 'Movies',
+                  'acc-ANIME': 'Anime', 'acc-CARTOONS': 'Cartoons', 'acc-Movies': 'Movies',
                   'acc-TV': 'Television', 'acc-OTHER': 'Other', 'acc-CN': 'Cartoon Network',
                   'acc-DC': 'DC Universe', 'acc-DISNEY': 'Disney', 'acc-GOT': 'Game of Thrones',
                   'acc-GHOSTBUSTERS': 'Ghostbusters', 'acc-HARRY': 'Harry Potter', 'acc-LOTR': 'Lord of the Rings',
@@ -31,9 +32,7 @@ tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies':
                   'comic-IDW': 'IDW', 'comic-IMAGE': 'Image', 'comic-KODANSHA': 'Kodansha', 'comic-MARVEL': 'Marvel', 'comic-ONI': 'Oni Press',
                   'comic-SHOGAKUGAN': 'Shogakugan', 'comic-SHUEISHA': 'Shueisha', 'comic-TOKYOPOP': 'Tokyopop', 'comic-VALIANT': 'Valiant', 'comic-OTHER': 'Other'}
 
-    # Add the rest of the tags from create_listing.html to allow createListing function to properly insert the tags into database
-
-from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart
+# Add the rest of the tags from create_listing.html to allow createListing function to properly insert the tags into database
 
 
 app = Flask(__name__, static_folder='./static')
@@ -53,17 +52,19 @@ def homepage():
     if request.method == 'POST':
 
         search_for = request.form['search_bar']
-        session["search_for"] = search_for        
-
+        session["search_for"] = search_for
 
         return redirect(url_for('searchpage'))
 
     ################################################################################################
     # Call function to perform SQL Query on specified categories (returns array containing tuples) #
     #
-    art_products = Product_Information.Get_Product_By_Catagory('Art')                                                #
-    comic_products = Product_Information.Get_Product_By_Catagory('Comics')                                             #
-    toy_products = Product_Information.Get_Product_By_Catagory('Toys & Models')                                        #
+    art_products = Product_Information.Get_Product_By_Catagory(
+        'Art')                                                #
+    comic_products = Product_Information.Get_Product_By_Catagory(
+        'Comics')                                             #
+    toy_products = Product_Information.Get_Product_By_Catagory(
+        'Toys & Models')                                        #
 
     #####################################################################################
     # Recurse through each tuple, only returning the third data column (the image id's) #
@@ -217,7 +218,8 @@ def searchpage():
     session["search_for"] = result
     # This line was causing problem as I was using session["result"] to get the result that they previously entered specifically when they clicked refreshed button so I can just query through that.
     session["result"] = result
-    array_art = Product_Information.Get_Product_By_Category_If_Valid(result, '%Art%')
+    array_art = Product_Information.Get_Product_By_Category_If_Valid(
+        result, '%Art%')
     session["array_art"] = array_art
     array_acc = Product_Information.Get_Product_By_Category_If_Valid(
         result, '%Accessories%')
@@ -235,22 +237,20 @@ def searchpage():
 
 
 @app.route('/createListing', methods=['GET', 'POST'])
-def createListing():    
+def createListing():
     tags = ""
     if request.method == 'POST':
 
         catagory = request.form['listingCategory']
         subcatagory = request.form['listingCategory']
-        uid = session["UID"] 
+        uid = session["UID"]
         list_of_tags = request.form.getlist('boxes')
         title = request.form['title']
 
         for x in list_of_tags:
             for y in tag_dictionary:
                 if x == y:
-                    tags = tags + ", " +tag_dictionary[y]
-           
-            
+                    tags = tags + ", " + tag_dictionary[y]
 
         print(title)
         description = request.form['desc']
@@ -262,7 +262,8 @@ def createListing():
         price = dollar + cent
 
         quantity = request.form['quantity']
-        Product_Information.Insert_New_Product(uid,tags, title, description,image[0], price, quantity,catagory, subcatagory)
+        Product_Information.Insert_New_Product(
+            uid, tags, title, description, image[0], price, quantity, catagory, subcatagory)
         return redirect(url_for('homepage'))
 
     return render_template('Create_Listing.html')
@@ -283,32 +284,55 @@ def itempage(iteminfo):
     return render_template('item_page.html', result=result, user=user, itemcount=itemcount, subtotal=subtotal)
 
 
-@app.route('/shoppingCart')
+@app.route('/shoppingCart', methods=['GET', 'POST'])
 def ShoppingCart():
 
-    user = session.get("UID")
-    Cart = Shopping_Cart.Pull_Cart(user)
-    
+    User = session.get("UID")
+    Cart = Shopping_Cart.Pull_Cart(User)
+
     Filled = Shopping_Cart.Get_Shopping_Products(Cart)
-   
+
     length = Shopping_Cart.Cart_Length(Filled)
     total = Shopping_Cart.Total_Shopping_Cart(Filled)
-    
+
     Tax_Value = round(total * 0.0825, 2)
     Tax = ("TAX 8.25%", Tax_Value, "TAX")
     Shipping = ("SHIPPING 5.89 per Item", length * 5.89, "SHIPPING")
     T_Total = round(total + Tax_Value + Shipping[1], 2)
     irreplaceable = [Tax, Shipping]
-    Checkout_Detail = SQL_Queries.Get_User_Checkout(user)
+    Checkout_Detail = SQL_Queries.Get_User_Checkout(User)
 
+    if request.method == "POST":
+        print("Posted!")
+        Shipping = Transaction.Make_Address_String(request.form["shipAddr"],
+                                                   request.form["shipState"],
+                                                   request.form["shipCity"],
+                                                   request.form["shipZip"],
+                                                   request.form["shipApt"])
+        print(Shipping)
+        if request.form.get("billzor"):
+            Billing = Transaction.Make_Address_String(
+                request.form["billAddr"],
+                request.form["billState"],
+                request.form["billCity"],
+                request.form["billZip"],
+                request.form["billApt"])
+        else:
+            Billing = Shipping
 
+        Trans = Transaction.Create_Transaction_Tuple(UID=User,
+                                                     Cart_IDs=str(Cart),
+                                                     Cart_Names=Transaction.Make_Cart_Names(
+                                                         Filled),
+                                                     Taxed_Total=T_Total,
+                                                     Date=Transaction.Get_Date(),
+                                                     Payment_Info=Transaction.Redact_CC(
+                                                         request.form["cardNumber"]),
+                                                     S_Address=Shipping,
+                                                     B_Address=Billing
+                                                     )
+        print(Trans)
 
-
-
-
-
-
-    
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
                            Tuple_Two=irreplaceable,

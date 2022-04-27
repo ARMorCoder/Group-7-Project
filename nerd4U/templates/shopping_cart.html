@@ -141,8 +141,15 @@
             </ul>
             <hr>
             <p class="text-end p-0">Absolute Total ({{N_Items}} items): &#36;{{Taxed_Total}}</p>
-            <div class="text-end p-0"><button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                    data-bs-target="#checkout">Proceed to Checkout</button></div>
+            <div class="text-end p-0">
+<!--
+				<button type="button" class="btn btn-warning" 
+                    data-bs-target="#Updatet">Update Cart</button>
+-->
+				<button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                    data-bs-target="#checkout">Proceed to Checkout</button>
+			
+			</div>
         </div>
     </form>
 
@@ -150,7 +157,7 @@
     <div class="modal fade" id="checkout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <form class="modal-content needs-validation" novalidate>
+            <form class="modal-content needs-validation" novalidate action="" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title">Checkout</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -160,20 +167,20 @@
                         <legend class="text-danger mb-3">Total ({{N_Items}} Items): &#36;{{Taxed_Total}}</legend>
                         <div class="col-6 mb-3">
                             <label for="shipAddr" class="form-label">Shipping Address</label>
-                            <input type="text" value="{{Address}}" class="form-control" id="shipAddr" maxlength="255"
+                            <input type="text" value="{{Address}}" class="form-control" name="shipAddr" id="shipAddr" maxlength="255"
                                 required>
                         </div>
                         <div class="col-6 mb-3">
                             <label for="shipApt" class="form-label">Apt/Suite</label>
-                            <input type="text" class="form-control" maxlength="255" id="shipApt">
+                            <input type="text" class="form-control" maxlength="255" name="shipApt" id="shipApt">
                         </div>
                         <div class="col-6 mb-3">
                             <label for="shipCity" class="form-label">City</label>
-                            <input type="text" class="form-control" id="shipCity" maxlength="255" required>
+                            <input type="text" class="form-control" id="shipCity" name="shipCity" maxlength="255" required>
                         </div>
                         <div class="col-3 mb-3">
                             <label for="shipState" class="form-label">State</label>
-                            <select class="form-select" id="shipState" onchange="" required>
+                            <select class="form-select" id="shipState" name="shipState" onchange="" required>
                                 <option value="" selected>--</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -230,11 +237,11 @@
                         </div>
                         <div class="col-3 mb-3">
                             <label for="shipZip" class="form-label">ZIP Code</label>
-                            <input type="number" class="form-control" id="shipZip" maxlength="255" required>
+                            <input type="text" class="form-control" id="shipZip" name="shipZip"maxlength="255" required>
                         </div>
                         <div class="col-3 mb-3">
                             <label for="cardProvider" class="form-label">Card Provider</label>
-                            <select class="form-select" id="cardProvider" required>
+                            <select class="form-select" id="cardProvider" name="cardProvider" required>
                                 <option value="">--</option>
                                 <option value="amex">American Express</option>
                                 <option value="disc">Discover</option>
@@ -244,40 +251,42 @@
                         </div>
                         <div class="col-6 mb-3">
                             <label for="cardNumber" class="form-label">Card Number</label>
-                            <input type="number" class="form-control" id="cardNumber" oninput="luhnCheck(this)" max="16"
+                            <!-- <input type="number" class="form-control" id="cardNumber" name="cardNumber" oninput="luhnCheck(this)" max="16"
+                                required> -->
+                            <input type="text" class="form-control" id="cardNumber" name="cardNumber"  max="16"
                                 required>
-                            <div class="invalid-feedback">Invalid Card Number</div>
+                            <!-- <div class="invalid-feedback">Invalid Card Number</div> -->
                         </div>
                         <div class="col-3 mb-3">
                             <label for="cvv" class="form-label">CVV</label>
-                            <input type="number" class="form-control" id="cvv" max="16" required>
+                            <input type="text" class="form-control" id="cvv" name="cvv" max="3" required>
                         </div>
                         <div class="col-12 mb-3">
                             <label for="cardholder" class="form-label">Cardholder Name <small>(Name printed on front of
                                     card)</small></label>
-                            <input type="text" value="{{Full_Name}}" class="form-control" id="cardholder" required>
+                            <input type="text" value="{{Full_Name}}" class="form-control" id="cardholder" name="cardholder" required>
                         </div>
                         <div class="col-12 mb-3">
-                            <input type="checkbox" class="form-check-input" id="billing" onchange="toggleBilling(this)">
+                            <input type="checkbox" class="form-check-input" id="billing" name="billzor" onchange="toggleBilling(this)">
                             <label for="billing" class="form-label">Billing Address (If different from shipping
                                 address)</label>
                         </div>
-                        <div class="row m-0 p-0" id="billInfo" hidden>
+                        <div class="row m-0 p-0" id="billInfo" name="billInfo" hidden>
                             <div class="col-6 mb-3">
                                 <label for="billAddr" class="form-label">Billing Address</label>
-                                <input type="text" class="form-control" id="billAddr">
+                                <input type="text" class="form-control" id="billAddr" name="billAddr">
                             </div>
                             <div class="col-6 mb-3">
                                 <label for="billApt" class="form-label">Apt/Suite</label>
-                                <input type="text" class="form-control" id="billApt">
+                                <input type="text" class="form-control" id="billApt" name="billApt">
                             </div>
                             <div class="col-6 mb-3">
                                 <label for="billCity" class="form-label">City</label>
-                                <input type="text" class="form-control" id="billCity">
+                                <input type="text" class="form-control" id="billCity" name="billCity">
                             </div>
                             <div class="col-3 mb-3">
                                 <label for="billState" class="form-label">State</label>
-                                <select class="form-select" id="billState">
+                                <select class="form-select" id="billState" name="billState">
                                     <option value="" selected>--</option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
@@ -334,14 +343,14 @@
                             </div>
                             <div class="col-3 mb-3">
                                 <label for="billZip" class="form-label">ZIP Code</label>
-                                <input type="number" class="form-control" id="billZip">
+                                <input type="number" class="form-control" id="billZip" name="billZip">
                             </div>
                         </div>
                         <div class="col-12 mb-3">
-                            <input type="checkbox" class="form-check-input" id="discount"
+                            <input type="checkbox" class="form-check-input" id="discount" name="discount"
                                 onchange="toggleDiscount(this)">
                             <label for="discount" class="form-label">Discount Code</label>
-                            <input type="text" class="form-control" id="discountCode" hidden>
+                            <input type="text" class="form-control" id="discountCode" name="discountCode" hidden>
                         </div>
                     </div>
                 </div>

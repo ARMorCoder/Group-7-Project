@@ -79,3 +79,7 @@ def Cart_Length(Filled):
     if len(Filled) == 0:
         return 0
     return len(Filled)
+
+def CList_to_Str(cart):
+    return str(cart)
+    pass
