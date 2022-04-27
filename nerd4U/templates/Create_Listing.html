@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta value = " " name="viewport" content="width=device-width, initial-scale=1">
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -25,7 +25,7 @@
         <header>
             <nav class="navbar navbar-expand navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Nerds4U</a>
+                    <a class="navbar-brand" href="/">Nerds4U</a>
                     <ul class="navbar-nav container-fluid">
                         <div class="input-group p-2 col">
                             <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">All</button>
@@ -38,13 +38,13 @@
                                 <li><a class="dropdown-item" href="#">Toys &amp; Models</a></li>
                             </ul>
                             <input class="form-control" type="search" placeholder="Search for art, accessories, comics, cards, toys, and more..." aria-label="Search">
-                            <button class="btn btn-warning" type="submit"><span class="bi bi-search"></span></button>
+                            <button class="btn btn-warning" type="submit" ><a href="searchpage"><span class="bi bi-search"></a></span></button>
                         </div>
                         <li class="nav-item px-1">
-                            <a class="nav-link btn btn-dark fs-5" href="#"><span class="bi bi-tags-fill"></span></a>
+                            <a class="nav-link btn btn-dark fs-5" href="/createListing"><span class="bi bi-tags-fill"></span></a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link btn btn-dark fs-5" href="#"><span class="bi bi-person-fill"></span></a>
+                            <a class="nav-link btn btn-dark fs-5" href="/userLogin"><span class="bi bi-person-fill"></span></a>
                         </li>
                         <li class="nav-item px-1">
                             <a class="nav-link btn btn-dark" href="#"><span class="bi bi-cart-fill fs-5"></span><span class="badge rounded-pill bg-secondary">0</span></a>
@@ -70,23 +70,23 @@
             </nav>
         </header>
         
-        <form class="shadow-lg rounded-3 bg-body container-fluid w-75 p-3 mb-5" style="max-width: 50rem">
+        <form class="shadow-lg rounded-3 bg-body container-fluid w-75 p-3 mb-5" action ="" method="post" style="max-width: 50rem">
             <div class="row g-">
                 <legend class="text-center mb-3">Create New Listing</legend>
                 <div class="col-6 mb-3">
                     <label for="listingCategory" class="form-label">Item Category</label>
-                    <select class="form-select" id="listingCategory" onchange="showCatTags(this.value)" required>
+                    <select class="form-select"  name="listingCategory" id="listingCategory" onchange="showCatTags(this.value)" required>
                         <option value="">-- Select</option>
-                        <option value="art">Art</option>
-                        <option value="acc">Accessories</option>
-                        <option value="com">Comics</option>
-                        <option value="card">Trading Cards</option>
-                        <option value="toy">Toys &amp; Models</option>
+                        <option value="art" >Art</option>
+                        <option value="acc" >Accessories</option>
+                        <option value="com" >Comics</option>
+                        <option value="card" >Trading Cards</option>
+                        <option value="toy" >Toys &amp; Models</option>
                     </select>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="listingSubcategory" class="form-label">Subcategory</label>
-                    <select class="form-select" id="listingSubcategory" onchange="showSubcatTags(this.value)" disabled required>
+                    <select class="form-select" name="listingSubcategory" id="listingSubcategory" onchange="showSubcatTags(this.value)" disabled required>
                         <option value="">-- Select</option>
                         <option hidden>Drawings &amp; Paintings</option>
                         <option hidden>Mixed Media</option>
@@ -120,105 +120,105 @@
                         <h6 class="text-center">Art Tags</h6>
                         <label class="form-label">Subject Matter:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-anime" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-anime" value = "art-ANIME" name="boxes" autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-anime">Anime</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-cartoons" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-cartoons" value = "art-CARTOONS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-cartoons">Cartoons</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-movies" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-movies" value = "art-MOVIES" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-movies">Movies</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-tv" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-tv" value = "art-TV" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-tv">TV Shows</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-video" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-video" value = "art-VIDEO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-video">Video Games</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-other" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-other" value = "art-OTHER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-other">Other</label>
                         </div><br>
                         <label class="form-label">Franchise:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-cn" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-cn" value = "art-CN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-cn">Cartoon Network</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-dc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-dc" value = "art-DC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-dc">DC Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-disney" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-disney" value = "art-DISNEY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-disney">Disney</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-got" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-got" value = "art-GOT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-got">Game of Thrones</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-ghostbusters" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-ghostbusters" value = "art-GHOSTBUSTERS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-ghostbusters">Ghostbusters</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-harry" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-harry" value = "art-HARRY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-harry">Harry Potter</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-lotr" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-lotr" value = "art-LOTR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-lotr">Lord of the Rings</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-marvel" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-marvel" value = "art-MARVEL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-marvel">Marvel Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-nickelodeon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-nickelodeon" value = "art-NICKELODEON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-nickelodeon">Nickelodeon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-nintendo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-nintendo" value = "art-NINTENDO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-nintendo">Nintendo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-pixar" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-pixar" value = "art-PIXAR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-pixar">Pixar</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-pokemon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-pokemon" value = "art-POKEMON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-pokemon">Pok&eacute;mon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-power" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-power" value = "art-POWER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-power">Power Rangers</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-sega" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-sega" value = "art-SEGA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-sega">SEGA</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-starTrek" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-starTrek" value = "art-STAR-TREK" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-starTrek">Star Trek</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-starWars" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-starWars" value = "art-STAR-WARS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-starWars">Star Wars</label>
                         </div><br>
                         <label class="form-label">Value Factors:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-autographed" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-autographed" value = "art-AUTOGRAPHED" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-autographed">Autographed</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-numbered" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-numbered" value = "art-NUMBERED" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-numbered">Numbered Exclusive</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="artTag-original" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="artTag-original" value = "art-ORIGINAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-danger" for="artTag-original">Original</label>
                         </div>
                     </div>
@@ -226,92 +226,92 @@
                         <h6 class="text-center">Accessories Tags</h6>
                         <label class="form-label">Field of Reference:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-anime" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-anime" value = "acc-ANIME" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-anime">Anime</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-cartoons" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-cartoons" value = "acc-CARTOONS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-cartoons">Cartoons</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-movies" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-movies" value = "acc-MOVIES" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-movies">Movies</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-tv" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-tv" value = "acc-TV" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-tv">TV Shows</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-video" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-video" value = "acc-VIDEO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-video">Video Games</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-other" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-other" value = "acc-OTHER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-other">Other</label>
                         </div><br>
                         <label class="form-label">Franchise:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-cn" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-cn" value = "acc-CN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-cn">Cartoon Network</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-dc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-dc" value = "acc-DC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-dc">DC Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-disney" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-disney" value = "acc-DISNEY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-disney">Disney</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-got" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-got" value = "acc-GOT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-got">Game of Thrones</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-ghostbusters" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-ghostbusters" value = "acc-GHOSTBUSTERS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-ghostbusters">Ghostbusters</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-harry" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-harry" value = "acc-HARRY-POTTER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-harry">Harry Potter</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-lotr" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-lotr" value = "acc-LOTR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-lotr">Lord of the Rings</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-marvel" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-marvel" value = "acc-MARVEL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-marvel">Marvel Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-nickelodeon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-nickelodeon" value = "acc-NICKELODEON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-nickelodeon">Nickelodeon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-nintendo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-nintendo" value = "acc-NINTENDO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-nintendo">Nintendo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-pixar" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-pixar" value = "acc-PIXAR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-pixar">Pixar</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-pokemon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-pokemon" value = "acc-POKEMON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-pokemon">Pok&eacute;mon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-power" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-power" value = "acc-POWER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-power">Power Rangers</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-sega" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-sega" value = "acc-SEGA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-sega">SEGA</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-starTrek" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-starTrek" value = "acc-STAR-TREK" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-starTrek">Star Trek</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="accTag-starWars" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="accTag-starWars" value = "acc-STAR-WARS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="accTag-starWars">Star Wars</label>
                         </div>
                     </div>
@@ -319,19 +319,19 @@
                         <h6 class="text-center">Jewelry Tags</h6>
                         <label class="form-label">Type:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="jewelryTag-bracelets" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="jewelryTag-bracelets" value = "jewelry-BRACELETS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="jewelryTag-bracelets">Bracelets</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="jewelryTag-earrings" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="jewelryTag-earrings" value = "jewelry-EARRINGS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="jewelryTag-earrings">Earrings/Piercings</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="jewelryTag-necklaces" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="jewelryTag-necklaces" value = "jewelry-NECKLACES" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="jewelryTag-necklaces">Necklaces</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="jewelryTag-rings" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="jewelryTag-rings" value = "jewelry-RINGS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-info" for="jewelryTag-rings">Rings</label>
                         </div>
                     </div>
@@ -339,145 +339,145 @@
                         <h6 class="text-center">Comics Tags</h6>
                         <label class="form-label">Format:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-single" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-single" value = "comic-SINGLE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-single">Single Issue</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-ogn" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-ogn" value = "comic-OGN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-ogn">Original Graphic Novel/Volume</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-magazine" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-magazine" value = "comic-MAGAZINE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-magazine">Magazine/Anthonlogy</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-pb" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-pb" value = "comic-PAPERBACK" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-pb">PB Collected Edition</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-hc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-hc" value = "comic-HARD-COVER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-hc">HC Collected Edition</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-digest" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-digest" value = "comic-DIGEST" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-digest">Digest</label>
                         </div><br>
                         <label class="form-label">Publisher:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-archie" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-archie" value = "comic-ARCHIE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-archie">Archie Comics</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-boom" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-boom" value = "comic-BOOM" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-boom">Boom! Studios</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-dark" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-dark" value = "comic-DARK" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-dark">Dark Horse</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-dc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-dc" value = "comic-DC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-dc">DC</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-archie" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-archie" value = "comic-DEL-REY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-archie">Del Rey</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-dynamite" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-dynamite" value = "comic-DYNAMITE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-dynamite">Dynamite</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-idw" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-idw" value = "comic-IDW" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-idw">IDW</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-image" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-image" value = "comic-IMAGE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-image">Image</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-kodansha" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-kodansha" value = "comic-KODANSHA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-kodansha">Kodansha</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-marvel" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-marvel" value = "comic-MARVEL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-marvel">Marvel</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-oni" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-oni" value = "comic-ONI" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-oni">Oni Press</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-shogakugan" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-shogakugan" value = "comic-SHOGAKUGAN"  name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-shogakugan">Shogakugan</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-shueisha" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-shueisha" value = "comic-SHUEISHA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-shueisha">Shueisha</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-tokyopop" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-tokyopop" value = "comic-TOKYOPOP" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-tokyopop">Tokyopop</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-valiant" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-valiant" value = "comic-VALIANT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-valiant">Valiant</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-viz" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-viz" value = "comic-VIZ" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-viz">Viz</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-other" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-other" value = "comic-OTHER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-other">Other</label>
                         </div><br>
                         <label class="form-label">Value Factors:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-zero" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-zero" value = "comic-ZERO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-zero">&#35;0</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-one" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-one" value = "comic-ONE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-one">&#35;1</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-cameo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-cameo" value = "comic-CAMEO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-cameo">Cameo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-cbcs" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-cbcs" value = "comic-CBCS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-cbcs">CBCS Graded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-cgc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-cgc" value = "comic-CGC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-cgc">CGC Graded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-classic" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-classic" value = "comic-CLASSIC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-classic">Classic Cover</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-crossover" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-crossover" value = "comic-CROSSOVER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-crossover">Crossover</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-file" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-file" value = "comic-FILE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-file">File/Warehouse Copy</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-first" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-first" value = "comic-FIRST" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-first">First Appearance</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-key" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-key" value = "comic-KEY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-key">Key Issue</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-pgx" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-pgx" value = "comic-PGX" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-pgx">PGX Graded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="comTag-variant" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="comTag-variant" value = "comic-VARIANT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="comTag-variant">Variant Cover</label>
                         </div>
                     </div>
@@ -485,52 +485,52 @@
                         <h6 class="text-center">Manga &amp; Int'l Comics Tags</h6>
                         <label class="form-label">Language/Style:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-bd" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-bd" value = "manga-BD" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-bd">Bandes Dessin&eacute;es</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-british" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-british" value = "manga-BRITISH" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-british">British Comics</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-funetti" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-funetti" value = "manga-FUNETTI" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-fumetti">Fumetti</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-manga" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-manga" value = "manga-MANGA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-manga">Manga</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-manhua" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-manhua" value = "manga-MANHUA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-manhua">Manhua</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-manhwa" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-manhwa" value = "manga-MANHWA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-manhwa">Manhwa</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-oel" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-oel" value = "manga-OEL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-oel">OEL Manga</label>
                         </div><br>
                         <label class="form-label">Manga Genre:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-shonen" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-shonen" value = "manga-SHONEN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-shonen">Shonen</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-shojo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-shojo" value = "manga-SHOJO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-shojo">Shojo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-seinen" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-seinen" value = "manga-SEINEN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-seinen">Seinen</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-josei" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-josei" value = "manga-JOSEI" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-josei">Josei</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="mangaTag-kodomomuke" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="mangaTag-kodomomuke" value = "manga-KODOMOMUKE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="mangaTag-kodomomuke">Kodomomuke</label>
                         </div>
                     </div>
@@ -538,36 +538,36 @@
                         <h6 class="text-center">Superhero Tags</h6>
                         <label class="form-label">Era:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-golden" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-golden" value = "super-GOLDEN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-golden">Golden Age (1938-55')</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-silver" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-silver" value = "super-SILVER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-silver">Silver Age (56'-69')</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-bronze" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-bronze" value = "super-BRONZE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-bronze">Bronze Age (70'-85')</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-modern" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-modern" value = "super-MODERN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-modern">Modern Age (1986&#43;)</label>
                         </div><br>
                         <label class="form-label">DC Continuity:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-pre" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-pre" value = "super-PRE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-pre">Pre-Crisis (&#60;1986)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-post" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-post" value = "super-POST" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-post">Post-Crisis (86'-2011)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-new52" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-new52" value = "super-NEW52" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-new52">New 52</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="superTag-rebirth" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="superTag-rebirth" value = "super-REBIRTH" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-primary" for="superTag-rebirth">Rebirth</label>
                         </div>
                     </div>
@@ -575,129 +575,129 @@
                         <h6 class="text-center">Trading Cards Tags</h6>
                         <label class="form-label">Packaging:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-raw" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-raw" value = "card-RAW" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-raw">Raw/Ungraded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-slabbed" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-slabbed" value = "card-SLABBED" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-slabbed">Slabbed/Graded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-pack" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-pack" value = "card-PACK" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-pack">Pack</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-box" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-box" value = "card-BOX" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-box">Box</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-case" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-case" value = "card-CASE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-case">Case</label>
                         </div><br>
                         <label class="form-label">Quantity &amp; Association:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-single" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-single" value = "card-SINGLE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-single">Single Card</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-mixed" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-mixed" value = "card-MIXED" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-mixed">Mixed Lot</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-associated" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-associated" value = "card-ASSOCIATED" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-associated">Associated Card</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-partial" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-partial" value = "card-PARTIAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-partial">Partial Set</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-full" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-full" value = "card-FULL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-full">Full Set</label>
                         </div><br>
                         <label class="form-label">Value Factors:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-acetate" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-acetate" value = "card-ACETATE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-acetate">Acetate</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-artist" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-artist" value = "card-ARTIST " name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-artist">Artist Card</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-autograph" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-autograph" value = "card-AUTOGRAPH" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-autograph">Autograph</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-bgs" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-bgs" value = "card-BGS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-bgs">BGS Graded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-chrome" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-chrome" value = "card-CHROME" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-chrome">Chrome</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-dieCut" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-dieCut" value = "card-DIE-CUT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-dieCut">Die Cut</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-error" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-error" value = "card-ERROR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-error">Error</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-foil" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-foil" value = "card-FOIL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-foil">Foil</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-insert" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-insert" value = "card-INSERT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-insert">Insert</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-lenticular" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-lenticular" value = "card-LENTICULAR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-lenticular">Lenticular</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-memorabilia" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-memorabilia" value = "card-MEMORABILIA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-memorabilia">Memorabilia/Prop</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-metal" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-metal" value = "card-METAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-metal">Metal</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-acetate" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-acetate" value = "card-ACETATE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-acetate">Modern (1980&#43;)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-one" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-one" value = "card-ONE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-one">One-of-One</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-promo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-promo" value = "card-PROMO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-promo">Promo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-psa" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-psa" value = "card-PSA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-psa">PSA Graded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-refractor" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-refractor" value = "card-REFRACTOR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-refractor">Refractor</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-relic" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-relic" value =  "card-RELIC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-relic">Relic</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-serial" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-serial" value = "card-SERIAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-serial">Serial Numbered</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-sgc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-sgc" value = "card-SGC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-sgc">SGC Graded</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="cardTag-vintage" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="cardTag-vintage" value = "card-VINTAGE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="cardTag-vintage">Vintage (&#60;1980)</label>
                         </div>
                     </div>
@@ -705,68 +705,68 @@
                         <h6 class="text-center">Card Games Tags</h6>
                         <label class="form-label">Game:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-cardfight" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-cardfight" value = "tcg-CARD-FIGHT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-cardfight">Cardfight!! Vanguard</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-dragon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-dragon" value =  "tcg-DRAGON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-dragon">Dragon Ball Super</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-force" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-force" value = "tcg-FORCE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-force">Force of Will</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-final" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-final" value = "tcg-FINAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-final">Final Fantasy</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-magic" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-magic" value = "tcg-MAGIC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-magic">Magic: The Gathering</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-pokemon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-pokemon" value = "tcg-POKEMON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-pokemon">Pok&eacute;mon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-wow" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-wow" value = "tcg-WOW" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-wow">World of Warcraft</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-yuGiOh" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-yuGiOh" value = "tcg-YUGIOH" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-yuGiOh">Yu-Gi-Oh!</label>
                         </div><br>
                         <label class="form-label">Rarity:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-common" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-common" value = "tcg-COMMON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-common">Common</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-uncommon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-uncommon" value = "tcg-UNCOMMON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-uncommon">Uncommon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-rare" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-rare" value = "tcg-RARE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-rare">Rare</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-holographic" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-holographic" value = "tcg-HOLOGRAPHIC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-holographic">Holographic</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-rareHolo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-rareHolo" value = "tcg-RARE-HOLO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-rareHolo">Rare Holo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-reverse" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-reverse" value = "tcg-REVERSE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-reverse">Reverse Holo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-ultra" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-ultra" value = "tcg-ULTRA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-ultra">Ultra Rare</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="tcgTag-secret" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="tcgTag-secret" value =  "tcg-SECRET" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="tcgTag-secret">Secret Rare</label>
                         </div>
                     </div>
@@ -774,43 +774,43 @@
                         <h6 class="text-center">Non-Sports Cards Tags</h6>
                         <label class="form-label">Category:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-animation" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-animation" value = "nonSports-ANIMATION" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-animation">Animation &amp; Anime</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-dc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-dc" value = "nonSports-DC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-dc">DC Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-fictional" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-fictional" value = "nonSports-FICTIONAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-fictional">Fictional Characters</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-film" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-film" value = "nonSports-FILM" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-film">Film &amp; TV</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-history" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-history" value = "nonSports-HISTORY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-history">History</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-humor" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-humor" value = "nonSports-HUMOR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-humor">Humor &amp; Parody</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-marvel" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-marvel" value = "nonSports-MARVEL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-marvel">Marvel Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-star" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-star" value = "nonSports-STAR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-star">Star Wars</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-vehicle" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-vehicle" value = "nonSports-VEHICLE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-vehicle">Vehicle</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="nonSportsTag-video" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="nonSportsTag-video" value =  "nonSports-VIDEO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="nonSportsTag-video">Video Game</label>
                         </div>
                     </div>
@@ -818,120 +818,120 @@
                         <h6 class="text-center">Sports Cards Tags</h6>
                         <label class="form-label">Sport:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-american" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-american" value = "sports-AMERICAN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-american">American Football</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-association" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-association" value = "sports-ASSOCIATION" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-association">Association Football</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-australian" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-australian" value = "sports-AUSTRALIAN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-australian">Australian Football</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-baseball" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-baseball" value = "sports-BASEBALL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-baseball">Baseball</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-basketball" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-basketball" value = "sports-BASKETBALL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-basketball">Basketball</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-boxing" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-boxing" value = "sports-BOXING" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-boxing">Boxing</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-cricket" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-cricket" value = "sports-CRICKET" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-cricket">Cricket</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-cycling" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-cycling" value = "sports-CYCLING" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-cycling">Cycling</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-golf" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-golf" value = "sports-GOLF" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-golf">Golf</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-hockey" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-hockey" value = "sports-HOCKEY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-hockey">Hockey</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-horse" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-horse" value = "sports-HORSE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-horse">Horse Racing</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-lacrosse" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-lacrosse" value = "sports-LACROSSE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-lacrosse">Lacrosse</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-motorsport" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-motorsport" value = "sports-MOTORSPORT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-motorsport">Motorsport</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-netball" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-netball" value = "sports-NETBALL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-netball">Netball</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-pro" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-pro" value = "sports-PRO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-pro">Pro-Wrestling</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-rugby" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-rugby" value = "sports-RUGBY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-rugby">Rugby</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-sumo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-sumo" value = "sports-SUMO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-sumo">Sumo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-surfing" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-surfing" value = "sports-SURFING" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-surfing">Surfing</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-tennis" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-tennis" value = "sports-TENNIS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-tennis">Tennis</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-wrestling" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-wrestling" value = "sports-WRESTLING" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-wrestling">Wrestling</label>
                         </div><br>
                         <label class="form-label">Feature:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-coach" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-coach" value = "sports-COACH" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-coach">Coach</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-combination" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-combination" value = "sports-COMBINATION" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-combination">Combination</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-hof" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-hof" value = "sports-HOF" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-hof">Hall of Famer</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-manager" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-manager" value = "sports-MANAGER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-manager">Manager</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-rookie" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-rookie" value = "sports-ROOKIE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-rookie">Rookie</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-second" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-second" value = "sports-SECOND" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-second">Second-year</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-star" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-star" value = "sports-STAR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-star">Star</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-superstar" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-superstar" value = "sports-SUPERSTAR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-superstar">Superstar</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="sportsTag-team" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="sportsTag-team" value = "sports-TEAM" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-warning" for="sportsTag-team">Team</label>
                         </div>
                     </div>
@@ -939,362 +939,362 @@
                         <h6 class="text-center">Toys Tags</h6>
                         <label class="form-label">Theme:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-animals" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-animals" value = "toy-ANIMALS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-animals">Animals &amp; Dinosaurs</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-anime" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-anime" value = "toy-ANIME" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-anime">Anime &amp; Manga</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-animation" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-animation" value = "toy-ANIMATION" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-animation">Animation &amp; Cartoons</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-comics" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-comics" value = "toy-COMICS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-comics">Comics</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-film" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-film" value = "toy-FILM" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-film">Film &amp; TV</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-historical" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-historical" value = "toy-HISTORICAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-historical">Historical Figures</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-military" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-military" value = "toy-MILITARY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-military">Military</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-sports" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-sports" value = "toy-SPORTS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-sports">Sports</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-robots" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-robots" value = "toy-ROBOTS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-robots">Robots &amp; Transformers</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-video" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-video" value =  "toy-VIDEO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-video">Video Game</label>
                         </div><br>
                         <label class="form-label">Franchise:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-alien" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-alien" value = "toy-ALIEN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-alien">Alien</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-barbie" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-barbie" value = "toy-BARBIE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-barbie">Barbie</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-blade" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-blade" value = "toy-BLADE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-blade">Blade Runner</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-blizzard" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-blizzard" value = "toy-BLIZZARD" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-blizzard">Blizzard Entertainment</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-cabbage" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-cabbage" value = "toy-CABBAGE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-cabbage">Cabbage Patch Kids</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-care" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-care" value = "toy-CARE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-care">Care Bears</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-cn" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-cn" value = "toy-CN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-cn">Cartoon Network</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-dc" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-dc" value = "toy-DC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-dc">DC Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-destiny" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-destiny" value =  "toy-DESTINY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-destiny">Destiny</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-disney" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-disney" value = "toy-DISNEY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-disney">Disney</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-dragon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-dragon" value = "toy-DRAGON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-dragon">Dragon Ball</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-dreamWorks" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-dreamWorks" value = "toy-DREAMWORKS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-dreamWorks">DreamWorks</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-got" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-got" value = "toy-GOT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-got">Game of Thrones</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-giJoe" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-giJoe" value = "toy-GIJOE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-giJoe">G.I. Joe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-ghostbusters" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-ghostbusters" value = "toy-GHOSTBUSTERS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-ghostbusters">Ghostbusters</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-halo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-halo" value = "toy-HALO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-halo">Halo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-harry" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-harry" value = "toy-HARRY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-harry">Harry Potter</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-hotWheels" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-hotWheels" value = "toy-HOTWHEELS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-hotWheels">Hot Wheels</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-lotr" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-lotr" value = "toy-LOTR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-lotr">Lord of the Rings</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-marvel" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-marvel" value = "toy-MARVEL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-marvel">Marvel Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-motu" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-motu" value = "toy-MOTU" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-motu">Master of the Universe</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-mortal" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-mortal" value = "toy-MORTAL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-mortal">Mortal Kombat</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-disney" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-disney" value = "toy-DISNEY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-disney">My Little Pony</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-nickelodeon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-nickelodeon" value = "toy-NICKELODEON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-nickelodeon">Nickelodeon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-nintendo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-nintendo" value = "toy-NINTENDO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-nintendo">Nintendo</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-pixar" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-pixar" value = "toy-PIXAR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-pixar">Pixar</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-pokemon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-pokemon" value = "toy-POKEMON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-pokemon">Pok&eacute;mon</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-power" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-power" value = "toy-POWER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-power">Power Rangers</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-predator" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-predator" value = "toy-PREDATOR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-predator">Predator</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-sega" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-sega" value = "toy-SEGA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-sega">SEGA</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-starTrek" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-starTrek" value = "toy-STAR-TREK" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-starTrek">Star Trek</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-starWars" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-starWars" value = "toy-STAR-WARS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-starWars">Star Wars</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-stranger" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-stranger" value = "toy-STRANGER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-stranger">Stranger Things</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-twd" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-twd" value = "toy-TWD" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-twd">The Walking Dead</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-thunderCats" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-thunderCats" value = "toy-THUNDERCATS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-thunderCats">ThunderCats</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-tmnt" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-tmnt" value = "toy-TMNT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-tmnt">TMNT</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-transformers" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-transformers" value = "toy-TRANSFORMERS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-tranformers">Transformers</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-wwe" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-wwe" value = "toy-WWE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-wwe">WWE</label>
                         </div><br>
                         <label class="form-label">Company/Manufacturer:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-bandai" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-bandai" value = "toy-BANDAI" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-bandai">Bandai</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-beast" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-beast" value = "toy-BEAST" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-beast">Beast Kingdom</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-build" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-build" value = "toy-BUILD" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-build">Build-A-Bear-Workshop</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-caleco" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-caleco" value = "toy-CALECO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-caleco">Caleco</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-cloudco" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-cloudco" value = "toy-CLOUDCO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-cloudco">Cloudco</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-fisher" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-fisher" value =  "toy-FISHER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-fisher">Fisher-Price</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-funko" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-funko" value =  "toy-FUNKO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-funko">Funko</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-greenlight" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-greenlight" value = "toy-GREENLIGHT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-greenlight">Greenlight</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-hasbro" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-hasbro" value = "toy-HASBRO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-hasbro">Hasbro</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-hollywood" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-hollywood" value = "toy-HOLLYWOOD" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-hollywood">Hollywood Collecctibles Group</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-hotToys" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-hotToys" value = "toy-HOTTOYS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-hotToys">Hot Toys</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-jada" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-jada" value = "toy-JADA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-jada">Jada Toys</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-johnny" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-johnny" value = "toy-JOHNNY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-johnny">Johnny Lightning</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-kenner" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-kenner" value = "toy-KENNER" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-kenner">Kenner</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-kotobukiya" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-kotobukiya" value = "toy-KOTOBUKIYA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-kotobukiya">Kotobukiya</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-llBean" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-llBean" value = "toy-LLBEAN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-llBean">L.L. Bean</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-m2" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-m2" value = "toy-M2" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-m2">M2 Machines</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-matchbox" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-matchbox" value = "toy-MATCHBOX" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-matchbox">Matchbox</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-mattel" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-mattel" value = "toy-MATTEL" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-mattel">Mattel</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-mcfarlane" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-mcfarlane" value = "toy-MCFARLANE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-mcfarlane">McFarlane</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-mego" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-mego" value = "toy-MEGO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-mego">Mego</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-neca" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-neca" value = "toy-NECA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-neca">NECA</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-play" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-play" value = "toy-PLAY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-play">Play Arts Kai</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-sideshow" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-sideshow" value = "toy-SIDESHOW" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-sideshow">Sideshow Collectibiles</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-starAce" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-starAce" value = "toy-STAR-ACE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-starAce">Star Ace Toys</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-threeA" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-threeA" value = "toy-THREEA" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-threeA">ThreeA</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-threezero" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-threezero" value = "toy-THREE-ZERO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-threezero">Threezero</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-ty" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-ty" value = "toy-TY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-ty">Ty</label>
                         </div><br>
                         <label class="form-label">Common Scales:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-one" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-one" value = "toy-ONE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-one">1:1 (Full Scale/Life-size)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-four" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-four" value = "toy-FOUR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-four">1:4 (&#126;18" Figures)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-six" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-six" value = "toy-SIX" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-six">1:6 (&#126;12" Figures, Dolls &amp; Statues)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-nine" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-nine" value = "toy-NINE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-nine">1:9 (&#126;8" Figures)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-ten" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-ten" value = "toy-TEN" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-ten">1:10 (&#126;7" Figures)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-twelve" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-twelve" value = "toy-TWELVE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-twelve">1:12 (&#126;6" Figures)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-four" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-four" value = "toy-FOUR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-four">1:18 (Model Cars &amp; 3.75-4" Figures)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-twentyFour" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-twentyFour" value = "toy-TWENTYFOUR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-twentyFour">1:24 (Largest Model Aircrafts)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-fourtyThree" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-fourtyThree" value = "toy-FOURTYTHREE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-fourtyThree">1:43 (Most Common Die-cast Cars)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-fourtyEight" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-fourtyEight" value = "toy-FOURTYEIGHT" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-fourtyEight">1:48 (Minifig Scale)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-sixtyFour" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-sixtyFour" value = "toy-SIXTYFOUR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-sixtyFour">1:64 (Most Common Toy Cars)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-seventyTwo" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-seventyTwo" value = "toy-SEVENTYTWO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-seventyTwo">1:72 (Most Common Model Aircrafts)</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="toyTag-uncommon" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="toyTag-uncommon" value = "toy-UNCOMMON" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="toyTag-uncommon">Uncommon</label>
                         </div>
                     </div>
@@ -1302,47 +1302,47 @@
                         <h6 class="text-center">LEGO Tags</h6>
                         <label class="form-label">LEGO Theme:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-architecture" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-architecture" value = "lego-ARCHITECTURE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-architecture">Architecture</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-bionicle" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-bionicle" value = "lego-BIONICLE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-bionicle">Bionicle</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-brickHeadz" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-brickHeadz" value = "lego-BRICKHEADZ" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-brickHeadz">BrickHeadz</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-brickSketches" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-brickSketches" value = "lego-BRICKSKETCHES" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-brickSketches">Brick Sketches</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-city" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-city" value = "lego-CITY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-city">City</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-classic" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-classic" value = "lego-CLASSIC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-classic">Classic</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-creatoe" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-creatoe" value = "lego-CREATOE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-creator">Creator</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-ideas" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-ideas" value = "lego-IDEAS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-ideas">Ideas</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-originals" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-originals" value = "lego-ORIGINALS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-originals">Originals</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-ninjago" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-ninjago" value = "lego-NINJAGO" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-ninjago">Ninjago</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="legoTag-tecnic" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="legoTag-technic" value = "lego-TECHNIC" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="legoTag-technic">Technic</label>
                         </div>
                     </div>
@@ -1350,47 +1350,47 @@
                         <h6 class="text-center">Toy Vehicles Tags</h6>
                         <label class="form-label">Vehicle Type:</label>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-air" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-air" value = "vehicle-AIR" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-air">Air &amp; Spacecrafts</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-buses" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-buses" value = "vehicle-BUSES" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-buses">Buses &amp; Semis</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-construction" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-construction" value = "vehicle-CONSTRUCTION" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-construction">Construction Vehicles</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-farm" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-farm" value = "vehicle-FARM" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-farm">Farm Vehicles</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-film" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-film" value = "vehicle-FILM" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-film">Film &amp; TV Vehicles</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-military" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-military" value = "vehicle-MILITARY" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-military">Military Vehicles</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-motorcycles" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-motorcycles" value = "vehicle-MOTORCYCLES" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-motorcycles">Motorcycles &amp; ATVs</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-race" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-race" value = "vehicle-RACE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-race">Race Cars</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-stock" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-stock" value = "vehicle-STOCK" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-stock">Stock Vehicles</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-service" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-service" value = "vehicle-SERVICE" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-service">Service &amp; Emergency Vehicles</label>
                         </div>
                         <div class="form-check-inline m-1">
-                            <input type="checkbox" class="btn-check" id="vehicleTag-ships" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="vehicleTag-ships" value = "vehicle-SHIPS" name = "boxes"  autocomplete="off">
                             <label class="btn btn-outline-success" for="vehicleTag-ships">Ships &amp; Boats</label>
                         </div>
                     </div>
@@ -1399,37 +1399,37 @@
                 </div>
                 <div class="col-12 mb-3">
                     <label for="listingTitle" class="form-label">Listing Title</label>
-                    <input type="text" class="form-control" id="listingTitle" required>
+                    <input type="text" class="form-control" id="listingTitle" value = " " name="title" required>
                     <div class="form-text">Write a standout title. Try using search terms that buyers often use. Avoid all caps and focus on specific details like brand, model, size, and color.</div>
                 </div>
                 <div class="col-12 mb-3">
                     <label for="listingDesc" class="form-label">Description</label>
-                    <textarea class="form-control" id="listingDesc" rows="3" required></textarea>
+                    <textarea class="form-control" id="listingDesc" rows="3" value = " " name="desc" required></textarea>
                 </div>
                 <div class="col-12 mb-3">
                     <label for="listingImg" class="form-label">Image</label>
-                    <input class="form-control" type="file" id="listingImg" accept="image/*">
+                    <input class="form-control" type="file" id="listingImg" value = " " name = "image" accept="image/*">
                     <div class="form-text">Take a high-quality photo. Snap your items from multiple angles in a well-lit place, and capture any blemishes for transparency.</div>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="listingPrice" class="form-label">Price</label>
                     <div class="input-group">
                         <span class="input-group-text">&#36;</span>
-                        <input type="number" class="form-control" id="listingPrice-dollars" placeholder="0" min="0" maxlength="9" required>
-                        <span class="input-group-text">.</span>
-                        <input type="number" class="form-control" id="listingPrice-cents" value="00" min="0.00" max="0.99" step="0.01">
+                        <input type="number" class="form-control" id="listingPrice-dollars"  name="dollar" placeholder="0" min="0" maxlength="9" required>
+                        <!-- <span class="input-group-text">.</span> -->
+                        <input type="number" class="form-control" id="listingPrice-cents"  name = "cent" value=".00" min="0.00" max="0.99" step="0.01">
                     </div>
                     <div class="form-text">Set the right price. We recommend a price based on recent sales of similar items.</div>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="listingQty" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" id="listingQty" min="1" value="1">
+                    <input type="number" class="form-control" name = 'quantity' d="listingQty" min="1" value="1">
                     <div class="form-text">Represents the quantity of listings you wish to sell, not the number of items in the listing.</div>
                 </div>
                 <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary">List for Sale</button></div>
             </div>
         </form>
-
+        <h1>{{title}}</h1>
         <footer class="mt-auto bg-dark text-center">
             <div class="p-3">
                 <div class="pb-2">

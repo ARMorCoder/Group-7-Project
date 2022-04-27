@@ -1,17 +1,12 @@
-from PY_Files import SQL_Queries
+from PY_Files import SQL_Queries, CONSTANTS
 
 
 def Login_User(Username, Password):
-    if(not(Check_Username(Username))):
-        return "Invalid Username"
+    return SQL_Queries.Get_Login([Username,Password])
+    
+    
 
-    if(not(Check_Password(Password))):
-        return "Invalid Password"
-
-
-def Check_Username(Username):
-    return Username == SQL_Queries.Get_Username(Username)
-
-
-def Check_Password(Password):
-    return Password == SQL_Queries.Get_Password(Password)
+# def Create_Session_Id(User_ID):
+#     Session_ID = str(User_ID)
+#     while(len(User_ID)):
+#         Session_ID = "0"+ Session_ID

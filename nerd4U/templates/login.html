@@ -12,13 +12,13 @@
           .container {
       
             position:absolute;
-            top:35%;
-            left:50%;
-            height:500px;
+            top:26%;
+            left:40%;
+            height:35rem;
             margin-top:-100px;
-            width:500px;
+            width:50rem;
             margin-left:-200px;
-            border: 12px solid darkslategray;
+            background-color:whitesmoke;
             border-radius: 10px;
           }
           a:link { text-decoration:none;}
@@ -38,21 +38,23 @@
             text-align:center;
           }
           .username-container{
-            padding-top:50px;
+           margin-top:50px;
           }
           .username-container,.password-container{
-            font-size:25px;
+            font-size:30px;
             height:30px;
             padding-left:18px;
           }
           .passwordtext-container, .usernametext-container {
             padding-left:18px;
             padding-bottom:18px;
+            padding-top:20px;
                   
           }
           input[type="text"],input[type="password"] {
             font-size:20px;
             width:95%;
+            
                   
           }
           .submitButton-container {
@@ -85,6 +87,9 @@
             padding-right:18px;
                   
           }
+          .h1-header {
+            padding-top:20px;
+          }
         </style>
   </head>
   
@@ -113,7 +118,6 @@
       <form action="" method="post">
         <div class="username-container">
           <label for="username" class="username"><b>Username</b></label>
-          
             </div>
         <div class="usernametext-container">                 
           <input type="text" placeholder="Enter your Username" name="username" class="username-textbox" required>

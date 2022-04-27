@@ -1,6 +1,8 @@
+.pem
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.pyc
 *$py.class
 
 # C extensions
@@ -126,4 +128,12 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
+<<<<<<< HEAD
 .pyre/
+=======
+<<<<<<< HEAD
+.pyre/
+=======
+.pyre/
+>>>>>>> Matt-Branch
+>>>>>>> jonathan--nerd4u

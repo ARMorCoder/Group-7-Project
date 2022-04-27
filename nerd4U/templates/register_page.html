@@ -20,6 +20,8 @@
     }
 
     input[type=text],
+    input[type=email],
+    input[type=tel],
     input[type=password] {
         width: 85%;
         padding: 15px;
@@ -94,7 +96,7 @@
         <div class="account_info-label">
             <label for="email"><b>Email Address</b></label>
         </div>
-        <input type="text" placeholder="example@gmail.com" name="email" id="email"
+        <input type="email" placeholder="example@gmail.com" name="email" id="email"
             pattern="(^[a-zA-Z0-9_.+-]{1,255}@[a-zA-Z0-9-]{1,255}\.[a-zA-Z0-9-.]{1,255}$)" required>
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="XxUsernamexX" name="username" id="username" pattern="^.{1,255}" required>
@@ -107,25 +109,25 @@
         </div>
         <input type="password" placeholder="Repeat Password" id="password-repeat" required>
         <label for="phone_number"><b>Phone Number</b></label>
-        <input type="text" placeholder="210-123-1234" name="phone_number" id="phone_number"
-            pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" required>
+        <input type="tel" placeholder="210-123-1234" name="phone_number" id="phone_number"
+            pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" maxlength="255" required>
         <div class="person_info">
             <div class="person_info-label">
                 <label><b>First Name</b></label>
                 <label style="float:right;"><b>Last Name</b></label>
             </div>
-            <input type="text" placeholder="Firstname" name="first_name" id="first_name"
+            <input type="text" placeholder="Firstname" name="first_name" id="first_name" maxlength="255"
                 pattern="^([A-Z]{1}[a-zA-Z]{1,255})" required>
-            <input type="text" placeholder="Lastname" name="last_name" id="last_name"
+            <input type="text" placeholder="Lastname" name="last_name" id="last_name" maxlength="255"
                 pattern="^([A-Z]{1}[a-zA-Z]{1,255})" required>
 
             <div class="person_info-label2">
                 <label><b>Street Address</b></label>
                 <label style="float: right;"><b>State</b></label>
             </div>
-            <input type="text" placeholder="123 Main St" name="street_address" pattern="^[0-9]{1,255}.*"
+            <input type="text" placeholder="123 Main St" name="street_address" maxlength="255" pattern="^[0-9]{1,255}.*{1,255}"
                 id="street_address" required>
-            <input type="text" placeholder="CA" name="state" id="state" pattern="^[A-Z]{2}" required>
+            <input type="text" placeholder="CA" name="state" id="state" pattern="^[A-Z]{2}" maxlength="2" required>
 
         </div>
 
