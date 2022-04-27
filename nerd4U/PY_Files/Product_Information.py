@@ -15,7 +15,11 @@ def Get_Product_By_Catagory(category):
     cursor.execute("SELECT * FROM product_information where catagory = '" + category + "'")
     array = cursor.fetchall()
     return (array)
-
+def Get_Product_By_Pid(pid):
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM product_information where PID = '{}'".format(pid))
+    new_array = cursor.fetchone()
+    return (new_array)
 def Get_Product_By_Category_If_Valid(array, category):
     cursor = db.cursor()
     # make a new string with spliced list

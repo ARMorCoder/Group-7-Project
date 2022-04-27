@@ -324,20 +324,31 @@ def ShoppingCart():
 @app.route('/accountpage', methods=['GET','POST'])
 def accountpage():
     order_list=[]
+    product=[]
     if session['UID']:
         user = SQL_Queries.UserIdToUsername(session['UID'])
         print(user[0])
         products_int = Shopping_Cart.Pull_Cart(user[0])
+        print(products_int)
 
         user_transactions = Transaction.Pull_Transactions_From_UID(str(user[0]))
-        print(user_transactions)
-        # for x in range(0,len(products_int)):
-        #     # temp = Transaction.Get_Products_From_Cart(str(products_int[x]))
-        #     print(temp)
-        #     order_list.append(temp)
-        #     # print(order_list)
-        # return render_template('account_page.html',user=user, order_list=order_list)
-        return render_template('account_page.html',user=user)
+        # print(user_transactions)
+        # for x in range(0,len(use r_transactions[2].split(","))):
+        for y in user_transactions:
+            # print("loop")
+            pids = y[2]
+            pids = pids.strip('][').split(', ')
+            for x in range(0,len(pids)):
+                
+                temp = Product_Information.Get_Product_By_Pid(x)
+                if temp != None:
+                    product.append(temp)
+                    
+               
+            num_items = len(y[2].split(","))
+            
+        # print(product)
+        return render_template('account_page.html',user=user, order_list = user_transactions,num_items=num_items, product=product)
 
 @app.route('/logout',methods=['GET','POST'])
 def logout():

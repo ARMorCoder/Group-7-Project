@@ -165,11 +165,12 @@
                                 <tr>
                                     <td>{{order[5]}}</td>
                                     <td>&#36;{{order[4]}}</td>
-                                    <td></td>
+                                    <td>{{num_items}}</td>
                                     <td>
-                                        <a href="#" class="text-decoration-none">Batman Poster</a>
-                                        <br><a href="#" class="text-decoration-none">Lego Batcave</a>
-                                        <br><a href="#" class="text-decoration-none">Hotwheels Batmobile</a>
+                                        {%for product_item in product %}
+                                        <a href="#" class="text-decoration-none" >{{product_item[1]}}</a>
+                                        {%endfor%}
+                                        
                                     </td>
                                 </tr>
                                 {%endfor%}
