@@ -277,7 +277,7 @@ def itempage(iteminfo):
     # Product_Information.strArrayToArray(iteminfo)
     result = Product_Information.strArrayToArray(iteminfo)
     result[5] = result[5].replace('|$|', ",")
-    Buyer = session.get("UID")
+    user_id = session.get("UID")
     seller = result[4]
     user = SQL_Queries.UserIdToUsername(str(seller))
     print("Your username is " +str(user))
