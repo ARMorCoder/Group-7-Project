@@ -123,9 +123,43 @@ def Fill_Cart(Cart_List):
     My_Cursor.execute(sql)
     return My_Cursor.fetchall()
     
+def UpdateUser(uname,uid):
+    My_Cursor = DB.cursor()
+    My_Cursor.execute(("UPDATE user_information SET username = '{}' where UID = '{}'".format(uname,uid)))
+    DB.commit()
+    # My_Cursor.rowcount
+
+def UpdatePassword(pword,uid):
+    My_Cursor = DB.cursor()
+    print(pword)
+    My_Cursor.execute(("UPDATE user_information SET Pass = '{}' where UID = '{}'".format(pword,uid)))
+    DB.commit()
+
+def Get_Password_With_UID(uid):
+    My_Cursor = DB.cursor()
+    My_Cursor.execute("SELECT * from user_information where UID = '{}'".format(uid))
+    result = My_Cursor.fetchone()
+    return result[3]
+
+def UpdateName(firstname,lastname,uid):
+    My_Cursor = DB.cursor()
+    My_Cursor.execute(("UPDATE user_information SET First_Name = '{}', Last_Name = '{}' where UID = '{}'".format(firstname,lastname,uid)))
+    DB.commit()
+def updatePhone(phone,uid):
+    My_Cursor = DB.cursor()
+    My_Cursor.execute(("UPDATE user_information SET Phone = {} where UID = '{}'".format(phone,uid)))
+    DB.commit()
+def UpdateEmail(email,uid):
+    My_Cursor = DB.cursor()
+    My_Cursor.execute(("UPDATE user_information SET Email = '{}' where UID = '{}'".format(email,uid)))
+    DB.commit()
+def UpdateAddress(address,state,uid):
+    My_Cursor = DB.cursor()
+    My_Cursor.execute(("UPDATE user_information SET Address = '{}', State = '{}' where UID = '{}'".format(address,state,uid)))
+    DB.commit()
 def UserIdToUsername(uid):
     My_Cursor = DB.cursor()
     My_Cursor.execute(("SELECT * FROM user_information where UID = {} ".format(uid)))
     user = My_Cursor.fetchone()
-    return (user[1])
+    return (user)
 

@@ -40,7 +40,8 @@ def Add_Item(Cart_List, New_PID):
 
 
 def Str_To_Lint(String_List):
-
+    if String_List[0] == "":
+        return []
     for i in range(0, len(String_List)):
         String_List[i] = int(String_List[i])
     return String_List

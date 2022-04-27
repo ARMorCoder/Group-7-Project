@@ -133,8 +133,10 @@ def login():
             passw = request.form['password']
 
             account = Login_User.Login_User(username,passw)
-            if account == "none":
+            if account == None:
                 flash('Incorrect User information')
+                return render_template('login.html')
+                
             else:
                 session["UID"] = str(account)
                 session["username"] = username
@@ -143,7 +145,6 @@ def login():
                 return redirect(url_for('homepage'))
                 
         # Show the login form with message (if any)
-
         return render_template('login.html')
     else:
         return redirect(url_for('accountpage'))
@@ -181,7 +182,6 @@ def searchpage():
     if request.method == "POST" and request.form['searchfor']:
         searchfor = request.form['searchfor']
         session["search_for"] = searchfor
-
         result = Product_Information.Get_Product_By_Tag(searchfor)
         session["result"] = result
         array_art = Product_Information.Get_Product_By_Category_If_Valid(result, '%Art%')
@@ -299,7 +299,8 @@ def itempage(iteminfo):
     print("Your username is " +str(user))
     shopcart=[]
     shopcart_cart_items = []
-    if user:
+    print("User id = " + str(user_id))
+    if user_id:
         shopcart =  Shopping_Cart.Pull_Cart(user_id)
         if shopcart:
             shopping_cart_items = Shopping_Cart.Get_Shopping_Products(shopcart)
@@ -322,15 +323,80 @@ def ShoppingCart():
     return render_template('shopping_cart.html')
 @app.route('/accountpage', methods=['GET','POST'])
 def accountpage():
-    if request.method == "POST":
-        
+    if session['UID']:
+        user = SQL_Queries.UserIdToUsername(session['UID'])
+        return render_template('account_page.html',user=user)
+    return render_template('account_page.html')
+
+@app.route('/logout',methods=['GET','POST'])
+def logout():
+       if request.method == "POST":
+        print("in sign out")
         session['UID'] = '00'
         flash("You have been logged out. We hope to see you again!")
         session["username"] = ""
         print(session['UID'])
         return redirect(url_for('homepage'))
-    return render_template('account_page.html')
+        
 @app.route('/adminPage',methods=['GET','POST'])
 def adminPage():
     return render_template('admin_listings.html')
+
+@app.route('/updateFullName',methods=['GET','POST'])
+def updateFullName():
+    if request.method=="POST":
+        if request.form['firstname']:
+            if request.form['lastname']:
+                firstname = request.form['firstname']
+                lastname = request.form['lastname']
+                print("In here")
+                SQL_Queries.UpdateName(str(firstname),str(lastname),str(session['UID']))
+                return redirect(url_for("accountpage"))
+    return render_template("accountpage.html")
+@app.route('/updatePassword',methods=['GET','POST'])
+def updatePassword():
+    if request.method=="POST":
+            current = request.form['current']
+            new = request.form['new']
+            confirm = request.form['confirm']
+            print("Current " + current + " new " + new + " confirm " + confirm)
+            actual = SQL_Queries.Get_Password_With_UID(session["UID"])
+            print(actual)
+            if str(actual) == str(current):
+                if str(new) == str(confirm):
+                    SQL_Queries.UpdatePassword(str(new),str(session['UID']))
+                    return redirect(url_for("accountpage"))
+            else:
+                return redirect(url_for("homepage"))
+@app.route('/updatePhone', methods=['GET','POST'])
+def updatePhone():
+    if request.method=="POST":
+        phone = request.form['phone']
+        SQL_Queries.updatePhone(str(phone),str(session["UID"]))
+        return redirect(url_for("accountpage"))
+@app.route('/updateUsername', methods=['GET','POST'])
+def updateUsername():
+    if request.method=="POST":
+        if request.form['username']:
+            username = request.form['username']
+            SQL_Queries.UpdateUser(str(username),str(session['UID']))
+            return redirect(url_for("accountpage"))
+@app.route('/updateEmail',methods=['GET','POST'])
+def updateEmail():
+    if request.method=="POST":
+        if request.form['email']:
+            email = request.form['email']
+            SQL_Queries.UpdateEmail(str(email),str(session["UID"]))
+            return redirect(url_for("accountpage"))
+
+@app.route('/updateAddress', methods=['GET','POST'])
+def updateAddress():
+    if request.method=="POST":
+        address = request.form['address']
+        state = request.form['state']
+        print(state)
+        SQL_Queries.UpdateAddress(str(address),str(state),str(session["UID"]))
+        return redirect(url_for("accountpage"))
+
+       
 app.run(debug=True)
