@@ -9,7 +9,7 @@ from ast import literal_eval
 
 import mysql.connector
 from flask import Flask, jsonify, request, render_template, send_from_directory, redirect, url_for, session, flash
-# from sympy import Q
+
 
 tag_dictionary = {'art-ANIME': 'Anime', 'art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
                   'art-TV': 'Television', 'art-OTHER': 'Other', 'art-CN': 'Cartoon Network',
@@ -279,8 +279,9 @@ def itempage(iteminfo):
     result[5] = result[5].replace('|$|', ",")
     user_id = session.get("UID")
     seller = result[4]
-    user = SQL_Queries.UserIdToUsername(str(seller))
-    print("Your username is " + str(user))
+    seller = SQL_Queries.UserIdToUsername(str(seller))
+    print("Your seller is " + str(seller))
+    print("Your result is " + str(result))
     shopcart=[]
     shopcart_cart_items = []
     print("User id = " + str(user_id))
@@ -292,7 +293,7 @@ def itempage(iteminfo):
     
     itemcount = len(shopcart)
     subtotal = 10
-    return render_template('item_page.html', result=result, user=user, itemcount=itemcount, subtotal=subtotal)
+    return render_template('item_page.html', result=result, user=seller, itemcount=itemcount, subtotal=subtotal)
 
 
 @app.route('/shoppingCart', methods=['GET', 'POST'])
