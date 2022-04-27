@@ -43,42 +43,32 @@ app.secret_key = 'super secret key'
 # Connect to database
 
 DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
+
 ## Home Page ##
-
-
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
 
+    # Grab what user enters in searchpage and use it to fill searchpage.html #
     if request.method == 'POST':
-
-
         search_for = request.form['search_bar']
         session["search_for"] = search_for        
-
-
         return redirect(url_for('searchpage'))
 
     ################################################################################################
     # Call function to perform SQL Query on specified categories (returns array containing tuples) #
-    #
-    art_products = Product_Information.Get_Product_By_Catagory('Art')                                                #
-    comic_products = Product_Information.Get_Product_By_Catagory('Comics')                                             #
-    toy_products = Product_Information.Get_Product_By_Catagory('Toys & Models')                                        #
+                                                                                                   #
+    art_products = Product_Information.Get_Product_By_Catagory('Art')                              #
+    comic_products = Product_Information.Get_Product_By_Catagory('Comics')                         #
+    toy_products = Product_Information.Get_Product_By_Catagory('Toys & Models')                    #
 
     #####################################################################################
     # Recurse through each tuple, only returning the third data column (the image id's) #
     #####################################################################################
-                                                                                        #
-                                                                                        #
-    art_img_ids = (tuple(map(lambda x: x[3], art_products)))                            #
-                                                                                        #
-                                                                                        #
+                                                                                        #                                                                #
+    art_img_ids = (tuple(map(lambda x: x[3], art_products)))                            #                                                                   #
     comic_img_ids = (tuple(map(lambda x: x[3], comic_products)))                        #
-                                                                                        #
-                                                                                        #
-                                                                                        #
     toy_img_ids = (tuple(map(lambda x: x[3], toy_products)))                            #
-                                                                                        #
+                        
    
     return render_template('homepage.html',
                            art_img_ids=art_img_ids,
@@ -89,54 +79,44 @@ def homepage():
                            toy_products=toy_products
                            )  # Display's homepage when at root directory of website along with all products ##
 
-## Helper Function ##
+## Art Page ##
 @app.route('/artPage')
 def artpage():
+
+    # Grab what user enters in searchpage and use it to fill searchpage.html #
     if request.method == 'POST':
-
-
         search_for = request.form['search_bar']
-        session["search_for"] = search_for        
-
-
+        session["search_for"] = search_for    
         return redirect(url_for('searchpage'))
 
-    ################################################################################################
-    # Call function to perform SQL Query on specified categories (returns array containing tuples) #
-                                                                                                   #
-    art_products = Product_Information.Get_Product_By_Catagory('Art')                              #
-    art_draw_paint = Product_Information.Get_Product_By_SubCategory('Drawing & Painting')
-    art_mixed_media = Product_Information.Get_Product_By_SubCategory('Mixed Media')
+    ###################################################################################################
+    # Call function to perform SQL Query on specified subcategories (returns array containing tuples) #
+    ###################################################################################################                                                                                                  
+    art_products = Product_Information.Get_Product_By_Catagory('Art')                                 #
+    art_draw_paint = Product_Information.Get_Product_By_SubCategory_Only('Drawing & Painting')             #
+    art_mixed_media = Product_Information.Get_Product_By_SubCategory_Only('Mixed Media')                   #
+    art_print_photo = Product_Information.Get_Product_By_SubCategory_Only('Prints & Photography')          #
+    art_sculptures = Product_Information.Get_Product_By_SubCategory_Only('Sculptures')                     #
 
-    #####################################################################################
-    # Recurse through each tuple, only returning the third data column (the image id's) #
-    #####################################################################################
-                                                                                        #
-                                                                                        #
-    art_img_ids = (tuple(map(lambda x: x[3], art_products)))                            #
-                                                                                        #
-                                                                                        #
-
-                                                                                        #
-                                                                                        #
-                                                                                        #
-
-                                                                                        #
-   
-    return render_template('homepage.html',
-                           art_img_ids=art_img_ids,
-                           )  # Display's homepage when at root directory of website along with all products ##
+    ############################################################################
+    #           Return the art page with all of it's subcategories             #
+    ############################################################################
+    return render_template('artPage.html',                                    #
+                           art_products=art_products,                          #
+                           art_draw_paint = art_draw_paint,                    #
+                           art_mixed_media = art_mixed_media,                  #
+                           art_print_photo = art_print_photo,                  #
+                           art_sculptures = art_sculptures                     #
+                           )                                                   #
 
 @app.route('/upload/<filename>')
 def send_image(filename):
 
-    # Display images
-
+    # Send the image the html page has requested to display on html page #
     return send_from_directory("../Images", filename)
 
 
 ## User Login Page ##
-
 
 @app.route('/userLogin', methods=['GET', 'POST'])
 def login():
@@ -306,13 +286,11 @@ def itempage(iteminfo):
     #Product_Information.strArrayToArray(iteminfo)
     result = Product_Information.strArrayToArray(iteminfo)
     result[5] = result[5].replace('|$|', ",")
-    user = session["UID"]
+    user_id = session["UID"]
     seller = result[4]
     user = SQL_Queries.UserIdToUsername(int(seller))
-    shopcart =  Shopping_Cart.Pull_Cart(session["UID"])
+    shopcart =  Shopping_Cart.Pull_Cart(user_id)
     shopping_cart_items = Shopping_Cart.Get_Shopping_Products(shopcart)
-
-    
     itemcount = len(shopcart)
     subtotal=0
     if itemcount != 0:

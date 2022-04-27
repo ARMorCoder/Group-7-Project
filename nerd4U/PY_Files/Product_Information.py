@@ -30,6 +30,12 @@ def Get_Product_By_Tag(tag):
     array = cursor.fetchall()
     return (array)
 
+def Get_Product_By_SubCategory_Only(subcategory):
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM product_information where sub_category like '%" + subcategory + "%'")
+    array = cursor.fetchall()
+    return (array)
+
 def Get_Product_By_SubCategory(subcategory,title):
     cursor = db.cursor()
     test = "" + str(title) + ""
