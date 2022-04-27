@@ -1,149 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Nerds4U</title>
+    <head>
+        <title>Nerds4U</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-
-        <style>
-          .container {
-      
-            position:absolute;
-            top:26%;
-            left:40%;
-            height:35rem;
-            margin-top:-100px;
-            width:50rem;
-            margin-left:-200px;
-            background-color:whitesmoke;
-            border-radius: 10px;
-          }
-          a:link { text-decoration:none;}
-          a {
-            color:dodgerblue;
-          }
-          hr {
-            height:10px;
-            background-color:darkslategray;
-            border-color:transparent;
-            border-radius:2.5px;
-            opacity:0.4;
-          }
-            
-          .h1-header{
-      
-            text-align:center;
-          }
-          .username-container{
-           margin-top:50px;
-          }
-          .username-container,.password-container{
-            font-size:30px;
-            height:30px;
-            padding-left:18px;
-          }
-          .passwordtext-container, .usernametext-container {
-            padding-left:18px;
-            padding-bottom:18px;
-            padding-top:20px;
-                  
-          }
-          input[type="text"],input[type="password"] {
-            font-size:20px;
-            width:95%;
-            
-                  
-          }
-          .submitButton-container {
-                  
-            padding-left:18px;
-            padding-bottom:20px;
-                  
-          }
-          .submitButton {
-            width:95%;
-            height:40px;
-            background-color:dodgerblue;
-            opacity:0.8;
-            border-color:transparent;
-            border-radius:5px;
-            font-size:20px;
-          }
-          .rememberMe-container {
-      
-      
-            padding-Left:18px;
-            padding-right:18px;
-            padding-bottom:40px;
-          }
-          .additionalInfo-container {
-      
-            padding-bottom:18px;
-            padding-top:5px;
-            padding-Left:18px;
-            padding-right:18px;
-                  
-          }
-          .h1-header {
-            padding-top:20px;
-          }
-        </style>
-  </head>
-  
-
-  
-  <body>
-    <div class="alertMsg">
-      {% with messages = get_flashed_messages() %}
-          {% if messages %}
-              {% for message in messages %}
-              <div class="contain">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{message}}</strong> 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                </div>
-
-              {% endfor %}
-          {% endif %}
-      {% endwith %}
-    </div>
-    <div class="container">
-      <h1 class="h1-header">Login into Nerds4U</h1>
-      <hr>
-      
-      <form action="" method="post">
-        <div class="username-container">
-          <label for="username" class="username"><b>Username</b></label>
-            </div>
-        <div class="usernametext-container">                 
-          <input type="text" placeholder="Enter your Username" name="username" class="username-textbox" required>
-            </div>
-        <div class="password-container">
-          <label for="password" class="password"><b>Password</b></label>
-            </div>
-        <div class = "passwordtext-container">
-          <input type="text" placeholder="Enter your Password" name="password" class="password-textbox" required>
-            </div>
-     
-        <div class="submitButton-container">
-          <button type="submit" class="submitButton" id="loginBtn">Login</button>
-            </div>
         
-        <div class="rememberMe-container">
-          <input type="checkbox" checked="checked" name="remember" class="rememberMe">Remember me
-        </div>
-        <hr>
-        <div class="additionalInfo-container">
-          <p1> I have not <a href="/userRegristration">registered for an account</a>.</p1>
-          <p1 style="float:right"> I forgot my <a href="#passwordRecovery">password</a></p1>
-        </div>
-      </form>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link href="\static\BodyStyleSheet.css" rel="stylesheet">
+    </head>
 
-    </div>
-  </body>
-  
+    <body class="d-flex flex-column min-vh-100">
+        
+        <header>
+            <nav class="navbar navbar-expand navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Nerds4U</a>
+                    <ul class="navbar-nav container-fluid">
+                        <div class="input-group p-2 col">
+                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">All</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">All Categories</a></li>
+                                <li><a class="dropdown-item" href="#">Art</a></li>
+                                <li><a class="dropdown-item" href="#">Accessories</a></li>
+                                <li><a class="dropdown-item" href="#">Comics</a></li>
+                                <li><a class="dropdown-item" href="#">Trading Cards</a></li>
+                                <li><a class="dropdown-item" href="#">Toys &amp; Models</a></li>
+                            </ul>
+                            <input class="form-control" name="search_bar" type="search" placeholder="Search for art, accessories, comics, cards, toys, and more..." aria-label="Search">
+                            <button class="btn btn-warning" type="submit"><a href="/"><span class="bi bi-search"></span></a></button>
+                        </div>
+                        <li class="nav-item px-1">
+                            <a class="nav-link btn fs-5" href="/createListing"><span class="bi bi-tags-fill"></span></a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link btn fs-5" href="/userLogin"><span class="bi bi-person-fill"></span></a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link btn" href="/shoppingCart"><span class="bi bi-cart-fill fs-5"></span><span class="badge rounded-pill bg-secondary">0</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <nav class="navbar navbar-expand-md navbar-light bg-light mb-5 px-2 py-1">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#subNavbarContent" aria-controls="subNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="subNavbarContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Art</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Accessories</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Comics</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Trading Cards</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Toys &amp; Models</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="alertMsg">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="contain">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{message}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+        
+        <div class="container shadow-lg rounded-3 bg-body p-3" style="max-width:30rem;">            
+            <form class="row m-0" method="post">
+                <legend class="fs-1 text-center">Login to Nerds4U</legend>
+                <hr>
+                <div class="col-12 mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" checked>
+                    <label for="remeberMe" class="form-label">Remeber Me</label>
+                </div>
+                <div class="col-12 text-center mb-3">
+                    <button type="submit" class="btn btn-warning" id="loginBtn">Login</button>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-3">
+                    <a href="/userRegristration">Register for an account</a>
+                    <a href="#passwordRecovery">Forgot my password</a>
+                </div>
+            </form>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
 </html>

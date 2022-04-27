@@ -6,23 +6,17 @@
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-        <link href="\static\BodyStyleSheet.css" rel="stylesheet">
         
         <title>Nerds4U</title>
         <style>
-            /* div img {
-			object-fit:cover;
-			top:0px;
-			width:20rem;
-			height:200px;
-			border-radius:5px;
-            border-bottom-right-radius: 5px;
-            padding-right:20px;
-            flex-wrap:wrap;
-            
-		    } */
-
-         
+            body {
+                background-color: lightgray;
+                background-image: url('background.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100%;
+                background-position: top center;
+            }
         </style>
     </head>
 
@@ -32,7 +26,7 @@
             <nav class="navbar navbar-expand navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">Nerds4U</a>
-                    <ul class="navbar-nav container-fluid">
+                    <ul class="navbar-nav container-fluid p-0">
                         <div class="input-group p-2 col">
                             <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">All</button>
                             <ul class="dropdown-menu">
@@ -47,13 +41,13 @@
                             <button class="btn btn-warning" type="submit"><span class="bi bi-search"></span></button>
                         </div>
                         <li class="nav-item px-1">
-                            <a class="nav-link btn btn-dark fs-5" href="#"><span class="bi bi-tags-fill"></span></a>
+                            <a class="nav-link btn fs-5" href="#"><span class="bi bi-tags-fill"></span></a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link btn btn-dark fs-5" href="#"><span class="bi bi-person-fill"></span></a>
+                            <a class="nav-link btn fs-5" href="#"><span class="bi bi-person-fill"></span></a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link btn btn-dark" href="#"><span class="bi bi-cart-fill fs-5"></span><span class="badge rounded-pill bg-secondary">0</span></a>
+                            <a class="nav-link btn" href="#"><span class="bi bi-cart-fill fs-5"></span><span class="badge rounded-pill bg-secondary">0</span></a>
                         </li>
                     </ul>
                 </div>
@@ -65,7 +59,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="subNavbarContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Art</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Accessories</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Comics</a></li>
@@ -78,18 +72,18 @@
         
         <div class="container d-flex shadow-lg rounded-3 bg-body p-3 mb-5">
             <div class="col-auto">
-                <div class="bg-body text-center" style="width:20vw; height:20vw; " >
+                <div class="bg-body text-center" style="width: 20vw; height: 20vw;">
 <!-- Image goes in here --->
-                    <img src="{{url_for('send_image', filename=result[3]+'.jpg')}}" class="mh-100 mw-100">
+                    <img src="" class="h-100">
                 </div>
-                
+                <h6 class="small mt-1 mb-0">Seller: seller_id.name</h6>
             </div>
             <div class="col px-3">
-                <legend class="fs-3">{{result[1]}}</legend>
+                <legend class="fs-3">Detective Comics No. 27</legend>
                 <hr class="my-0">
                 <div class="d-flex justify-content-between">
-                    <h5 class="text-danger pt-1">Price: &#36;{{result[2]}}</h5>
-                    <p class="fs-5 text-end">Qty Available: {{result[7]}}</p>
+                    <h5 class="text-danger pt-1">Price: &#36;420.69</h5>
+                    <p class="fs-5 text-end">Qty Available: 1</p>
                 </div>
                 <div class="row">
                     <div class="col-auto">
@@ -98,15 +92,14 @@
                         <p class="fw-bold">Tags</p>
                     </div>
                     <div class="col">
-                        <p>{{result[8]}}</p>
-                        <p>{{result[9]}}</p>
-                        <p>{{result[10]}}</p>
+                        <p>Comics</p>
+                        <p>Superhero</p>
+                        <p>DC, GOLDEN-AGE, PRE-CRISIS</p>
                     </div>
                 </div>
                 <hr class="mt-0">
                 <h6>About this item</h6>
-                <p>Seller: {{user[1]}}</p>
-                <p>Description: {{result[5]}}</p>
+                <p>Copypasta is a term for a block of text that has been copied and pasted multiple times. It is often jumbled, disjointed or ridiculous in some way. Copypasta makes its way across a social media platform, forum or email chain to reach multiple users.Copypasta is a term for a block of text that has been copied and pasted multiple times. It is often jumbled, disjointed or ridiculous in some way.</p>
             </div>
             <div class="col-auto">
 <!-- show by default, hide when item already in cart -->
@@ -120,15 +113,33 @@
                             <p class="text-end mb-0">&#61;</p>
                         </div>
                         <div class="col ps-0">
-                            <p class="mb-1">{{itemcount}}</p>
-                            <p class="mb-1">&#36;{{subtotal}}</p>
-                            <p class="text-danger mb-1">&#36;{{result[2]}}</p>
-                            <p class="mb-1">&#36;{{adding_to_cart}}</p>
+                            <p class="mb-1">3</p>
+                            <p class="mb-1">&#36;30.00</p>
+                            <p class="text-danger mb-1">&#36;420.69</p>
+                            <p class="mb-1">&#36;450.69</p>
                         </div>
                     </div>
                     <div class="text-center"><button type="button" class="btn btn-warning">Add to Cart</button></div>
                 </div>
-
+<!-- hide by default, show when item is already in cart -->
+                <div name="cartRemove" hidden>
+                    <h6>Shopping Cart:</h6>
+                    <div class="row mb-2">
+                        <div class="col-auto">
+                            <p class="fw-bold mb-1">Items</p>
+                            <p class="fw-bold mb-1">Subtotal</p>
+                            <p class="text-danger text-end mb-1">&#45;</p>
+                            <p class="text-end mb-0">&#61;</p>
+                        </div>
+                        <div class="col ps-0">
+                            <p class="mb-1">4</p>
+                            <p class="mb-1">&#36;450.69</p>
+                            <p class="text-danger mb-1">&#36;420.69</p>
+                            <p class="mb-1">&#36;30.00</p>
+                        </div>
+                    </div>
+                    <div class="text-center"><button type="button" class="btn btn-danger">Remove from Cart</button></div>
+                </div>
             </div>
         </div>
         
