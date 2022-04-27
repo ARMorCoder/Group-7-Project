@@ -305,36 +305,38 @@ def createListing():
 @app.route('/itempage/<iteminfo>', methods=['GET', 'POST'])
 def itempage(iteminfo):
     # Product_Information.strArrayToArray(iteminfo)
+    user = session["UID"]
+    Cart = Shopping_Cart.Pull_Cart(user)
+    Filled = Shopping_Cart.Get_Shopping_Products(Cart)
+    length = Shopping_Cart.Cart_Length(Filled)
+    total = Shopping_Cart.Total_Shopping_Cart(Filled)
+    print("iteminfoiteminfoiteminfo {}".format(iteminfo[0]))
     result = Product_Information.strArrayToArray(iteminfo)
+    # print(result[5])
     result[5] = result[5].replace('|$|', ",")
-    user_id = session["UID"]
     seller = result[4]
-    user = SQL_Queries.UserIdToUsername(str(seller))
-    print("Your username is " + str(user))
-    shopcart = []
-    shopcart_cart_items = []
-    print("User id = " + str(user_id))
-    if user_id:
-        shopcart = Shopping_Cart.Pull_Cart(user_id)
-        if shopcart:
-            shopping_cart_items = Shopping_Cart.Get_Shopping_Products(shopcart)
+    seller = SQL_Queries.UserIdToUsername(str(seller))
 
-    itemcount = len(shopcart)
-    subtotal = 0
-    if itemcount != 0:
-        subtotal = 0
-        for x in shopping_cart_items:
-            subtotal += int(x[1])
-    adding_to_cart = int(subtotal) + int(result[2])
+    adding_to_cart = int(total) + int(result[2])
+    if request.method == "POST":
+        print("item posting")
+        Cart = Shopping_Cart.Add_Item(Cart,[0])
+        Shopping_Cart.Push_Cart(Cart,user)
+        return render_template('itempage/<iteminfo>.html')
 
-    return render_template('item_page.html', result=result, user=user, itemcount=itemcount, subtotal=subtotal, adding_to_cart=adding_to_cart)
+    return render_template('item_page.html',
+                           result=result,
+                           user=seller,
+                           itemcount=length,
+                           subtotal=total,
+                           adding_to_cart=adding_to_cart)
+
 
 @app.route('/shoppingCart', methods=['GET', 'POST'])
 def ShoppingCart():
 
     User = session.get("UID")
     Cart = Shopping_Cart.Pull_Cart(User)
-
     Filled = Shopping_Cart.Get_Shopping_Products(Cart)
 
     length = Shopping_Cart.Cart_Length(Filled)
