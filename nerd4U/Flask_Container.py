@@ -123,16 +123,15 @@ def send_image(filename):
 
 @app.route('/userLogin', methods=['GET', 'POST'])
 def login():
-    print(session["UID"])
 
-    if(session['UID'] == '00'):
+    print(session["UID"])
+    if(session["UID"] == '00'):
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             # Create variables for easy access
-
             username = request.form['username']
             passw = request.form['password']
-
             account = Login_User.Login_User(username,passw)
+            print(account)
             if account == None:
                 flash('Incorrect User information')
                 return render_template('login.html')
