@@ -137,7 +137,7 @@ def login():
                 flash('Incorrect User information')
             else:
                 session["UID"] = str(account)
-
+                session["username"] = username
                 flash('Login Sucessful. Welcome back ' +  username + '!')
                 # Redirect to home page
                 return redirect(url_for('homepage'))
@@ -224,8 +224,6 @@ def searchpage():
         array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Toys & Models%')
         session["array_toys_and_models"] = array_toys_and_models
 
-        
-
         # Remove Session search,array_art,... from having values
 
         return render_template('searchpage.html', result = new_result
@@ -235,7 +233,9 @@ def searchpage():
                                                 , array_trading = array_trading
                                                 , array_toys_and_models = array_toys_and_models)
 
+
     result = Product_Information.Get_Product_By_Tag(session["search_for"])
+    print("Printng " + str(result))
     session["search_for"] = result
     ## This line was causing problem as I was using session["result"] to get the result that they previously entered specifically when they clicked refreshed button so I can just query through that.
     session["result"] = result
@@ -283,6 +283,8 @@ def createListing():
 
         quantity = request.form['quantity']
         Product_Information.Insert_New_Product(uid,tags, title, description,image[0], price, quantity,catagory, subcatagory)
+
+        flash("You successfully created a item listing!")
         return redirect(url_for('homepage'))
 
     return render_template('Create_Listing.html')
@@ -293,9 +295,16 @@ def itempage(iteminfo):
     result[5] = result[5].replace('|$|', ",")
     user_id = session["UID"]
     seller = result[4]
-    user = SQL_Queries.UserIdToUsername(int(seller))
-    shopcart =  Shopping_Cart.Pull_Cart(user_id)
-    shopping_cart_items = Shopping_Cart.Get_Shopping_Products(shopcart)
+    user = SQL_Queries.UserIdToUsername(str(seller))
+    print("Your username is " +str(user))
+    shopcart=[]
+    shopcart_cart_items = []
+    if user:
+        shopcart =  Shopping_Cart.Pull_Cart(user_id)
+        if shopcart:
+            shopping_cart_items = Shopping_Cart.Get_Shopping_Products(shopcart)
+        
+    
     itemcount = len(shopcart)
     subtotal=0
     if itemcount != 0:
@@ -314,8 +323,10 @@ def ShoppingCart():
 @app.route('/accountpage', methods=['GET','POST'])
 def accountpage():
     if request.method == "POST":
-        print("In logout")
+        
         session['UID'] = '00'
+        flash("You have been logged out. We hope to see you again!")
+        session["username"] = ""
         print(session['UID'])
         return redirect(url_for('homepage'))
     return render_template('account_page.html')
