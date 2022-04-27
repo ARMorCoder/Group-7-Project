@@ -280,7 +280,7 @@ def itempage(iteminfo):
     user_id = session.get("UID")
     seller = result[4]
     user = SQL_Queries.UserIdToUsername(str(seller))
-    print("Your username is " +str(user))
+    print("Your username is " + str(user))
     shopcart=[]
     shopcart_cart_items = []
     print("User id = " + str(user_id))
