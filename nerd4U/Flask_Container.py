@@ -10,6 +10,8 @@ import mysql.connector
 from flask import Flask, jsonify, request, render_template, send_from_directory, redirect, url_for, session, flash
 
 
+
+
 tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
                   'art-TV': 'Television', 'art-OTHER': 'Other', 'art-CN': 'Cartoon Network',
                   'art-DC': 'DC Universe', 'art-DISNEY': 'Disney', 'art-GOT': 'Game of Thrones',
@@ -47,9 +49,6 @@ DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,password=C
 ## Home Page ##
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
-
-
-    
 
     # Grab what user enters in searchpage and use it to fill searchpage.html #
     if request.method == 'POST':
@@ -124,8 +123,8 @@ def send_image(filename):
 @app.route('/userLogin', methods=['GET', 'POST'])
 def login():
 
-    print(session["UID"])
-    if(session["UID"] == '00'):
+
+    if(session.get("UID") == None):
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             # Create variables for easy access
             username = request.form['username']
@@ -323,16 +322,15 @@ def ShoppingCart():
 @app.route('/accountpage', methods=['GET','POST'])
 def accountpage():
     order_list=[]
+    user_listings=[]
     product=[]
-    if session['UID']:
+    if session.get('UID'):
         user = SQL_Queries.UserIdToUsername(session['UID'])
-        print(user[0])
+        print(user)
         products_int = Shopping_Cart.Pull_Cart(user[0])
         print(products_int)
-
+        print("My session id = ", + session['UID'])
         user_transactions = Transaction.Pull_Transactions_From_UID(str(user[0]))
-        # print(user_transactions)
-        # for x in range(0,len(use r_transactions[2].split(","))):
         for y in user_transactions:
             # print("loop")
             pids = y[2]
@@ -342,12 +340,11 @@ def accountpage():
                 temp = Product_Information.Get_Product_By_Pid(x)
                 if temp != None:
                     product.append(temp)
-                    
-               
-            num_items = len(y[2].split(","))
-            
-        # print(product)
-        return render_template('account_page.html',user=user, order_list = user_transactions,num_items=num_items, product=product)
+                num_items = len(y[2].split(","))
+                
+        user_listings = Product_Information.Get_Product_By_UID(session['UID'])
+        print("Im here" + str(user_listings))
+        return render_template('account_page.html',user=user, order_list = user_transactions,num_items=num_items, product=product, user_listings = user_listings)
 
 @app.route('/logout',methods=['GET','POST'])
 def logout():

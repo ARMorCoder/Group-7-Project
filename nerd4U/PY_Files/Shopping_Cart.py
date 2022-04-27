@@ -21,8 +21,6 @@ def Pull_Cart(UID):
         return []
     else:
         Cart_List = SQL_Queries.Get_Cart(UID)
-
-        
         Cart_List = Cart_List[1:-1]
         Cart_List = Cart_List.split(',')
         Cart_List = Str_To_Lint(Cart_List)

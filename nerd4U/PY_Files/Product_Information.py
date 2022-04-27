@@ -8,7 +8,11 @@ TABLE_NAME = "product_information"
     ## Queries Database for products that  ##
     ## have specified category.            ##
     #########################################   
-
+def Get_Product_By_UID(uid):
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM product_information where seller_id = '{}'".format(uid))
+    new_array = cursor.fetchall()
+    return (new_array)
 def Get_Product_By_Catagory(category):
     cursor = db.cursor()
 
