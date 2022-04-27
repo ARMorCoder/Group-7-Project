@@ -310,19 +310,19 @@ def itempage(iteminfo):
     Filled = Shopping_Cart.Get_Shopping_Products(Cart)
     length = Shopping_Cart.Cart_Length(Filled)
     total = Shopping_Cart.Total_Shopping_Cart(Filled)
-    print("iteminfoiteminfoiteminfo {}".format(iteminfo[0]))
     result = Product_Information.strArrayToArray(iteminfo)
-    # print(result[5])
+    
     result[5] = result[5].replace('|$|', ",")
     seller = result[4]
     seller = SQL_Queries.UserIdToUsername(str(seller))
 
     adding_to_cart = int(total) + int(result[2])
     if request.method == "POST":
-        print("item posting")
-        Cart = Shopping_Cart.Add_Item(Cart,[0])
+        print("Add_Item c{} r{}".format(Cart,result[0]))
+        Cart = Shopping_Cart.Add_Item(Cart,result[0])
+        print(Cart)
         Shopping_Cart.Push_Cart(Cart,user)
-        return render_template('itempage/<iteminfo>.html')
+        return redirect(url_for('ShoppingCart'))
 
     return render_template('item_page.html',
                            result=result,
@@ -352,7 +352,7 @@ def ShoppingCart():
     if request.method == "POST" and request.form.getlist('Delete_Checks'):
         print("POSTER!")
         Deleter_List = request.form.getlist('Delete_Checks')
-        print(Deleter_List)
+        # print(Deleter_List)
 
         Deleter_List = Shopping_Cart.Get_PID_From_P_Name(Deleter_List)
 

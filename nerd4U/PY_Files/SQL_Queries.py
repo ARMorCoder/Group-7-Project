@@ -87,7 +87,7 @@ def Select_Any_Dirty(Table, Select_List, Attribute_List, Value_List):
     return returner
 
 def Format_Zip_List(Attribute_List, Value_List,Delimiter):
-    sql = "{} = '{}'"
+    sql = '{} = "{}"'
     returner = ""
     True_Delimiter = " {} ".format(Delimiter)
 
@@ -127,8 +127,9 @@ def Update_Field(Table,Attribute_List, Value_List, ID_Type,ID):
     My_Cursor = DB.cursor()
     update = "update {}".format(Table)
     set = "set " + Format_Zip_List([Attribute_List], [Value_List],",")
-    where = "Where {} = {}".format(ID_Type,ID)
+    where = 'Where {} = {}'.format(ID_Type,ID)
     sql  = "{} {} {}".format(update,set,where)
+    print(sql)
     My_Cursor.execute(sql)
     DB.commit()
 

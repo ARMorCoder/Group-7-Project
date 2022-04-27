@@ -34,7 +34,7 @@ def Add_Item(Cart_List, New_PID):
     PID_Set = set(Cart_List)
     if New_PID not in PID_Set:
         PID_Set.add(New_PID)
-        Cart_List.insert(0,New_PID)
+        Cart_List.insert(0,int(New_PID))
     Cart_List.sort()
     return Cart_List
 
