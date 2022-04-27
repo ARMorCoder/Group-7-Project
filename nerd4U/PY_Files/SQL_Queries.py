@@ -19,10 +19,11 @@ def Push_To_User_Table(Username, Email, Password, First, Last, Street, State, ph
     My_Cursor.execute(sql)
     DB.commit()
 
-def Push_To_Trans_Table(TID,UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Address):
+def Push_To_Trans_Table(UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address):
     My_Cursor = DB.cursor()
-    sql = "insert into {} (UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Address) values  ('{}', '{}', '{}', '{}', '{}', '{}', '{}')"
-    sql = sql.format(T_TABLE, UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Address)
+    sql = "insert into {} (UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Ship_Address,Billing_Address) values  ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')"
+    sql = sql.format(T_TABLE, UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address)
+    print(sql)
     My_Cursor.execute(sql)
     DB.commit()
     
@@ -136,6 +137,7 @@ def Update_Field(Table, Attribute_List, Value_List, ID_Type, ID):
     set = "set " + Format_Zip_List([Attribute_List], [Value_List], ",")
     where = "Where {} = {}".format(ID_Type, ID)
     sql = "{} {} {}".format(update, set, where)
+    print(sql)
     My_Cursor.execute(sql)
     DB.commit()
 

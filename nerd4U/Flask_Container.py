@@ -320,7 +320,7 @@ def ShoppingCart():
         else:
             Billing = Shipping
 
-        Trans = Transaction.Create_Transaction_Tuple(UID=User,
+        Transaction.Create_Transaction_Tuple(       UID=User,
                                                      Cart_IDs=str(Cart),
                                                      Cart_Names=Transaction.Make_Cart_Names(
                                                          Filled),
@@ -329,9 +329,7 @@ def ShoppingCart():
                                                      Payment_Info=Transaction.Redact_CC(
                                                          request.form["cardNumber"]),
                                                      S_Address=Shipping,
-                                                     B_Address=Billing
-                                                     )
-        print(Trans)
+                                                     B_Address=Billing)
 
     return render_template('shopping_cart.html',
                            Tuple_List=Filled,
