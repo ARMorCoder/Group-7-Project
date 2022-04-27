@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        
+        <title>Nerds4U</title>
+        <style>
+            body {
+                background-color: lightgray;
+                background-image: url('background.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100%;
+                background-position: top center;
+            }
+        </style>
+    </head>
+
+    <body class="d-flex flex-column min-vh-100">
+        
+        <header>
+            <nav class="navbar navbar-expand navbar-primary bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Nerds4U Admin</a>
+                    <ul class="navbar-nav container-fluid p-0">
+                        <div class="input-group p-2 col">
+                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">All</button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">All</a></li>
+                                <li><a class="dropdown-item" href="#">Listings</a></li>
+                                <li><a class="dropdown-item" href="#">Orders</a></li>
+                                <li><a class="dropdown-item" href="#">Users</a></li>
+                            </ul>
+                            <input class="form-control" type="search" placeholder="Search for listings, orders, and users..." aria-label="Search">
+                            <button class="btn btn-warning" type="submit"><span class="bi bi-search"></span></button>
+                        </div>
+                        <li class="nav-item px-1">
+                            <button class="nav-link btn fs-5" data-bs-toggle="modal" data-bs-target="#discount"><span class="bi bi-tag-fill"></span></button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-5 px-2 py-1">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#subNavbarContent" aria-controls="subNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="subNavbarContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#">Listings</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="modal fade" id="discount" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Generate Discount Code</h5>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" aria-label="Close"><span class="bi bi-x-lg"></span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="code" class="form-label">Code</label>
+                                <div class="row m-0">
+                                    <div class="col ps-0"><input type="text" class="form-control mb-3" id="code" required></div>
+                                    <div class="col-auto p-0"><button type="button" class="btn btn-primary" onclick="generateRandomCode()">Random</button></div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="start" class="form-label">Start Date</label>
+                                <input type="date" class="form-control mb-3" id="start" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="end" class="form-label">End Date</label>
+                                <input type="date" class="form-control mb-3" id="end" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="checkbox" class="form-check-input" id="percentage" onchange="toggleDiscountType(this)">
+                                <label for="percentage" class="form-label">Percentage</label>
+                                <div class="input-group mb-3" id="percentageInputGroup" hidden>
+                                    <span class="input-group-text">&#45;</span>
+                                    <input type="number" class="form-control" id="percentageInput" placeholder="0" min="0" max="100" maxlength="3">
+                                    <span class="input-group-text">&#37;</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <input type="checkbox" class="form-check-input" id="flat" onchange="toggleDiscountType(this)">
+                                <label for="flat" class="form-label">Flat</label>
+                                <div class="input-group mb-3" id="flatInputGroup" hidden>
+                                    <span class="input-group-text">&#45;&#36;</span>
+                                    <input type="number" class="form-control" id="flatInput-dollars" placeholder="0" min="0">
+                                    <input type="number" class="form-control" id="flatInput-cents" value=".00" min="0.00" max="0.99" step="0.01">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="minAmount" class="form-label">Minimum &#36; Amount</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">&#45;&#36;</span>
+                                    <input type="number" class="form-control" id="minAmount-dollars" placeholder="0" min="0">
+                                    <input type="number" class="form-control" id="minAmount-cents" value=".00" min="0.00" max="0.99" step="0.01">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="minItems" class="form-label">Minimum &#35; of Items</label>
+                                <input type="number" class="form-control" id="minItems" placeholder="0" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning">Create Code</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="container shadow-lg rounded-3 bg-dark text-white table-responsive p-3 mb-5">
+            <div class="d-flex justify-content-between">
+                <h5 class="mb-3">Orders</h5>
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort by:</button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">Newest</a></li>
+                        <li><a class="dropdown-item" href="#">Oldest</a></li>
+                        <li><a class="dropdown-item" href="#">Price: Lowest</a></li>
+                        <li><a class="dropdown-item" href="#">Price: Highest</a></li>
+                        <li><a class="dropdown-item" href="#">A-Z</a></li>
+                        <li><a class="dropdown-item" href="#">Z-A</a></li>
+                    </ul>
+                </div>
+            </div>            
+            <table class="table table-dark table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">TID</th>
+                        <th scope="col">UID</th>
+                        <th scope="col">&#35; of Items</th>
+                        <th scope="col">Items</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>04/23/2022</td>
+                        <td>12345</td>
+<!--USER ID IN VALUE--> <td><a href="#" class="text-decoration-none" value="{{UserID Goes HERE}}" data-bs-toggle="modal" data-bs-target="#editUser">01234</a></td>
+                        <td>3</td>
+                        <td>
+                            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Batman Poster</a>
+                            <br><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Lego Batcave</a>
+                            <br><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Hotwheels Batmobile</a>
+                        </td>
+                        <td>&#36;45.56</td>
+                    </tr>
+                    <tr>
+                        <td>04/20/2022</td>
+                        <td>12323</td>
+                        <td><a href="#" class="text-decoration-none">01234</a></td>
+                        <td>4</td>
+                        <td>
+                            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Detective Comics No. 27</a>
+                            <br><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Batman Poster</a>
+                            <br><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Lego Batcave</a>
+                            <br><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Hotwheels Batmobile</a>
+                        </td>
+                        <td>&#36;487.17</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="modal fade" id="editUser" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <form class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit User: [Username]</h5>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" aria-label="Close"><span class="bi bi-x-lg"></span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input class="form-control" id="username" value="User's_Username" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="text" class="form-control" id="password" value="secret_password" required>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning">Update</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="editListing" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <form class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Listing</h5>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" aria-label="Close"><span class="bi bi-x-lg"></span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label for="category" class="form-label">Item Category</label>
+                                <select class="form-select" id="category" onchange="showSubcategories(this.value)" required>
+                                    <option value="">-- Select</option>
+                                    <option value="art">Art</option>
+                                    <option value="acc">Accessories</option>
+                                    <option value="com">Comics</option>
+                                    <option value="card">Trading Cards</option>
+                                    <option value="toy">Toys &amp; Models</option>
+                                </select>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="subcategory" class="form-label">Subcategory</label>
+                                <select class="form-select" id="subcategory" required>
+                                    <option value="">-- Select</option>
+                                    <option>Drawings &amp; Paintings</option>
+                                    <option>Mixed Media</option>
+                                    <option>Prints &amp; Photography</option>
+                                    <option>Sculptures &amp; Statues</option>
+                                    <option value="jewelry">Jewelry</option>
+                                    <option>Key Chains &amp; Lanyards</option>
+                                    <option>Pins &amp; Buttons</option>
+                                    <option>Stickers</option>
+                                    <option>Action, Adventure &amp; Slice of Life</option>
+                                    <option>Historical &amp; Non-fiction</option>
+                                    <option>Humor</option>
+                                    <option value="manga">Manga &amp; Int'l Comics</option>
+                                    <option>Sci-fi, Fantasy &amp; Horror</option>
+                                    <option value="super">Superhero</option>
+                                    <option value="tcg">Card Games</option>
+                                    <option value="nonSports">Non-Sports Cards</option>
+                                    <option value="sports">Sports Cards</option>
+                                    <option>Action Figures &amp; Props</option>
+                                    <option>Dolls &amp; Plushies</option>
+                                    <option>Funko Pops! &amp; Bobbleheads</option>
+                                    <option value="lego">LEGO</option>
+                                    <option>Models &amp; Statues</option>
+                                    <option value="vehicle">Toy Vehicles</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="tags" class="form-label">Tags</label>
+                                <textarea class="form-control" id="tags" rows="3" required>List, Tags, Here</textarea>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" value="Listing Title Here" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" rows="3" required>This is where the Listing Description goes</textarea>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="img" class="form-label">Image</label>
+                                <div class="row m-0">
+                                    <div class="col ps-0"><input class="form-control" type="text" id="img" accept="image/*" value="img_100.png" disabled></div>
+                                    <div class="col-auto p-0"><button type="button" class="btn btn-danger" onclick="removeImg()">Remove Image</button></div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="price" class="form-label">Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">&#36;</span>
+                                    <input type="number" class="form-control" id="price-dollars" value="10" min="0" maxlength="9" required>
+                                    <input type="number" class="form-control" id="price-cents" value=".00" min="0.00" max="0.99" step="0.01">
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="listingQty" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="listingQty" min="1" value="1">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning">Update</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <footer class="mt-auto bg-dark text-center">
+            <div class="p-3">
+                <div class="pb-2">
+                    <a class="" href="#"><span class="bi bi-twitter"></span></a>
+                    <a class="" href="#"><span class="bi bi-facebook"></span></a>
+                    <a class="" href="#"><span class="bi bi-instagram"></span></a>
+                </div>
+                <p class="m-0"><span class="text-muted">Nerds4U Admin Pages</span></p>
+                <p class="m-0"><span class="text-muted">&copy; 2022 Nerds4U.com</span></p>
+            </div>
+        </footer>
+        
+        <script>
+            function generateRandomCode(){
+                var code = document.querySelector('input[id=code]');
+                var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                var randomCode = '';
+                for(let i=8; i>0; --i){
+                    randomCode += chars[Math.floor(Math.random() * chars.length)];
+                }
+                code.value = randomCode;
+            }
+            function toggleDiscountType(type){
+                var percentage = document.querySelector('input[id=percentage]');
+                var percentageIntputGroup = document.querySelector('div[id=percentageInputGroup]');
+                var percentageIntput = document.querySelector('input[id=percentageInput]');
+                var flat = document.querySelector('input[id=flat]');
+                var flatIntputGroup = document.querySelector('div[id=flatInputGroup]');
+                var flatIntputDollars = document.querySelector('input[id=flatInput-dollars]');
+                var flatIntputCents = document.querySelector('input[id=flatInput-cents]');
+                
+                percentageInput.value = '0';
+                flatIntputDollars.value = '0';
+                flatIntputCents.value = '.00';                
+                if (type.id == "percentage"){
+                    flat.disabled = type.checked;
+                    percentageInputGroup.hidden = !type.checked;
+                }
+                else if (type.id == "flat") {
+                    percentage.disabled = type.checked;
+                    flatInputGroup.hidden = !type.checked;
+                }                    
+            }
+            function showSubcategories(catSelected){
+                var listSubcat = document.querySelector('select[id=subcategory]');
+                listSubcat.value = "";
+                
+                if (catSelected != ""){
+                    listSubcat.disabled = false;
+                    for(let i=1; i<listSubcat.length; i++){
+                        listSubcat[i].hidden = true;
+                        if (catSelected == "art" && i<=4)
+                            listSubcat[i].hidden = false;
+                        else if (catSelected == "acc" && i>4 && i<=8)
+                            listSubcat[i].hidden = false;
+                        else if (catSelected == "com" && i>8 && i<=14)
+                            listSubcat[i].hidden = false;
+                        else if (catSelected == "card" && i>14 && i<=17)
+                            listSubcat[i].hidden = false;
+                        else if (catSelected == "toy" && i>17 && i<=23)
+                            listSubcat[i].hidden = false;
+                    }
+                }
+                else
+                    listSubcat.disabled = true;
+            }
+            function removeImg(){
+                var img = document.querySelector('input[id=img]');
+                img.value = "";
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

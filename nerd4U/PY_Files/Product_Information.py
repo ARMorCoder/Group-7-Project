@@ -31,7 +31,14 @@ def Get_Product_By_Category_If_Valid(array, category):
 
 def Get_Product_By_Tag(tag):
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM product_information where tags like '%" + tag + "%' or catagory like '%" + tag + "%'")
+    print(tag)
+    cursor.execute("SELECT * FROM product_information where tags like '%" + tag + "%' or catagory like '%" + tag + "%' or name like '%" + tag +"%'")
+    array = cursor.fetchall()
+    return (array)
+
+def Get_Product_By_SubCategory_Only(subcategory):
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM product_information where sub_category like '%" + subcategory + "%'")
     array = cursor.fetchall()
     return (array)
 

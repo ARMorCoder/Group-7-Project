@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+		<link href="\static\BodyStyleSheet.css" rel="stylesheet">
+        
+        <title>Nerds4U</title>
+        <style>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+		.alert {
+		padding: 20px;
+		border-color:transparent;
+		margin-bottom: 15px;
+		width:74%;
+		left:13%;
+		}
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-	<link href="\static\BodyStyleSheet.css" rel="stylesheet">
+		/* The close button */
+		.closebtn {
+		margin-left: 15px;
 
-	<title>Nerds4U</title>
-	<style>
-		* {
+		font-weight: bold;
+		float: right;
+		font-size: 22px;
+		line-height: 20px;
+		cursor: pointer;
+		transition: 0.3s;
+		}
+
+		/* When moving the mouse over the close button */
+		.closebtn:hover {
+		color: black;
+		}
+		footer {
+			position:fixed;
+			bottom:0;
+			width:100%;
+		}
+
+            *{
 			padding: 0;
 			margin: 0;
 		}
@@ -167,54 +196,43 @@
 								<li><a class="dropdown-item" href="#">Toys &amp; Models</a></li>
 							</ul>
 
-							<input class="form-control" name="search_bar" type="search"
-								placeholder="Search for art, accessories, comics, cards, toys, and more..."
-								aria-label="Search">
-							<button class="btn btn-warning" type="submit"><a href="/"><span
-										class="bi bi-search"></span></a></button>
+				<nav class="navbar navbar-expand-md navbar-light bg-light mb-5 px-2 py-1">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#subNavbarContent" aria-controls="subNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="subNavbarContent">
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="/artPage">Art</a></li>
+							<li class="nav-item"><a class="nav-link" href="/accPage">Accessories</a></li>
+							<li class="nav-item"><a class="nav-link" href="/comPage">Comics</a></li>
+							<li class="nav-item"><a class="nav-link" href="/tradePage">Trading Cards</a></li>
+							<li class="nav-item"><a class="nav-link" href="toyPage">Toys &amp; Models</a></li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+        </form>
 
+		<div class="alertMsg">
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+
+					  <div class="alert alert-success alert-dismissible fade show" role="alert">
+						  <strong>{{message}}</strong> 
+						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 						</div>
-						<li class="nav-item px-1">
-							<a class="nav-link btn btn-dark fs-5" href="/createListing"><span
-									class="bi bi-tags-fill"></span></a>
-						</li>
-						<li class="nav-item px-1">
-							<a class="nav-link btn btn-dark fs-5" href="/userLogin"><span
-									class="bi bi-person-fill"></span></a>
-						</li>
-						<li class="nav-item px-1">
-							<a class="nav-link btn btn-dark" href="/shoppingCart"><span
-									class="bi bi-cart-fill fs-5"></span><span
-									class="badge rounded-pill bg-secondary">0</span></a>
-						</li>
-					</ul>
-				</div>
-			</nav>
 
+	  
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		  </div>
+        <!-- Art Products Container -->
 
-			<nav class="navbar navbar-expand-md navbar-light bg-light mb-5 px-2 py-1">
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#subNavbarContent" aria-controls="subNavbarContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="subNavbarContent">
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Art</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Accessories</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Comics</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Trading Cards</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Toys &amp; Models</a></li>
-					</ul>
-				</div>
-			</nav>
-		</header>
-	</form>
-	<!-- Art Products Container -->
-
-	<main class="shadow-lg rounded-3 bg-body container-fluid w-75 mb-5 p-0 h-100">
-
+	<main class ="shadow-lg rounded-3 bg-body container-fluid w-75 mb-5 p-0 h-100" >
+		
 		<span class="arrow">&#139;</span>
 		<span class="arrow">&#155;</span>
 		<span class="card_title_containers">
