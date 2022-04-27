@@ -1,11 +1,10 @@
 import datetime
-import SQL_Queries
-
+from tkinter import HIDDEN
 def Create_Transaction_Tuple(UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address):
-    SQl_Queries.Push_To_Trans_Table(UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address)
+    return (UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address)
 
 def Make_Address_String(Street, State, City, Zip, Suite):
-    return "{} #{} {} {} {}".format(Street,Suite,Zip,State,City)
+    return "{}{} {} {} {}".format(Street,Suite,Zip,State,City)
 
 def Make_Cart_Names(Tuple_List):
     returner = ""
