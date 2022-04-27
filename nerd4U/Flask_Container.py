@@ -8,7 +8,7 @@ from ast import literal_eval
 
 import mysql.connector
 from flask import Flask, jsonify, request, render_template, send_from_directory, redirect, url_for, session, flash
-from sympy import Q
+
 
 tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
                   'art-TV': 'Television', 'art-OTHER': 'Other', 'art-CN': 'Cartoon Network',
@@ -33,7 +33,7 @@ tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies':
 
     # Add the rest of the tags from create_listing.html to allow createListing function to properly insert the tags into database
 
-from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart
+from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart, Transaction
 
 
 app = Flask(__name__)
@@ -323,10 +323,21 @@ def ShoppingCart():
     return render_template('shopping_cart.html')
 @app.route('/accountpage', methods=['GET','POST'])
 def accountpage():
+    order_list=[]
     if session['UID']:
         user = SQL_Queries.UserIdToUsername(session['UID'])
+        print(user[0])
+        products_int = Shopping_Cart.Pull_Cart(user[0])
+
+        user_transactions = Transaction.Pull_Transactions_From_UID(str(user[0]))
+        print(user_transactions)
+        # for x in range(0,len(products_int)):
+        #     # temp = Transaction.Get_Products_From_Cart(str(products_int[x]))
+        #     print(temp)
+        #     order_list.append(temp)
+        #     # print(order_list)
+        # return render_template('account_page.html',user=user, order_list=order_list)
         return render_template('account_page.html',user=user)
-    return render_template('account_page.html')
 
 @app.route('/logout',methods=['GET','POST'])
 def logout():
@@ -398,5 +409,5 @@ def updateAddress():
         SQL_Queries.UpdateAddress(str(address),str(state),str(session["UID"]))
         return redirect(url_for("accountpage"))
 
-       
+
 app.run(debug=True)

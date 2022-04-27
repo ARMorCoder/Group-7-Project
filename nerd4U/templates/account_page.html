@@ -160,27 +160,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                {% for order in order_list%}
                                 <tr>
-                                    <td>04/25/2022</td>
-                                    <td>&#36;45.56</td>
-                                    <td>3</td>
+                                    <td>{{order[5]}}</td>
+                                    <td>&#36;{{order[4]}}</td>
+                                    <td></td>
                                     <td>
                                         <a href="#" class="text-decoration-none">Batman Poster</a>
                                         <br><a href="#" class="text-decoration-none">Lego Batcave</a>
                                         <br><a href="#" class="text-decoration-none">Hotwheels Batmobile</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>04/20/2022</td>
-                                    <td>&#36;487.27</td>
-                                    <td>4</td>
-                                    <td>
-                                        <a href="#" class="text-decoration-none">Detective Comics No. 27</a>
-                                        <br><a href="#" class="text-decoration-none">Batman Poster</a>
-                                        <br><a href="#" class="text-decoration-none">Lego Batcave</a>
-                                        <br><a href="#" class="text-decoration-none">Hotwheels Batmobile</a>
-                                    </td>
-                                </tr>
+                                {%endfor%}
                             </tbody>
                         </table>
                     </div>
