@@ -122,6 +122,10 @@ def send_image(filename):
 def login():
 
     Sess_UID = session.get('UID')
+
+    if (Sess_UID == '1'):
+        return redirect(url_for("admin_listings"))
+
     if(Sess_UID == None or Sess_UID == '00' or Sess_UID == 00):
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             # Create variables for easy access
@@ -145,7 +149,15 @@ def login():
     else:
         return redirect(url_for('accountpage'))
 
-
+@app.route('/admin_orders')
+def admin_orders():
+    return render_template("admin_orders.html")
+@app.route('/admin_listings')
+def admin_listings():
+    return render_template("admin_listings.html")
+@app.route('/admin_users')
+def admin_users():
+    return render_template("admin_users.html")
 @app.route('/userRegristration', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
