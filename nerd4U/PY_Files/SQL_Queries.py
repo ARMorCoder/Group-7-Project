@@ -1,4 +1,5 @@
 import mysql.connector
+import py
 from PY_Files import CONSTANTS
 DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,
                              password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
@@ -22,7 +23,7 @@ def Push_To_Trans_Table(UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_
     My_Cursor = DB.cursor()
     sql = "insert into {} (UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Ship_Address,Billing_Address) values  ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')"
     sql = sql.format(T_TABLE, UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address)
-    print(sql)
+
     My_Cursor.execute(sql)
     DB.commit()
 def Get_Email(Email):
@@ -56,7 +57,7 @@ def Select_Any(Table, Select_List, Attribute_List, Value_List):
     sql = "Select ({}) From {} Where {}"
     Where = Format_Zip_List(Attribute_List, Value_List,"And")
     sql = sql.format(Select_List, Table, Where)
-    print (sql)
+
     My_Cursor.execute(sql)
     returner = My_Cursor.fetchone()
     # My_Cursor.close()
@@ -150,7 +151,7 @@ def UpdateUser(uname,uid):
 
 def UpdatePassword(pword,uid):
     My_Cursor = DB.cursor()
-    print(pword)
+
     My_Cursor.execute(("UPDATE user_information SET Pass = '{}' where UID = '{}'".format(pword,uid)))
     DB.commit()
 

@@ -1,481 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        
+        <title>Nerds4U</title>
+        <style>
+            body {
+                background-color: lightgray;
+                background-image: url('background.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100%;
+                background-position: top center;
+            }
+        </style>
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <body class="d-flex flex-column min-vh-100">
+        
+        <header>
+            <nav class="navbar navbar-expand navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Nerds4U</a>
+                    <ul class="navbar-nav container-fluid p-0">
+                        <div class="input-group p-2 col">
+                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">All</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">All Categories</a></li>
+                                <li><a class="dropdown-item" href="#">Art</a></li>
+                                <li><a class="dropdown-item" href="#">Accessories</a></li>
+                                <li><a class="dropdown-item" href="#">Comics</a></li>
+                                <li><a class="dropdown-item" href="#">Trading Cards</a></li>
+                                <li><a class="dropdown-item" href="#">Toys &amp; Models</a></li>
+                            </ul>
+                            <input class="form-control" type="search" placeholder="Search for art, accessories, comics, cards, toys, and more..." aria-label="Search">
+                            <button class="btn btn-warning" type="submit" href="/" type="submit"><span class="bi bi-search"></span></button>
+                        </div>
+                        <li class="nav-item px-1">
+                            <a class="nav-link btn btn-dark fs-5" href="/createListing"><span class="bi bi-tags-fill"></span></a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link btn btn-dark fs-5" href="/userLogin"><span class="bi bi-person-fill"></span></a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link btn btn-dark" href="/shoppingCart"><span class="bi bi-cart-fill fs-5"></span><span class="badge rounded-pill bg-secondary">0</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-
-    <title>Nerds4U</title>
-    <style>
-        body {
-            background-color: lightgray;
-            background-image: url('background.png');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100%;
-            background-position: top center;
-        }
-    </style>
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-
-    <header>
-        <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">Nerds4U</a>
-                <ul class="navbar-nav container-fluid">
-                    <div class="input-group p-2 col">
-                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">All</button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">All Categories</a></li>
-                            <li><a class="dropdown-item" href="#">Art</a></li>
-                            <li><a class="dropdown-item" href="#">Accessories</a></li>
-                            <li><a class="dropdown-item" href="#">Comics</a></li>
-                            <li><a class="dropdown-item" href="#">Trading Cards</a></li>
-                            <li><a class="dropdown-item" href="#">Toys &amp; Models</a></li>
-                        </ul>
-                        <input class="form-control" name="search_bar" type="search"
-                            placeholder="Search for art, accessories, comics, cards, toys, and more..."
-                            aria-label="Search">
-                        <button class="btn btn-warning" type="submit"><a href="/"><span
-                                    class="bi bi-search"></span></a></button>
-
-                    </div>
-                    <li class="nav-item px-1">
-                        <a class="nav-link btn btn-dark fs-5" href="/createListing"><span
-                                class="bi bi-tags-fill"></span></a>
-                    </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link btn btn-dark fs-5" href="/userLogin"><span
-                                class="bi bi-person-fill"></span></a>
-                    </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link btn btn-dark" href="/shoppingCart"><span
-                                class="bi bi-cart-fill fs-5"></span><span
-                                class="badge rounded-pill bg-secondary">0</span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-
-        <nav class="navbar navbar-expand-md navbar-light bg-light mb-5 px-2 py-1">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#subNavbarContent"
-                aria-controls="subNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="subNavbarContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Art</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Accessories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Comics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Trading Cards</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Toys &amp; Models</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <form action="/logout" method="post">
+            <nav class="navbar navbar-expand-md navbar-light bg-light mb-5 px-2 py-1">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#subNavbarContent" aria-controls="subNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="subNavbarContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Art</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Accessories</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Comics</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Trading Cards</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Toys &amp; Models</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <form action="/logout" method="post">
         <div class="container d-flex shadow-lg rounded-3 bg-body p-3 mb-5">
             <div class="rounded-3 d-flex flex-column flex-shrink-0 pe-3" style="width: 200px;">
                 <span class="d-flex align-items-center fs-4">{{user[1]}}</span>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <button class="nav-link link-dark container-fluid text-start active" type="button" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#nav-profile" aria-controls="nav-profile"
-                            aria-selected="true">
+                        <button class="nav-link link-dark container-fluid text-start active" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#nav-profile" aria-controls="nav-profile" aria-selected="true">
                             Profile
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link link-dark container-fluid text-start" type="button" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#nav-orders" aria-controls="nav-orders"
-                            aria-selected="true">
+                        <button class="nav-link link-dark container-fluid text-start" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#nav-orders" aria-controls="nav-orders" aria-selected="true">
                             Order History
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link link-dark container-fluid text-start" type="button" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#nav-listings" aria-controls="nav-listings"
-                            aria-selected="true">
+                        <button class="nav-link link-dark container-fluid text-start" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#nav-listings" aria-controls="nav-listings" aria-selected="true">
                             Listings
                         </button>
                     </li>
-
+                    
                 </ul>
                 <hr class="m-0">
-                <button class="nav-link link-dark container-fluid text-start btn btn-black text-danger" type="submit"
-                    name="signout">
+                <button class="nav-link link-dark container-fluid text-start btn btn-black text-danger" type="submit" name="signout">
                     Sign Out
                 </button>
 
             </div>
-    </form>
-    <div class="tab-content container-fluid p-0">
-        <div class="tab-pane fade active show" id="nav-profile" role="tabpanel">
-            <div class="d-flex row">
-                <div class="col-12">
-                    <dl class="row mb-0">
-                        <dt class="col-6">Name</dt>
-                        <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal"
-                                data-bs-target="#editName"><span class="bi bi-pencil-fill"></span></a></div>
-                        <dd>{{user[4]}} {{user[5]}}</dd>
-                    </dl>
+            </form>
+            <div class="tab-content container-fluid p-0">
+                <div class="tab-pane fade active show" id="nav-profile" role="tabpanel">
+                    <div class="d-flex row">
+                        <div class="col-12">
+                            <dl class="row mb-0">
+                                <dt class="col-6">Name</dt>
+                                <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#editName"><span class="bi bi-pencil-fill"></span></a></div>
+                                <dd>{{user[4]}} {{user[5]}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row mb-0">
+                                <dt class="col-6">Username</dt>
+                                <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#editUsername"><span class="bi bi-pencil-fill"></span></a></div>
+                                <dd>{{user[1]}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row mb-0">
+                                <dt class="col-6">Password</dt>
+                                <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#editPassword"><span class="bi bi-pencil-fill"></span></a></div>
+                                <dd>{{user[3]}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row mb-0">
+                                <dt class="col-6">Email</dt>
+                                <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#editEmail"><span class="bi bi-pencil-fill"></span></a></div>
+                                <dd>{{user[2]}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row mb-0">
+                                <dt class="col-6">Phone</dt>
+                                <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#editPhone"><span class="bi bi-pencil-fill"></span></a></div>
+                                <dd>{{user[8]}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-12">
+                            <dl class="row mb-0">
+                                <dt class="col-6">Address</dt>
+                                <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal" data-bs-target="#editAddress"><span class="bi bi-pencil-fill"></span></a></div>
+                                <dd>{{user[6]}}</dd>
+                                <dd>San Antonio, TX 78231</dd>
+                            </dl>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <dl class="row mb-0">
-                        <dt class="col-6">Username</dt>
-                        <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal"
-                                data-bs-target="#editUsername"><span class="bi bi-pencil-fill"></span></a></div>
-                        <dd>{{user[1]}}</dd>
-                    </dl>
-                </div>
-                <div class="col-md-6">
-                    <dl class="row mb-0">
-                        <dt class="col-6">Password</dt>
-                        <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal"
-                                data-bs-target="#editPassword"><span class="bi bi-pencil-fill"></span></a></div>
-                        <dd>{{user[3]}}</dd>
-                    </dl>
-                </div>
-                <div class="col-md-6">
-                    <dl class="row mb-0">
-                        <dt class="col-6">Email</dt>
-                        <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal"
-                                data-bs-target="#editEmail"><span class="bi bi-pencil-fill"></span></a></div>
-                        <dd>{{user[2]}}</dd>
-                    </dl>
-                </div>
-                <div class="col-md-6">
-                    <dl class="row mb-0">
-                        <dt class="col-6">Phone</dt>
-                        <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal"
-                                data-bs-target="#editPhone"><span class="bi bi-pencil-fill"></span></a></div>
-                        <dd>{{user[8]}}</dd>
-                    </dl>
-                </div>
-                <div class="col-12">
-                    <dl class="row mb-0">
-                        <dt class="col-6">Address</dt>
-                        <div class="col-6 text-end"><a class="link-dark" href="#" data-bs-toggle="modal"
-                                data-bs-target="#editAddress"><span class="bi bi-pencil-fill"></span></a></div>
-                        <dd>{{user[6]}}</dd>
-                        <dd>San Antonio, TX 78231</dd>
-                    </dl>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="nav-orders" role="tabpanel">
-            <div class="table-responsive">
-                <legend>My Orders</legend>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Date of Purchase</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">&#35; of Items</th>
-                            <th scope="col">Items</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="tab-pane fade" id="nav-orders" role="tabpanel">
+                    <div class="table-responsive">
+                        <legend>My Orders</legend>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date of Purchase</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">&#35; of Items</th>                                    
+                                    <th scope="col">Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        {% for order in order_list%}
-                        <tr>
-                            <td>{{order[5]}}</td>
-                            <td>&#36;{{order[4]}}</td>
-                            <td></td>
-                            <td>
-                                <a href="#" class="text-decoration-none">Batman Poster</a>
-                                <br><a href="#" class="text-decoration-none">Lego Batcave</a>
-                                <br><a href="#" class="text-decoration-none">Hotwheels Batmobile</a>
-                            </td>
-                        </tr>
-                        {%endfor%}
-                    </tbody>
-                </table>
+                                {% for order in order_list%}
+                                <tr>
+                                    <td>{{order[5]}}</td>
+                                    <td>&#36;{{order[4]}}</td>
+                                    <td>{{num_items}}</td>
+                                    <td>
+                                        {%for product_item in product %}
+                                        <a href="#" class="text-decoration-none" >{{product_item[1]}}</a>
+                                        {%endfor%}
+                                        
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade row" id="nav-listings" role="tabpanel">
+                    <div class="table-responsive">
+                        <legend>My Listings</legend>
+                        <table class="table table-striped table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date Created</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Sold Out&#63;</th>
+                                    <th scope="col">Date Sold Out</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {%for listing in user_listings%}
+                                <tr>
+                                    <td>{{listing[0]}}</td>
+                                    <td><a href="#" class="text-decoration-none">{{listing[1]}}</a></td>
+                                    <td>{{listing[3]}}</td>
+                                    <td>&#36;{{listing[2]}}</td>
+                                    <td>N</td>
+                                    <td>N/a</td>
+                                </tr>
+                            {%endfor%}                  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="tab-pane fade row" id="nav-listings" role="tabpanel">
-            <div class="table-responsive">
-                <legend>My Listings</legend>
-                <table class="table table-striped table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th scope="col">Date Created</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Sold Out&#63;</th>
-                            <th scope="col">Date Sold Out</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>04/23/2022</td>
-                            <td><a href="#" class="text-decoration-none">Batman Poster</a></td>
-                            <td>3</td>
-                            <td>&#36;10.00</td>
-                            <td>N</td>
-                            <td>N/a</td>
-                        </tr>
-                        <tr>
-                            <td>04/20/2022</td>
-                            <td><a href="#" class="text-decoration-none">Detective Comics No. 27</a></td>
-                            <td>1</td>
-                            <td>&#36;420.69</td>
-                            <td>Y</td>
-                            <td>04/22/2022</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </form>
+        <div class="modal fade" id="editName" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" action="/updateFullName" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Name</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label for="first" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="first" name="firstname value="{{user[4]}}" required>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="last" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="last" name="lastname value="{{user[5]}}"  required>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" name="update1">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-    </div>
-    </form>
-    <div class="modal fade" id="editName" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" action="/updateFullName" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Name</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <label for="first" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first" name="firstname value=" {{user[4]}}"
-                                required>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label for="last" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last" name="lastname value=" {{user[5]}}"
-                                required>
+        <div class="modal fade" id="editUsername" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" action="/updateUsername" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Username</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="currentUsername" required>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" name="update2">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="editPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" action="/updatePassword" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Change Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="currentPassword" class="form-label">Current Password</label>
+                                <input type="password" name="current" class="form-control" id="currentPassword" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="newPassword" class="form-label">New Password</label>
+                                <input type="password" name="new" class="form-control" id="newPassword" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="cuPassword" class="form-label">Confirm Password</label>
+                                <input type="password" name="confirm" class="form-control" id="currentPassword" required>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning" name="update1">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal fade" id="editUsername" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" action="/updateUsername" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Username</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" id="username"
-                                placeholder="currentUsername" required>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" name="update3">Update</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning" name="update2">Update</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="modal fade" id="editPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" action="/updatePassword" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Change Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <label for="currentPassword" class="form-label">Current Password</label>
-                            <input type="password" name="current" class="form-control" id="currentPassword" required>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label for="newPassword" class="form-label">New Password</label>
-                            <input type="password" name="new" class="form-control" id="newPassword" required>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label for="cuPassword" class="form-label">Confirm Password</label>
-                            <input type="password" name="confirm" class="form-control" id="currentPassword" required>
-                        </div>
+        <div class="modal fade" id="editEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" action="/updateEmail" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Email</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning" name="update3">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal fade" id="editEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" action="/updateEmail" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Email</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="{{user[2]}}"
-                                required>
-                        </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" name="email" id="email" placeholder="{{user[2]}}" required>
+                            </div>
+                        </div>                        
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning" name="update4">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal fade" id="editPhone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" action="/updatePhone" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Phone</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="1234567890"
-                                required>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" name="update4">Update</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning" name="update5">Update</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="modal fade" id="editAddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" action="/updateAddress" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Address</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" id="address" value="1234 Street St"
-                                required>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label for="aptSuite" class="form-label">Apt/Suite</label>
-                            <input type="text" class="form-control" id="aptSuite" value="Apt 210">
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label for="city" class="form-label">City</label>
-                            <input type="text" class="form-control" id="city" value="San Antonio" required>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <label for="shipState" class="form-label">State</label>
-                            <select class="form-select" name="state" id="shipState" onchange="" required>
-                                <optio value="" selected>--</option>
+        <div class="modal fade" id="editPhone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" action="/updatePhone" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Phone</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" name="phone" id="phone" placeholder="1234567890" required>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" name="update5">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="editAddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" action="/updateAddress" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Address</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" name="address" id="address" value="1234 Street St" required>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="aptSuite" class="form-label">Apt/Suite</label>
+                                <input type="text" class="form-control" id="aptSuite" value="Apt 210">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="city" value="San Antonio" required>
+                            </div>
+                            <div class="col-3 mb-3">
+                                <label for="shipState" class="form-label">State</label>
+                                <select class="form-select" name="state" id="shipState" onchange="" required>
+                                    <optio value=""selected>--</option>
                                     <option value="AL">Alabama</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="DC">District Of Columbia</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="NH">New Hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="NY">New York</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="WA">Washington</option>
-                                    <option value="WV">West Virginia</option>
-                                    <option value="WI">Wisconsin</option>
-                                    <option value="WY">Wyoming</option>
-                            </select>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <label for="shipZip" class="form-label">ZIP Code</label>
-                            <input type="number" class="form-control" id="shipZip" value="78231" required>
-                        </div>
+                                    <option value="AK">Alaska</option> 
+                                    <option value="AZ">Arizona</option> 
+                                    <option value="AR">Arkansas</option> 
+                                    <option value="CA">California</option> 
+                                    <option value="CO">Colorado</option> 
+                                    <option value="CT">Connecticut</option> 
+                                    <option value="DE">Delaware</option> 
+                                    <option value="DC">District Of Columbia</option> 
+                                    <option value="FL">Florida</option> 
+                                    <option value="GA">Georgia</option> 
+                                    <option value="HI">Hawaii</option> 
+                                    <option value="ID">Idaho</option> 
+                                    <option value="IL">Illinois</option> 
+                                    <option value="IN">Indiana</option> 
+                                    <option value="IA">Iowa</option> 
+                                    <option value="KS">Kansas</option> 
+                                    <option value="KY">Kentucky</option> 
+                                    <option value="LA">Louisiana</option> 
+                                    <option value="ME">Maine</option> 
+                                    <option value="MD">Maryland</option> 
+                                    <option value="MA">Massachusetts</option> 
+                                    <option value="MI">Michigan</option> 
+                                    <option value="MN">Minnesota</option> 
+                                    <option value="MS">Mississippi</option> 
+                                    <option value="MO">Missouri</option> 
+                                    <option value="MT">Montana</option> 
+                                    <option value="NE">Nebraska</option> 
+                                    <option value="NV">Nevada</option> 
+                                    <option value="NH">New Hampshire</option> 
+                                    <option value="NJ">New Jersey</option> 
+                                    <option value="NM">New Mexico</option> 
+                                    <option value="NY">New York</option> 
+                                    <option value="NC">North Carolina</option> 
+                                    <option value="ND">North Dakota</option> 
+                                    <option value="OH">Ohio</option> 
+                                    <option value="OK">Oklahoma</option> 
+                                    <option value="OR">Oregon</option> 
+                                    <option value="PA">Pennsylvania</option> 
+                                    <option value="RI">Rhode Island</option> 
+                                    <option value="SC">South Carolina</option> 
+                                    <option value="SD">South Dakota</option> 
+                                    <option value="TN">Tennessee</option> 
+                                    <option value="TX">Texas</option> 
+                                    <option value="UT">Utah</option> 
+                                    <option value="VT">Vermont</option> 
+                                    <option value="VA">Virginia</option> 
+                                    <option value="WA">Washington</option> 
+                                    <option value="WV">West Virginia</option> 
+                                    <option value="WI">Wisconsin</option> 
+                                    <option value="WY">Wyoming</option> 
+                                </select>
+                            </div>
+                            <div class="col-3 mb-3">
+                                <label for="shipZip" class="form-label">ZIP Code</label>
+                                <input type="number" class="form-control" id="shipZip" value="78231" required>
+                            </div>
+                        </div>                        
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <footer class="mt-auto bg-dark text-center">
-        <div class="p-3">
-            <div class="pb-2">
-                <a class="" href="#"><span class="bi bi-twitter"></span></a>
-                <a class="" href="#"><span class="bi bi-facebook"></span></a>
-                <a class="" href="#"><span class="bi bi-instagram"></span></a>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning">Update</button>
+                    </div>
+                </form>
             </div>
-            <p class="m-0"><span class="text-muted">Powered by Amazon Web Services</span></p>
-            <p class="m-0"><span class="text-muted">&copy; 2022 Nerds4U.com</span></p>
         </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</body>
-
+        
+        <footer class="mt-auto bg-dark text-center">
+            <div class="p-3">
+                <div class="pb-2">
+                    <a class="" href="#"><span class="bi bi-twitter"></span></a>
+                    <a class="" href="#"><span class="bi bi-facebook"></span></a>
+                    <a class="" href="#"><span class="bi bi-instagram"></span></a>
+                </div>
+                <p class="m-0"><span class="text-muted">Powered by Amazon Web Services</span></p>
+                <p class="m-0"><span class="text-muted">&copy; 2022 Nerds4U.com</span></p>
+            </div>
+        </footer>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
 </html>

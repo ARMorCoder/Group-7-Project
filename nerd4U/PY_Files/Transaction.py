@@ -35,6 +35,7 @@ def Complete_Transaction():
     pass
 
 def Pull_Transactions_From_UID(uid):
+    print("TRANS UID = " + str(uid))
     cursor = DB.cursor()
     cursor.execute("SELECT * FROM trans_information where UID = '" + uid + "'")
     array = cursor.fetchall()

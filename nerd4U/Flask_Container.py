@@ -1,4 +1,3 @@
-from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart, Transaction
 import re
 from re import A
 import sys
@@ -10,14 +9,16 @@ import mysql.connector
 from flask import Flask, jsonify, request, render_template, send_from_directory, redirect, url_for, session, flash
 
 
-tag_dictionary = {'art-ANIME': 'Anime', 'art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
+
+
+tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies': 'Movies',
                   'art-TV': 'Television', 'art-OTHER': 'Other', 'art-CN': 'Cartoon Network',
                   'art-DC': 'DC Universe', 'art-DISNEY': 'Disney', 'art-GOT': 'Game of Thrones',
                   'art-GHOSTBUSTERS': 'Ghostbusters', 'art-HARRY': 'Harry Potter', 'art-LOTR': 'Lord of the Rings',
                   'art-MARVEL': 'Marvel', 'art-NICKELODEON': 'Nickelodeon', 'art-Nintendo': 'Nintendo',
                   'art-PIXAR': 'Pixar', 'art-POKEMON': 'Pokemon', 'art-POWER': 'Power Rangers',
                   'art-SEGA': 'SEGA', 'art-STAR-TREK': 'Star Trek', 'art-STAR-WARS': 'Star Wars',
-                  'acc-ANIME': 'Anime', 'acc-CARTOONS': 'Cartoons', 'acc-Movies': 'Movies',
+                  'acc-ANIME': 'Anime','acc-CARTOONS': 'Cartoons', 'acc-Movies': 'Movies',
                   'acc-TV': 'Television', 'acc-OTHER': 'Other', 'acc-CN': 'Cartoon Network',
                   'acc-DC': 'DC Universe', 'acc-DISNEY': 'Disney', 'acc-GOT': 'Game of Thrones',
                   'acc-GHOSTBUSTERS': 'Ghostbusters', 'acc-HARRY': 'Harry Potter', 'acc-LOTR': 'Lord of the Rings',
@@ -33,6 +34,7 @@ tag_dictionary = {'art-ANIME': 'Anime', 'art-CARTOONS': 'Cartoons', 'art-Movies'
 
 # Add the rest of the tags from create_listing.html to allow createListing function to properly insert the tags into database
 
+from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart, Transaction
 
 app = Flask(__name__)
 
@@ -44,81 +46,66 @@ DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,
                              password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
 
 ## Home Page ##
-
-
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
 
     # Grab what user enters in searchpage and use it to fill searchpage.html #
     if request.method == 'POST':
         search_for = request.form['search_bar']
-        session["search_for"] = search_for
+        session["search_for"] = search_for        
         return redirect(url_for('searchpage'))
 
     ################################################################################################
     # Call function to perform SQL Query on specified categories (returns array containing tuples) #
-        #
-    # art_products = Product_Information.Get_Product_By_Catagory(
-    #     'Art')                              #
-    comic_products = Product_Information.Get_Product_By_Catagory(
-        'Comics')                         #
-    toy_products = Product_Information.Get_Product_By_Catagory(
-        'Toys & Models')                    #
+                                                                                                   #
+    #art_products = Product_Information.Get_Product_By_Tag_Only('Art')                              #
+    comic_products = Product_Information.Get_Product_By_Catagory('Comics')                         #
+    toy_products = Product_Information.Get_Product_By_Catagory('Toys & Models')                    #
 
     #####################################################################################
     # Recurse through each tuple, only returning the third data column (the image id's) #
     #####################################################################################
-    #                                                                #
-    # art_img_ids = (tuple(map(lambda x: x[3], art_products)))
-    comic_img_ids = (
-        tuple(map(lambda x: x[3], comic_products)))                        #
-    #
-    toy_img_ids = (tuple(map(lambda x: x[3], toy_products)))
-
+                                                                                        #                                                                #
+                          #                                                                   #
+    comic_img_ids = (tuple(map(lambda x: x[3], comic_products)))                        #
+    toy_img_ids = (tuple(map(lambda x: x[3], toy_products)))                            #
+                        
+    
     return render_template('homepage.html',
-                           
+
                            comic_img_ids=comic_img_ids,
                            toy_img_ids=toy_img_ids,
-                           
                            comic_products=comic_products,
                            toy_products=toy_products
                            )  # Display's homepage when at root directory of website along with all products ##
 
 ## Art Page ##
-
-
 @app.route('/artPage')
 def artpage():
-
     # Grab what user enters in searchpage and use it to fill searchpage.html #
     if request.method == 'POST':
         search_for = request.form['search_bar']
-        session["search_for"] = search_for
+        session["search_for"] = search_for    
         return redirect(url_for('searchpage'))
 
     ###################################################################################################
     # Call function to perform SQL Query on specified subcategories (returns array containing tuples) #
-    ###################################################################################################
-    art_products = Product_Information.Get_Product_By_Catagory(
-        'Art')                                 #
-    art_draw_paint = Product_Information.Get_Product_By_SubCategory_Only(
-        'Drawing & Painting')             #
-    art_mixed_media = Product_Information.Get_Product_By_SubCategory_Only(
-        'Mixed Media')                   #
-    art_print_photo = Product_Information.Get_Product_By_SubCategory_Only(
-        'Prints & Photography')          #
-    art_sculptures = Product_Information.Get_Product_By_SubCategory_Only(
-        'Sculptures')                     #
+    ###################################################################################################                                                                                                  
+    art_products = Product_Information.Get_Product_By_Catagory('Art')                                 #
+    art_draw_paint = Product_Information.Get_Product_By_SubCategory_Only('Drawing & Painting')             #
+    art_mixed_media = Product_Information.Get_Product_By_SubCategory_Only('Mixed Media')                   #
+    art_print_photo = Product_Information.Get_Product_By_SubCategory_Only('Prints & Photography')          #
+    art_sculptures = Product_Information.Get_Product_By_SubCategory_Only('Sculptures')                     #
 
     ############################################################################
     #           Return the art page with all of it's subcategories             #
     ############################################################################
     return render_template('artPage.html',                                    #
                            art_products=art_products,                          #
-                           art_draw_paint=art_draw_paint,                    #
-                           art_mixed_media=art_mixed_media,                  #
-                           art_print_photo=art_print_photo,                  #
-                           art_sculptures=art_sculptures                     #
+                           art_draw_paint = art_draw_paint,                    #
+                           art_mixed_media = art_mixed_media,                  #
+                           art_print_photo = art_print_photo,                  #
+                           art_sculptures = art_sculptures                     #
                            )                                                   #
 
 
@@ -133,11 +120,11 @@ def send_image(filename):
 
 @app.route('/userLogin', methods=['GET', 'POST'])
 def login():
+
     Sess_UID = session.get('UID')
     if(Sess_UID == None or Sess_UID == '00' or Sess_UID == 00):
         if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
             # Create variables for easy access
-
             username = request.form['username']
             passw = request.form['password']
 
@@ -180,91 +167,92 @@ def register():
         if Flash_Code == 0:
             return redirect(url_for('homepage'))
 
+
+
     return render_template('register_page.html')
 
 
 @app.route('/searchpage', methods=['GET', 'POST'])
 def searchpage():
 
+    
     if request.method == "POST" and request.form['searchfor']:
         searchfor = request.form['searchfor']
         session["search_for"] = searchfor
         result = Product_Information.Get_Product_By_Tag(searchfor)
         session["result"] = result
-        array_art = Product_Information.Get_Product_By_Category_If_Valid(
-            result, '%Art%')
+        array_art = Product_Information.Get_Product_By_Category_If_Valid(result, '%Art%')
         session["array_art"] = array_art
-        array_acc = Product_Information.Get_Product_By_Category_If_Valid(
-            result, '%Accessories%')
+        array_acc = Product_Information.Get_Product_By_Category_If_Valid(result, '%Accessories%')
         session["array_acc"] = array_acc
-        array_com = Product_Information.Get_Product_By_Category_If_Valid(
-            result, '%Comics%')
+        array_com = Product_Information.Get_Product_By_Category_If_Valid(result, '%Comics%')
         session["array_com"] = array_com
-        array_trading = Product_Information.Get_Product_By_Category_If_Valid(
-            result, '%Trading Card%')
-        session["array_trading"] = array_trading
-        array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(
-            result, '%Toys & Models%')
+        array_trading = Product_Information.Get_Product_By_Category_If_Valid(result, '%Trading Card%')
+        session["array_trading"] = array_trading 
+        array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(result, '%Toys & Models%')
         session["array_toys_and_models"] = array_toys_and_models
-        return render_template('searchpage.html', result=result, array_art=array_art, array_acc=array_acc, array_com=array_com, array_trading=array_trading, array_toys_and_models=array_toys_and_models)
+        return render_template('searchpage.html', result = result
+                                                , array_art = array_art
+                                                , array_acc = array_acc
+                                                , array_com = array_com
+                                                , array_trading = array_trading
+                                                , array_toys_and_models = array_toys_and_models)
     if request.method == "POST":
         result = session["result"]
-        i = 0
-
+        i=0
+        
         subcategory = request.form.getlist('sub_check')
         for s in subcategory:
             new_result = ()
             subcat = s.split('-')[1]
             for r in result:
-                new_result = new_result + \
-                    tuple(Product_Information.Get_Product_By_SubCategory(
-                        subcat, r[1]))
+                new_result = new_result + tuple(Product_Information.Get_Product_By_SubCategory(subcat,r[1]))
+                
 
-        print(len(new_result))
-
-        array_art = Product_Information.Get_Product_By_Category_If_Valid(
-            new_result, '%Art%')
+             
+        array_art = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Art%')
         session["array_art"] = array_art
-        array_acc = Product_Information.Get_Product_By_Category_If_Valid(
-            new_result, '%Accessories%')
+        array_acc = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Accessories%')
         session["array_acc"] = array_acc
-        array_com = Product_Information.Get_Product_By_Category_If_Valid(
-            new_result, '%Comics%')
+        array_com = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Comics%')
         session["array_com"] = array_com
-        array_trading = Product_Information.Get_Product_By_Category_If_Valid(
-            new_result, '%Trading Card%')
-        session["array_trading"] = array_trading
-        array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(
-            new_result, '%Toys & Models%')
+        array_trading = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Trading Card%')
+        session["array_trading"] = array_trading 
+        array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Toys & Models%')
         session["array_toys_and_models"] = array_toys_and_models
 
         # Remove Session search,array_art,... from having values
 
-        return render_template('searchpage.html', result=new_result, array_art=array_art, array_acc=array_acc, array_com=array_com, array_trading=array_trading, array_toys_and_models=array_toys_and_models)
+        return render_template('searchpage.html', result = new_result
+                                                , array_art = array_art
+                                                , array_acc = array_acc
+                                                , array_com = array_com
+                                                , array_trading = array_trading
+                                                , array_toys_and_models = array_toys_and_models)
+
 
     result = Product_Information.Get_Product_By_Tag(session["search_for"])
-    print("Printng " + str(result))
+
     session["search_for"] = result
-    # This line was causing problem as I was using session["result"] to get the result that they previously entered specifically when they clicked refreshed button so I can just query through that.
+    ## This line was causing problem as I was using session["result"] to get the result that they previously entered specifically when they clicked refreshed button so I can just query through that.
     session["result"] = result
-    array_art = Product_Information.Get_Product_By_Category_If_Valid(
-        result, '%Art%')
+    array_art = Product_Information.Get_Product_By_Category_If_Valid(result, '%Art%')
     session["array_art"] = array_art
-    array_acc = Product_Information.Get_Product_By_Category_If_Valid(
-        result, '%Accessories%')
+    array_acc = Product_Information.Get_Product_By_Category_If_Valid(result, '%Accessories%')
     session["array_acc"] = array_art
-    array_com = Product_Information.Get_Product_By_Category_If_Valid(
-        result, '%Comics%')
+    array_com = Product_Information.Get_Product_By_Category_If_Valid(result, '%Comics%')
     session["array_com"] = array_com
-    array_trading = Product_Information.Get_Product_By_Category_If_Valid(
-        result, '%Trading Card%')
+    array_trading = Product_Information.Get_Product_By_Category_If_Valid(result, '%Trading Card%')
     session["array_trading"] = array_trading
-    array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(
-        result, '%Toys & Models%')
+    array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(result, '%Toys & Models%')
     session["array_toys_and_models"] = array_toys_and_models
-    return render_template('searchpage.html', result=result, array_art=array_art, array_acc=array_acc, array_com=array_com, array_trading=array_trading, array_toys_and_models=array_toys_and_models)
-
-
+    return render_template('searchpage.html', result = result
+                                            , array_art = array_art
+                                            , array_acc = array_acc
+                                            , array_com = array_com
+                                            , array_trading = array_trading
+                                            , array_toys_and_models = array_toys_and_models)
+    
 @app.route('/createListing', methods=['GET', 'POST'])
 def createListing():
     tags = ""
@@ -272,16 +260,16 @@ def createListing():
 
         catagory = request.form['listingCategory']
         subcatagory = request.form['listingCategory']
-        uid = session["UID"]
+        uid = session["UID"] 
         list_of_tags = request.form.getlist('boxes')
         title = request.form['title']
 
         for x in list_of_tags:
             for y in tag_dictionary:
                 if x == y:
-                    tags = tags + ", " + tag_dictionary[y]
+                    tags = tags + ", " +tag_dictionary[y]
+           
 
-        print(title)
         description = request.form['desc']
         description.replace(",", "|$|")
         image = request.form['image']
@@ -291,16 +279,13 @@ def createListing():
         price = dollar + cent
 
         quantity = request.form['quantity']
-        Product_Information.Insert_New_Product(
-            uid, tags, title, description, image[0], price, quantity, catagory, subcatagory)
+        Product_Information.Insert_New_Product(uid,tags, title, description,image[0], price, quantity,catagory, subcatagory)
 
         flash("You successfully created a item listing!")
         return redirect(url_for('homepage'))
 
     return render_template('Create_Listing.html')
-
-
-@app.route('/itempage/<iteminfo>', methods=['GET', 'POST'])
+@app.route('/itempage/<iteminfo>', methods=['GET','POST'])
 def itempage(iteminfo):
     # Product_Information.strArrayToArray(iteminfo)
     user = session["UID"]
@@ -316,9 +301,9 @@ def itempage(iteminfo):
 
     adding_to_cart = int(total) + int(result[2])
     if request.method == "POST":
-        # print("Add_Item c{} r{}".format(Cart,result[0]))
+
         Cart = Shopping_Cart.Add_Item(Cart,result[0])
-        # print(Cart)
+
         Shopping_Cart.Push_Cart(Cart,user)
         return redirect(url_for('ShoppingCart'))
 
@@ -395,107 +380,110 @@ def ShoppingCart():
     return render_template('shopping_cart.html')
 
 
-@app.route('/accountpage', methods=['GET', 'POST'])
+
+
+@app.route('/accountpage', methods=['GET','POST'])
 def accountpage():
-    order_list = []
-    if session.get('UID'):
+    order_list=[]
+    user_listings=[]
+    product=[]
+    listing_user=[]
+    num_items = 0
+    if session['UID'] != None:
+        print("Accessing account page != None")
         user = SQL_Queries.UserIdToUsername(session['UID'])
-        print(user[0])
         products_int = Shopping_Cart.Pull_Cart(user[0])
+        user_transactions = Transaction.Pull_Transactions_From_UID(str(user[0]))
+        for y in user_transactions:
+            pids = y[2]
+            pids = pids.strip('][').split(', ')
+            for x in range(0,len(pids)):
+                
+                temp = Product_Information.Get_Product_By_Pid(x)
+                if temp != None:
+                    product.append(temp)
+                num_items = len(y[2].split(","))
+                
+        user_listings = Product_Information.Get_Product_By_UID(session['UID'])
 
-        user_transactions = Transaction.Pull_Transactions_From_UID(
-            str(user[0]))
-        print(user_transactions)
-        # for x in range(0,len(products_int)):
-        #     # temp = Transaction.Get_Products_From_Cart(str(products_int[x]))
-        #     print(temp)
-        #     order_list.append(temp)
-        #     # print(order_list)
-        # return render_template('account_page.html',user=user, order_list=order_list)
-        return render_template('account_page.html', user=user)
+        for listing in user_listings:
+            if listing[7] > 0:
+                listing_user.append(('N/A',str(listing[1]),str(listing[2]),str(listing[6]),'N','N/A'))
+            else:
+                listing_user.append(('N/A',str(listing[1]),str(listing[2]),str(listing[6]),'Y','N/A'))
 
+       
 
-@app.route('/logout', methods=['GET', 'POST'])
+        return render_template('account_page.html',user=user, order_list = user_transactions,num_items=num_items, product=product, user_listings = listing_user)
+
+@app.route('/logout',methods=['GET','POST'])
 def logout():
-    if request.method == "POST":
-        print("in sign out")
+       if request.method == "POST":
+
         session['UID'] = '00'
         flash("You have been logged out. We hope to see you again!")
         session["username"] = ""
-        print(session['UID'])
+
         return redirect(url_for('homepage'))
-
-
-@app.route('/adminPage', methods=['GET', 'POST'])
+        
+@app.route('/adminPage',methods=['GET','POST'])
 def adminPage():
     return render_template('admin_listings.html')
 
-
-@app.route('/updateFullName', methods=['GET', 'POST'])
+@app.route('/updateFullName',methods=['GET','POST'])
 def updateFullName():
-    if request.method == "POST":
+    if request.method=="POST":
         if request.form['firstname']:
             if request.form['lastname']:
                 firstname = request.form['firstname']
                 lastname = request.form['lastname']
                 print("In here")
-                SQL_Queries.UpdateName(str(firstname), str(
-                    lastname), str(session['UID']))
+                SQL_Queries.UpdateName(str(firstname),str(lastname),str(session['UID']))
                 return redirect(url_for("accountpage"))
     return render_template("accountpage.html")
-
-
-@app.route('/updatePassword', methods=['GET', 'POST'])
+@app.route('/updatePassword',methods=['GET','POST'])
 def updatePassword():
-    if request.method == "POST":
-        current = request.form['current']
-        new = request.form['new']
-        confirm = request.form['confirm']
-        print("Current " + current + " new " + new + " confirm " + confirm)
-        actual = SQL_Queries.Get_Password_With_UID(session["UID"])
-        print(actual)
-        if str(actual) == str(current):
-            if str(new) == str(confirm):
-                SQL_Queries.UpdatePassword(str(new), str(session['UID']))
-                return redirect(url_for("accountpage"))
-        else:
-            return redirect(url_for("homepage"))
-
-
-@app.route('/updatePhone', methods=['GET', 'POST'])
+    if request.method=="POST":
+            current = request.form['current']
+            new = request.form['new']
+            confirm = request.form['confirm']
+            print("Current " + current + " new " + new + " confirm " + confirm)
+            actual = SQL_Queries.Get_Password_With_UID(session["UID"])
+            print(actual)
+            if str(actual) == str(current):
+                if str(new) == str(confirm):
+                    SQL_Queries.UpdatePassword(str(new),str(session['UID']))
+                    return redirect(url_for("accountpage"))
+            else:
+                return redirect(url_for("homepage"))
+@app.route('/updatePhone', methods=['GET','POST'])
 def updatePhone():
-    if request.method == "POST":
+    if request.method=="POST":
         phone = request.form['phone']
-        SQL_Queries.updatePhone(str(phone), str(session["UID"]))
+        SQL_Queries.updatePhone(str(phone),str(session["UID"]))
         return redirect(url_for("accountpage"))
-
-
-@app.route('/updateUsername', methods=['GET', 'POST'])
+@app.route('/updateUsername', methods=['GET','POST'])
 def updateUsername():
-    if request.method == "POST":
+    if request.method=="POST":
         if request.form['username']:
             username = request.form['username']
-            SQL_Queries.UpdateUser(str(username), str(session['UID']))
+            SQL_Queries.UpdateUser(str(username),str(session['UID']))
             return redirect(url_for("accountpage"))
-
-
-@app.route('/updateEmail', methods=['GET', 'POST'])
+@app.route('/updateEmail',methods=['GET','POST'])
 def updateEmail():
-    if request.method == "POST":
+    if request.method=="POST":
         if request.form['email']:
             email = request.form['email']
-            SQL_Queries.UpdateEmail(str(email), str(session["UID"]))
+            SQL_Queries.UpdateEmail(str(email),str(session["UID"]))
             return redirect(url_for("accountpage"))
 
-
-@app.route('/updateAddress', methods=['GET', 'POST'])
+@app.route('/updateAddress', methods=['GET','POST'])
 def updateAddress():
-    if request.method == "POST":
+    if request.method=="POST":
         address = request.form['address']
         state = request.form['state']
         print(state)
-        SQL_Queries.UpdateAddress(
-            str(address), str(state), str(session["UID"]))
+        SQL_Queries.UpdateAddress(str(address),str(state),str(session["UID"]))
         return redirect(url_for("accountpage"))
 
 
