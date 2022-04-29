@@ -8,6 +8,13 @@ name: admin
 PW: admin
 
 
+working account of transaction and listings:
+
+name: ant
+
+pw: 12345
+
+
 Bug fixes
   account page
     displays transaction and listing
