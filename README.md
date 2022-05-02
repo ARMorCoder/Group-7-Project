@@ -5,7 +5,7 @@ admin acocunt
 
 name: admin 
 
-PW: admin
+PW: password
 
 
 working account of transaction and listings:
