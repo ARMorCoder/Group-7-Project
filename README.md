@@ -18,6 +18,8 @@ Bugs still occuring in our code:
   When logging in, if entering a wrong password but valid username it will still login user but would cause server to fail accessing item page, search page
   and account page. It is recommended to ensure username and password of account you attempt to login to is proper unless these issues will be faced
   Newly created listings made by valid users may not pop up when clicked.
+  Prior to uploading to the EC2, our website was funcioning properly 
+  
   
 
 Bug fixes
