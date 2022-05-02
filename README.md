@@ -19,6 +19,7 @@ Bugs still occuring in our code:
   and account page. It is recommended to ensure username and password of account you attempt to login to is proper unless these issues will be faced
   Newly created listings made by valid users may not pop up when clicked.
   Prior to uploading to the EC2, our website was funcioning properly 
+  When logging to admin page, you cannot log out of the admin account unless restarting browser
   
   
 
