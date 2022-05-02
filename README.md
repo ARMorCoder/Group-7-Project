@@ -14,6 +14,10 @@ name: ant
 
 pw: 12345
 
+Bugs still occuring in our code:
+  When logging in, if entering a wrong password but valid username it will still login user but would cause server to fail accessing item page, search page
+  and account page. It is recommended to ensure username and password of account you attempt to login to is proper unless these issues will be faced
+  
 
 Bug fixes
   account page
