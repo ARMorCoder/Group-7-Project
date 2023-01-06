@@ -1,6 +1,6 @@
-HOST = "user-information.cfe8lazrwbtc.us-east-1.rds.amazonaws.com"
+HOST = "nerd4u-database.c4632ipwo6gx.us-east-2.rds.amazonaws.com"
 USER = "admin" 
-PASSWORD = "password"
+PASSWORD = "mypassword123!"
 DATABASE = "user"
 
 USER_TABLE = "user.user_information"
