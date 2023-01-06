@@ -111,7 +111,6 @@ def artpage():
 
 @app.route('/upload/<filename>')
 def send_image(filename):
-
     # Send the image the html page has requested to display on html page #
     return send_from_directory("../Images", filename)
 
@@ -264,7 +263,9 @@ def searchpage():
                                             , array_com = array_com
                                             , array_trading = array_trading
                                             , array_toys_and_models = array_toys_and_models)
-    
+
+
+
 @app.route('/createListing', methods=['GET', 'POST'])
 def createListing():
     tags = ""
