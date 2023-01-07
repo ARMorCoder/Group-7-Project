@@ -44,7 +44,7 @@ app.secret_key = 'super secret key'
 
 # Connect to database
 
-DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
+DB = mysql.connector.connect(user="jtmoney", password="HelpHimRnPlz1327!", host="nerd4u-ecommerce-database.mysql.database.azure.com", port=3306, database="nerd4u")
 
 ## Home Page ##
 @app.route('/', methods=['GET', 'POST'])
@@ -59,7 +59,7 @@ def homepage():
     ################################################################################################
     # Call function to perform SQL Query on specified categories (returns array containing tuples) #
                                                                                                    #
-    #art_products = Product_Information.Get_Product_By_Tag_Only('Art')                              #
+    art_products = Product_Information.Get_Product_By_Tag_Only('Art')                              #
     comic_products = Product_Information.Get_Product_By_Catagory('Comics')                         #
     toy_products = Product_Information.Get_Product_By_Catagory('Toys & Models')                    #
 
@@ -200,28 +200,74 @@ def searchpage():
                                                 , array_trading = array_trading
                                                 , array_toys_and_models = array_toys_and_models)
     if request.method == "POST":
+
+        array_art = None
+        array_acc = None
+        array_com = None
+        array_trading = None 
+        array_toys_and_models = None
+        array_art_valid = False
+        array_acc_valid = False
+        array_com_valid = False
+        array_trading_valid = False 
+        array_toys_and_models_valid = False
         result = session["result"]
+        result = list(result)
+        new_result = []
+
         i=0
-        
         subcategory = request.form.getlist('sub_check')
+        print(str(subcategory) + " this is subcategory check")
+        subcategories_displayed=[]
+        i=0
+        # for res in result:
+        #     subcategories_displayed.insert(i,res[9])
+        #     i+=1
+        # unique_subcategories_displayed = set(subcategories_displayed)
+        # print(unique_subcategories_displayed)
+
         for s in subcategory:
-            new_result = ()
-            subcat = s.split('-')[1]
+            i=0
+            subcat = s
+            print(subcat + "SUBCATEGORY \n")
+
             for r in result:
-                new_result = new_result + tuple(Product_Information.Get_Product_By_SubCategory(subcat,r[1]))
+                # print("going through " + r[9])
+
+                if r[9] == subcat:
+                    print(str(r)+" " + subcat + " ")
+                    print("yes\n")
+                    new_result.insert(i,r)
+                    i+=1
+                    if r[8] == "Art":
+                        array_art_valid=True
+                    if r[8] == "Accessories":
+                        array_acc_valid=True
+                    if r[8] == "Comics":
+                        array_com_valid=True
+                    if r[8] == "Trading Cards":
+                        array_trading_valid=True
+                    if r[8] == "Toys & Models":
+                        array_toys_and_models_valid=True
                 
-        print(len(new_result))
-             
-        array_art = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Art%')
-        session["array_art"] = array_art
-        array_acc = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Accessories%')
-        session["array_acc"] = array_acc
-        array_com = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Comics%')
-        session["array_com"] = array_com
-        array_trading = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Trading Card%')
-        session["array_trading"] = array_trading 
-        array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Toys & Models%')
-        session["array_toys_and_models"] = array_toys_and_models
+                
+        print(str(len(new_result)) + " Length of list")
+        print(new_result)
+        if (array_art_valid == True):
+            array_art = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Art%')
+            session["array_art"] = array_art
+        elif (array_acc_valid == True):
+            array_acc = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Accessories%')
+            session["array_acc"] = array_acc
+        elif (array_com_valid == True):
+            array_com = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Comics%')
+            session["array_com"] = array_com
+        elif (array_trading_valid == True):
+            array_trading = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Trading Card%')
+            session["array_trading"] = array_trading 
+        elif (array_toys_and_models_valid == True):
+            array_toys_and_models = Product_Information.Get_Product_By_Category_If_Valid(new_result, '%Toys & Models%')
+            session["array_toys_and_models"] = array_toys_and_models
 
         # Remove Session search,array_art,... from having values
 
@@ -234,7 +280,7 @@ def searchpage():
 
 
     result = Product_Information.Get_Product_By_Tag(session["search_for"])
-    print("Printng " + str(result))
+    print("Printing " + str(result))
     session["search_for"] = result
     ## This line was causing problem as I was using session["result"] to get the result that they previously entered specifically when they clicked refreshed button so I can just query through that.
     session["result"] = result
@@ -425,4 +471,5 @@ def updateAddress():
         return redirect(url_for("accountpage"))
 
 
-app.run(debug=True)
+
+app.run(debug=True);

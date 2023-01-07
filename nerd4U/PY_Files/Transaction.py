@@ -1,8 +1,6 @@
 import mysql.connector
-import py
 from PY_Files import CONSTANTS
-DB = mysql.connector.connect(host=CONSTANTS.HOST, user=CONSTANTS.USER,
-                             password=CONSTANTS.PASSWORD, database=CONSTANTS.DATABASE)
+DB = mysql.connector.connect(user="jtmoney", password="HelpHimRnPlz1327!", host="nerd4u-ecommerce-database.mysql.database.azure.com", port=3306, database="nerd4u")
 
 def Pull_Transactions_From_UID(uid):
     cursor = DB.cursor()

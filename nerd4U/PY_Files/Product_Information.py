@@ -1,6 +1,6 @@
 import mysql.connector
 
-db = mysql.connector.connect(host="user-information.cfe8lazrwbtc.us-east-1.rds.amazonaws.com", user="admin",password="password",database="user")
+db = mysql.connector.connect(user="jtmoney", password="HelpHimRnPlz1327!", host="nerd4u-ecommerce-database.mysql.database.azure.com", port=3306, database="nerd4u")
 
 TABLE_NAME = "product_information"
 
@@ -27,6 +27,7 @@ def Get_Product_By_Pid(pid):
 def Get_Product_By_Category_If_Valid(array, category):
     cursor = db.cursor()
     # make a new string with spliced list
+    
     cursor.execute("SELECT * FROM product_information where catagory like '%" + category + "%' AND  tags like '%" + str(array[0][10]) + "%'")
     new_array = cursor.fetchall()
     return (new_array)
