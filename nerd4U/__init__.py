@@ -281,7 +281,6 @@ def searchpage():
             subcat = s
             print(s)
             for r in result:
-
                 result_r = r[9].split(' ')
                 if result_r[0] == subcat:
                     print(result_r[0],subcat)
