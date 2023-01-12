@@ -95,7 +95,7 @@
 									<li><a class="dropdown-item" href="#">Toys &amp; Models</a></li>
 								</ul>
 								
-								<input class="form-control" name="search_bar" type="search" placeholder="Search for art, accessories, comics, cards, toys, and more..." aria-label="Search">
+								<input class="form-control" name="searchfor"  id="search" type="search" placeholder="Search for art, accessories, comics, cards, toys, and more..." aria-label="Search">
 								<button class="btn btn-warning"  type="submit"><a href="/"><span class="bi bi-search"></span></a></button>
 								
 							</div>
@@ -149,16 +149,16 @@
                                 <div id="artSubsPanel" class="accordion-collapse collapse show" aria-labelledby="artHeading">
                                     <div class="accordion-body small pt-1">
                                         <div class="form-check">
-                                            <label class="form-check-label" for="art-drawCheck"><input class="form-check-input" type="checkbox" id="art-drawCheck" name="sub_check" value="Drawings" checked>Drawings &amp; Paintings <span class="badge border bg-body text-dark">0</span></label>
+                                            <label class="form-check-label" for="art-drawCheck"><input class="form-check-input" type="checkbox" id="art-drawCheck" name="sub_check" value="Drawing" checked>Drawings &amp; Paintings <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="art-mixedCheck"><input class="form-check-input" type="checkbox" id="art-mixedCheck" name="sub_check" value = "Mixed" checked>Mixed Media <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="art-photosCheck"><input class="form-check-input" type="checkbox" id="art-photosCheck" name="sub_check" value = "Photos" checked>Prints &amp; Photography <span class="badge border bg-body text-dark">0</span></label>
+                                            <label class="form-check-label" for="art-photosCheck"><input class="form-check-input" type="checkbox" id="art-photosCheck" name="sub_check" value = "Prints" checked>Prints &amp; Photography <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="art-sculptCheck"><input class="form-check-input" type="checkbox" id="art-sculptCheck" name="sub_check" value="Sculpture"  checked>Sculptures <span class="badge border bg-body text-dark">0</span></label>
+                                            <label class="form-check-label" for="art-sculptCheck"><input class="form-check-input" type="checkbox" id="art-sculptCheck" name="sub_check" value="Sculptures"  checked>Sculptures <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@
                                             <label class="form-check-label" for="acc-jewelryCheck"><input class="form-check-input" type="checkbox" id="acc-jewelryCheck" name="sub_check" value="Jewelry" onchange="toggleSubcatCheck(this, 'accTag-jewelry')" checked>Jewelry <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="acc-keyCheck"><input class="form-check-input" type="checkbox" id="acc-keyCheck" name="sub_check" value="Keychain" checked>Key Chains &amp; Lanyards <span class="badge border bg-body text-dark">0</span></label>
+                                            <label class="form-check-label" for="acc-keyCheck"><input class="form-check-input" type="checkbox" id="acc-keyCheck" name="sub_check" value="Key" checked>Key Chains &amp; Lanyards <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="acc-pinsCheck"><input class="form-check-input" type="checkbox" id="acc-pinsCheck" name="sub_check" value="Pins" checked>Pins &amp; Buttons <span class="badge border bg-body text-dark">0</span></label>
@@ -233,10 +233,10 @@
                                 <div id="cardSubPanel" class="accordion-collapse collapse show" aria-labelledby="cardHeading">
                                     <div class="accordion-body small pt-1">
                                         <div class="form-check">
-                                            <label class="form-check-label" for="card-gamesCheck"><input class="form-check-input" type="checkbox" id="card-gamesCheck" name="sub_check" value="Games"  checked>Card Games <span class="badge border bg-body text-dark">0</span></label>
+                                            <label class="form-check-label" for="card-gamesCheck"><input class="form-check-input" type="checkbox" id="card-gamesCheck" name="sub_check" value="Card"  checked>Card Games <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="card-nonSportsCheck"><input class="form-check-input" type="checkbox" id="card-nonSportsCheck" name="sub_check" value="NonSport"  checked>Non-Sports <span class="badge border bg-body text-dark">0</span></label>
+                                            <label class="form-check-label" for="card-nonSportsCheck"><input class="form-check-input" type="checkbox" id="card-nonSportsCheck" name="sub_check" value="Non-Sport"  checked>Non-Sports <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="card-sportsCheck"><input class="form-check-input" type="checkbox" id="card-sportsCheck" name="sub_check" value="Sports"  checked>Sports <span class="badge border bg-body text-dark">0</span></label>
@@ -256,7 +256,7 @@
                                 <div id="toySubPanel" class="accordion-collapse collapse show" aria-labelledby="toyHeading">
                                     <div class="accordion-body small pt-1">
                                         <div class="form-check">
-                                            <label class="form-check-label" for="toy-actionCheck"><input class="form-check-input" type="checkbox" id="toy-actionCheck" name="sub_check" value="Figures" checked>Action Figures &amp; Props <span class="badge border bg-body text-dark">0</span></label>
+                                            <label class="form-check-label" for="toy-actionCheck"><input class="form-check-input" type="checkbox" id="toy-actionCheck" name="sub_check" value="Action" checked>Action Figures &amp; Props <span class="badge border bg-body text-dark">0</span></label>
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="toy-dollsCheck"><input class="form-check-input" type="checkbox" id="toy-dollsCheck" name="sub_check" value="Dolls" checked>Dolls &amp; Plushies <span class="badge border bg-body text-dark">0</span></label>

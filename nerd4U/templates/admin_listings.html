@@ -34,6 +34,7 @@
                                 <li><a class="dropdown-item" href="#">Listings</a></li>
                                 <li><a class="dropdown-item" href="#">Orders</a></li>
                                 <li><a class="dropdown-item" href="#">Users</a></li>
+                                
                             </ul>
                             <input class="form-control" type="search" placeholder="Search for listings, orders, and users..." aria-label="Search">
                             <button class="btn btn-warning" type="submit"><span class="bi bi-search"></span></button>
@@ -51,9 +52,15 @@
                 </button>
                 <div class="collapse navbar-collapse" id="subNavbarContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link active" href="#">Listings</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Orders</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/adminPage">Listings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/adminOrders">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/adminUsers">Users</a></li>
+                        <form action="/logout" method="post">
+                            <button class="nav-link link-dark container-fluid text-start btn btn-black text-light bg-danger" type="submit" name="signout">
+                                Sign Out
+                            </button>
+                            </form>
                     </ul>
                 </div>
             </nav>
@@ -150,24 +157,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% if listings %}
+                    {% for listing in listings %}
                     <tr>
-                        <td>04/23/2022</td>
-                        <td><div class="text-center" style="width: 2rem; height: 2em;"><img src="pokemon.jpg" class="h-100"></div></td>
-                        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Batman Poster</a></td>
-                        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">0123</a></td>
-                        <td>3</td>
-                        <td>&#36;10.00</td>
-                        <td>ImaSeller</td>
+                        <td>00/00/00</td>
+                        <td><div class="text-center" style="width: 2rem; height: 2em;"><img src="{{url_for('send_image', filename=listing[3]+'.jpg')}}" class="h-100"></div></td>
+                        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">{{listing[1]}}</a></td>
+                        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">{{listing[0]}}</a></td>
+                        <td>{{listing[6]}}</td>
+                        <td>{{listing[2]}}</td>
+                        <td>{{listing[0]}}</td>
                     </tr>
-                    <tr>
-                        <td>04/20/2022</td>
-                        <td><div class="text-center" style="width: 2rem; height: 2em;"><img src="pokemon.jpg" class="h-100"></div></td>
-                        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">Detective Comics No. 27</a></td>
-                        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editListing">0122</a></td>
-                        <td>1</td>
-                        <td>&#36;420.69</td>
-                        <td>ImaSeller</td>
-                    </tr>
+                    {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

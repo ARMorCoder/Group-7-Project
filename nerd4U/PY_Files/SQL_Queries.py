@@ -1,13 +1,32 @@
 import mysql.connector
-
 from PY_Files import CONSTANTS
 DB = mysql.connector.connect(user="jtmoney", password="HelpHimRnPlz1327!", host="nerd4u-ecommerce-database.mysql.database.azure.com", port=3306, database="nerd4u")
+
 
 U_TABLE = CONSTANTS.USER_TABLE
 P_TABLE = CONSTANTS.PROD_TABLE
 K_TABLE = CONSTANTS.KEYS_TABLE
+T_TABLE = CONSTANTS.TRANS_TABLE
 
 
+def Get_All_Listings(): 
+    cursor = DB.cursor()
+    cursor.execute("SELECT * FROM product_information")
+    new_array = cursor.fetchall()
+    return (new_array)
+
+
+def Get_All_Orders(): 
+    cursor = DB.cursor()
+    cursor.execute("SELECT * FROM trans_information")
+    new_array = cursor.fetchall()
+    return (new_array)
+
+def Get_All_Users(): 
+    cursor = DB.cursor()
+    cursor.execute("SELECT * FROM user_information")
+    new_array = cursor.fetchall()
+    return (new_array)
 # sql.format(USER_TABLE,UID,USERNAME,EMAIL,PASSWORD,FIRST,LAST,STREET,STATE,SCORE,PHONE,PRIMARY)
 def Push_To_User_Table(Username, Email, Password, First, Last, Street, State, phone):
     My_Cursor = DB.cursor()
@@ -17,7 +36,13 @@ def Push_To_User_Table(Username, Email, Password, First, Last, Street, State, ph
     My_Cursor.execute(sql)
     DB.commit()
 
-
+def Push_To_Trans_Table(UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address):
+    My_Cursor = DB.cursor()
+    sql = "insert into {} (UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,Ship_Address,Billing_Address) values  ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')"
+    sql = sql.format(T_TABLE, UID,Cart_IDs,Cart_Names,Taxed_Total,Date,Payment_Info,S_Address,B_Address)
+    print(sql)
+    My_Cursor.execute(sql)
+    DB.commit()
 def Get_Email(Email):
     return Select_Any(U_TABLE, "Email", ["Email"], [Email])
 
@@ -49,9 +74,10 @@ def Select_Any(Table, Select_List, Attribute_List, Value_List):
     sql = "Select ({}) From {} Where {}"
     Where = Format_Zip_List(Attribute_List, Value_List,"And")
     sql = sql.format(Select_List, Table, Where)
-    print (sql)
+    print(sql)
     My_Cursor.execute(sql)
     returner = My_Cursor.fetchone()
+
     # My_Cursor.close()
     return Clean_Result(returner)
 
@@ -61,14 +87,25 @@ def Clean_Result(dirty):
         return "none"
     return dirty[0]
 
-# 
-# 
-# 
-# 
-# 
+def Get_User_Checkout(UID):
+    returner = Select_Any_Dirty(
+        U_TABLE, "Address,First_Name,Last_Name", ["UID"], [UID])
+    if returner != None:
+        return returner
+    return ("", "", "", "")
+
+def Select_Any_Dirty(Table, Select_List, Attribute_List, Value_List):
+    My_Cursor = DB.cursor()
+    sql = "Select {} From {} Where {}"
+    Where = Format_Zip_List(Attribute_List, Value_List, "And")
+    sql = sql.format(Select_List, Table, Where)
+    My_Cursor.execute(sql)
+    returner = My_Cursor.fetchone()
+    # My_Cursor.close()
+    return returner
 
 def Format_Zip_List(Attribute_List, Value_List,Delimiter):
-    sql = "{} = '{}'"
+    sql = '{} = "{}"'
     returner = ""
     True_Delimiter = " {} ".format(Delimiter)
 
@@ -108,17 +145,19 @@ def Update_Field(Table,Attribute_List, Value_List, ID_Type,ID):
     My_Cursor = DB.cursor()
     update = "update {}".format(Table)
     set = "set " + Format_Zip_List([Attribute_List], [Value_List],",")
-    where = "Where {} = {}".format(ID_Type,ID)
+    where = 'Where {} = {}'.format(ID_Type,ID)
     sql  = "{} {} {}".format(update,set,where)
+    
     My_Cursor.execute(sql)
     DB.commit()
 
 def Fill_Cart(Cart_List):
     My_Cursor = DB.cursor()
     sql = "Select {} From {} Where {}"
-    Sel_Value = "Name,Price,picture_id"
+    Sel_Value = "Name,Price,picture"
     Where = Format_Half_Zip_List("PID",Cart_List," OR ")
     sql = sql.format(Sel_Value, P_TABLE, Where)
+
     My_Cursor.execute(sql)
     return My_Cursor.fetchall()
     
@@ -162,3 +201,11 @@ def UserIdToUsername(uid):
     user = My_Cursor.fetchone()
     return (user)
 
+def Fill_Deleter(Deleter_List):
+    My_Cursor = DB.cursor()
+    sql = "Select {} From {} Where {}"
+    Sel_Value = "PID"
+    Where = Format_Half_Zip_List("name", Deleter_List, " OR ")
+    sql = sql.format(Sel_Value, P_TABLE, Where)
+    My_Cursor.execute(sql)
+    return My_Cursor.fetchall()

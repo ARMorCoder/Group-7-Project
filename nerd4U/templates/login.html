@@ -14,7 +14,7 @@
             position:absolute;
             top:26%;
             left:40%;
-            height:35rem;
+            height:38.5rem;
             margin-top:-100px;
             width:50rem;
             margin-left:-200px;
@@ -38,7 +38,7 @@
             text-align:center;
           }
           .username-container{
-           margin-top:50px;
+           margin-top:20px;
           }
           .username-container,.password-container{
             font-size:30px;
@@ -98,20 +98,35 @@
   <body>
     <div class="container">
       <h1 class="h1-header">Login into Nerds4U</h1>
+      <p class="text-muted"> Login is needed to create a listing and utilize shopping cart</p>
       <hr>
       
       <form action="" method="post">
+        <div class="pre-determined" style="display: flex; justify-content: space-evenly; ">
+          <div class="auto-fill">
+            <label>Auto Fill Login</label>
+            <input type="checkbox" name="autoFill" class="align-middle w-20 h-20">
+          </div>
+          <div class="admin-fill">
+            <label>Auto Fill Admin Account</label>
+            <input type="checkbox" name="adminAcc" class="align-middle w-20 h-20">
+          </div>
+        </div>
+        <p style="text-align:center; padding-top:10px;" class="text-muted">To use one of these options, please check one and press the 'Login' button below</p>
+
+        <div class="">
+        </div>
         <div class="username-container">
           <label for="username" class="username"><b>Username</b></label>
             </div>
         <div class="usernametext-container">                 
-          <input type="text" placeholder="Enter your Username" name="username" class="username-textbox" required>
+          <input type="text" placeholder="Enter your Username" name="username" class="username-textbox">
             </div>
         <div class="password-container">
           <label for="password" class="password"><b>Password</b></label>
             </div>
         <div class = "passwordtext-container">
-          <input type="text" placeholder="Enter your Password" name="password" class="password-textbox" required>
+          <input type="text" placeholder="Enter your Password" name="password" class="password-textbox">
             </div>
      
         <div class="submitButton-container">

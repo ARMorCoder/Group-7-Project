@@ -17,14 +17,18 @@ def Push_Cart(Temp_Cart,UID):
 
 # Makes a list from a cart's uid
 def Pull_Cart(UID):
-    if(UID == "00"):
+    if(UID == "00" or UID == 00 or UID == None):
         return []
-    else:
-        Cart_List = SQL_Queries.Get_Cart(UID)
-        Cart_List = Cart_List[1:-1]
-        Cart_List = Cart_List.split(',')
-        Cart_List = Str_To_Lint(Cart_List)
-        return Cart_List
+    
+    Cart_List = SQL_Queries.Get_Cart(UID)
+    if Cart_List == None:
+        return []
+
+    print(Cart_List)
+    Cart_List = Cart_List[1:-1]
+    Cart_List = Cart_List.split(',')
+    Cart_List = Str_To_Lint(Cart_List)
+    return Cart_List
 
 
 # adds a pid to a list cart
@@ -32,7 +36,7 @@ def Add_Item(Cart_List, New_PID):
     PID_Set = set(Cart_List)
     if New_PID not in PID_Set:
         PID_Set.add(New_PID)
-        Cart_List.insert(0,New_PID)
+        Cart_List.insert(0,int(New_PID))
     Cart_List.sort()
     return Cart_List
 
@@ -49,6 +53,36 @@ def Delete_From_Cart(UID,PID):
     Cart.remove(PID)
     Push_Cart(Cart,UID)
 
-def Get_Shopping_Products(cart_list):
-     return SQL_Queries.Fill_Cart(cart_list)
 
+def Get_Shopping_Products(Cart_List):
+    if Cart_Is_Empty(Cart_List):
+        return []
+    return SQL_Queries.Fill_Cart(Cart_List)
+
+
+def Total_Shopping_Cart(Cart_List):
+    total = 0
+    if Cart_Is_Empty(Cart_List):
+        return 0
+    for each in Cart_List:
+        total += int(each[1])
+    return total
+
+
+def Cart_Is_Empty(Cart):
+    return len(Cart) == 0
+
+def Cart_Length(Filled):
+    if len(Filled) == 0:
+        return 0
+    return len(Filled)
+
+def CList_to_Str(cart):
+    return str(cart)
+
+def Get_PID_From_P_Name(Deleter_List):
+    print(SQL_Queries.Fill_Deleter(Deleter_List))
+
+def Empty_Cart(UID):
+    SQL_Queries.Update_Field(CONSTANTS.USER_TABLE,
+                             "Cart", "", "UID", UID)

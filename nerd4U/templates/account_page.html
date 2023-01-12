@@ -161,19 +161,24 @@
                             </thead>
                             <tbody>
 
+
                                 {% for order in order_list%}
                                 <tr>
                                     <td>{{order[5]}}</td>
                                     <td>&#36;{{order[4]}}</td>
-                                    <td>{{num_items}}</td>
+                                    {% set list = order[3].split(',') %}
+                                    <td>{{list | length}}</td>
                                     <td>
-                                        {%for product_item in product %}
-                                        <a href="#" class="text-decoration-none" >{{product_item[1]}}</a>
-                                        {%endfor%}
+
+
+                                    <br><a href="#" class="text-decoration-none" >{{order[3]}}</a>
+
                                         
                                     </td>
                                 </tr>
                                 {%endfor%}
+
+
                             </tbody>
                         </table>
                     </div>

@@ -34,7 +34,9 @@ def Get_Product_By_Category_If_Valid(array, category):
 
 def Get_Product_By_Tag(tag):
     cursor = db.cursor()
-    print(tag)
+
+    tag = str(tag)
+
     cursor.execute("SELECT * FROM product_information where tags like '%" + tag + "%' or catagory like '%" + tag + "%' or name like '%" + tag +"%'")
     array = cursor.fetchall()
     return (array)
@@ -62,7 +64,7 @@ def Insert_New_Product(uid,list_of_tags,title,description, image,price,quantity,
     
     cursor = db.cursor()
 
-    sql="INSERT INTO product_information (name, price, picture_id, seller_id, description, quantity, remaining_item, catagory, sub_category, tags) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    sql="INSERT INTO product_information (name, price, picture, seller_id, description, quantity, remaining_items, catagory, sub_category, tags) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     
     #### CHANGE PRICE (DOLLAR) TO ACTUAL SUM OF DOLLAR + CENT
     val = (title, price, image, uid, description, quantity, quantity, catagory, subcategory, str(list_of_tags))
