@@ -35,6 +35,7 @@ tag_dictionary = {'art-ANIME': 'Anime','art-CARTOONS': 'Cartoons', 'art-Movies':
                   'comic-SHOGAKUGAN': 'Shogakugan', 'comic-SHUEISHA': 'Shueisha', 'comic-TOKYOPOP': 'Tokyopop', 'comic-VALIANT': 'Valiant', 'comic-OTHER': 'Other'}
 
     # Add the rest of the tags from create_listing.html to allow createListing function to properly insert the tags into database
+sys.path.insert(1, 'nerd4U/PY_Files')
 
 from PY_Files import Create_User, Login_User, CONSTANTS, SQL_Queries, Product_Information, Shopping_Cart, Transaction
 
@@ -636,4 +637,3 @@ def updateAddress():
 
 
 
-app.run(debug=True);
