@@ -263,7 +263,7 @@ def searchpage():
         array_trading_valid = False 
         array_toys_and_models_valid = False
         result = session["result"]
-        result = list(result)
+        result = (result)
         new_result = []
 
         i=0
@@ -407,31 +407,50 @@ def createListing():
 @app.route('/itempage/<iteminfo>', methods=['GET','POST'])
 def itempage(iteminfo):
        # Product_Information.strArrayToArray(iteminfo)
-    user = session["UID"]
-    Cart = Shopping_Cart.Pull_Cart(user)
-    Filled = Shopping_Cart.Get_Shopping_Products(Cart)
-    length = Shopping_Cart.Cart_Length(Filled)
-    total = Shopping_Cart.Total_Shopping_Cart(Filled)
-    result = Product_Information.strArrayToArray(iteminfo)
-    
-    result[5] = result[5].replace('|$|', ",")
-    seller = result[4]
-    seller = SQL_Queries.UserIdToUsername(str(seller))
 
-    adding_to_cart = int(total) + int(result[2])
-    if request.method == "POST":
+    if session.get("UID") == None or session['UID'] == '00':
+        result = Product_Information.strArrayToArray(iteminfo)
+        result[5] = result[5].replace('|$|', ",")
+        print("THIS IS RESULT" ,result)
+        uli = False
+        seller = result[4]
+        seller = SQL_Queries.UserIdToUsername(str(seller))
+        if request.method == "POST":
+            return redirect(url_for('login'))
 
-        Cart = Shopping_Cart.Add_Item(Cart,result[0])
+        return render_template('item_page.html',
+                        result=result,
+                        user=seller,
+                        user_logged_in=uli)
+    else:
+        uli=True
+        user = session["UID"]
+        Cart = Shopping_Cart.Pull_Cart(user)
+        Filled = Shopping_Cart.Get_Shopping_Products(Cart)
+        length = Shopping_Cart.Cart_Length(Filled)
+        total = Shopping_Cart.Total_Shopping_Cart(Filled)
+        result = Product_Information.strArrayToArray(iteminfo)
+        
+        result[5] = result[5].replace('|$|', ",")
+        seller = result[4]
 
-        Shopping_Cart.Push_Cart(Cart,user)
-        return redirect(url_for('ShoppingCart'))
+        seller = SQL_Queries.UserIdToUsername(str(seller))
+        print("The seller is ! ", seller)
+        adding_to_cart = int(total) + int(result[2])
+        if request.method == "POST":
 
-    return render_template('item_page.html',
-                           result=result,
-                           user=seller,
-                           itemcount=length,
-                           subtotal=total,
-                           adding_to_cart=adding_to_cart)
+            Cart = Shopping_Cart.Add_Item(Cart,result[0])
+
+            Shopping_Cart.Push_Cart(Cart,user)
+            return redirect(url_for('ShoppingCart'))
+
+        return render_template('item_page.html',
+                            result=result,
+                            user=seller,
+                            itemcount=length,
+                            subtotal=total,
+                            adding_to_cart=adding_to_cart,
+                            user_logged_in=uli)
 
 @app.route('/shoppingCart', methods=['GET', 'POST'])
 def ShoppingCart():

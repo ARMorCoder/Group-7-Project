@@ -120,7 +120,7 @@
             <p>Seller: {{user[1]}}</p>
             <p>Description: {{result[5]}}</p>
         </div>
-
+        {% if user_logged_in %}
         <!-- show by default, hide when item already in cart -->
         <div name="cartAdd">
             <h6>Shopping Cart:</h6>
@@ -146,6 +146,18 @@
 
                 </div>
             </form>
+            {% else %}
+                <div class="display:flex; flex-column">
+                <div name="user-login">
+                    <h6>To utilize shopping cart please login.</h6>
+                </div>
+                <form action="" method="post">
+                    <div class="text-center">
+                        <input type="submit" value="Login Page" class="btn btn-warning">
+                    </div>
+                </form>
+                </div>
+            {% endif %}
         </div>
     </div>
 
